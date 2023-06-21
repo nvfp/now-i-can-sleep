@@ -1,1 +1,5 @@
-print(123123)
+from nics import main
+
+
+if __name__ == '__main__':
+    main()
