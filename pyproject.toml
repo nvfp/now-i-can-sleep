@@ -27,6 +27,7 @@ classifiers = [
     "Natural Language :: English"
 ]
 dependencies = [
+    "mykit==4.0.0",
 ]
 
 
