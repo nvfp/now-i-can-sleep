@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nics"
-version = "0.1.0-dev-1"
+version = "0.1.0-testing-1"
 description = "Automated docs repo generator"
 readme = "README.md"
 requires-python = ">=3.8"
@@ -27,7 +27,7 @@ classifiers = [
     "Natural Language :: English"
 ]
 dependencies = [
-    "mykit==4.0.0",
+    "mykit==4.1.0",
 ]
 
 
