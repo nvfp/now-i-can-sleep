@@ -1,9 +1,17 @@
-from mykit.kit.utils import print_screen
+import os
+
+from mykit.kit.utils import printer
 
 
-def run():
+def run(input, output):
+    """
+    ## Params
+    - `input`:
+    - `output`:
+    """
 
-    print_screen(
-        'Welcome to NICS!\n'
-    )
-    usr = input(': ')
+    printer(f'DEBUG: input: {repr(input)}.')
+    printer(f'DEBUG: output: {repr(output)}.')
+
+    printer(f'DEBUG: os.path.isdir(input): {os.path.isdir(input)}.')
+    printer(f'DEBUG: os.path.isdir(output): {os.path.isdir(output)}.')
