@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "nics"
+version = "0.1.0-dev-1"
+description = "Automated docs repo generator"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+  	{email = "nvfastplease@gmail.com"},
+]
+keywords = ["python", "toolkit", "mykit"]
+classifiers = [
+	"Topic :: Scientific/Engineering",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+    "Natural Language :: English"
+]
+dependencies = [
+]
+
+
+[tool.setuptools.packages.find]
+exclude = [
+    "archive*",
+    "docs*",
+]
+
+
+[project.urls]
+documentation = "https://nvfp.github.io/now-i-can-sleep/docs"
+"report bugs" = "https://github.com/nvfp/now-i-can-sleep/issues"
+repo = "https://github.com/nvfp/now-i-can-sleep"
+changelog = "https://nvfp.github.io/now-i-can-sleep/changelog"
+
+
+[project.scripts]
+nics = "nics.__main__:main"

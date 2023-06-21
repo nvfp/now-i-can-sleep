@@ -1,0 +1,1 @@
+There are two ways to compile the docs/ structure: via Python or by using Jekyll Liquid syntax. However, using the Jekyll Liquid way is simpler.
