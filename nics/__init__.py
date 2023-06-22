@@ -51,25 +51,8 @@ def main():
 
     ## compile command (that users shouldn't run)
     compile_parser = subparsers.add_parser('_compile', help='')
-    compile_parser.add_argument('input')
-    compile_parser.add_argument('output')
-
-
-    ## positional args
-    # parser.add_argument(
-    #     'cmd',
-    #     choices=['start', 'update', '_compile'],
-    #     help=argparse.SUPPRESS  # to hide the help message
-    # )
-    # parser.add_argument(
-    #     'arg2',
-    #     choices=[
-    #         'step2', 'step3',
-    #         ''
-    #     ],
-    #     nargs='?',
-    #     help=argparse.SUPPRESS  # to hide the help message
-    # )
+    compile_parser.add_argument('container')
+    compile_parser.add_argument('target')
 
 
     args = parser.parse_args()
@@ -77,4 +60,4 @@ def main():
     printer(f'INFO: running command {repr(args.cmd)}.')
 
     if args.cmd == '_compile':
-        run_compile(args.input, args.output)
+        run_compile(args.container, args.target)

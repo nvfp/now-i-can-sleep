@@ -1,10 +1,18 @@
 import os
 
+## typehint
+from pathlib import Path as _Path
+from typing import Union, NoReturn
+
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
 
-def header_writer(container) -> str:
+## typehint
+AbsPath = Union[str, os.PathLike]
+
+
+def header_writer(tree: AbsPath) -> str:
 
     header = (
         '<header>'
@@ -21,7 +29,7 @@ def header_writer(container) -> str:
 
     def recursion(pth):
 
-        printer(f'DEBUG: pth: {repr(pth)}')
+        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}')
 
         for i in os.listdir(pth):
 
@@ -35,7 +43,7 @@ def header_writer(container) -> str:
         
         return 'x'
 
-    header += recursion(container)
+    header += recursion(tree)
     
     ## </build the nested divs recursively>
 
@@ -50,12 +58,41 @@ def header_writer(container) -> str:
     return header
 
 
-def run(container, target):
+def inspect_the_container(container: AbsPath) -> Union[None, NoReturn]:
+    """
+    Asserting the required core elements for deploying the pages.
+    """
+    
+    ## settings.txt must exist
+    if not os.path.isfile( os.path.join(container, 'settings.txt') ):
+        raise AssertionError('The main settings file "settings.txt" is not found in the container.')
+
+    ## tree/ folder must exist
+    if not os.path.isdir( os.path.join(container, 'tree') ):
+        raise AssertionError('The docs structure folder "tree/" is not found in the container.')
+
+
+def inspect_the_tree():
+    """
+    The 'tree/' folder has a quite strict rules: only the necessary stuff should be there,
+    and the names of files and folders should follow certain patterns.
+    This makes things easier later on, with fewer checks needed.
+    """
+
+
+def run(container: AbsPath, target: AbsPath) -> None:
     """
     ## Params
     - `container`: the nics folder bundle
     - `target`: the branch
     """
+
+    ## validate the requirements
+    inspect_the_container(container)
+
+    ## validate
+    inspect_the_tree()
+
 
     printer(f'DEBUG: container: {repr(container)}.')
     printer(f'DEBUG: target: {repr(target)}.')
@@ -79,3 +116,5 @@ def run(container, target):
 
     
     printer(f'INFO: start copying assets..')
+    printer(f'INFO: start copying 404.md..')
+    printer(f'INFO: start copying favicon.png..')
