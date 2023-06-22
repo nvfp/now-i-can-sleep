@@ -40,20 +40,13 @@ def header_writer(tree: AbsPath) -> str:
 
     ## <build the nested divs recursively>
 
-    def recursion(pth) -> str:
+    def recursion(pth, base) -> str:  # reminder: `base` is the X in foo.com/baseurl/{X}page (e.g. nvfp.github.io/mykit/docs/guide/foo, then X='docs/guide/')
         out = ''
 
         ## Somehow, os.listdir is not ordered, but remember the order matters
         ## because nics allows users to arrange the order of the docs tree.
         ordered = sorted(os.listdir(pth))  # a list of files and folders inside `pth`
         printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  ordered: {ordered}')
-
-        def parse_relative_path() -> str:  # reminder: using function to prevent variable name clash
-            rel = os.path.relpath(pth, tree)  # cut the path up to the tree/ path
-            if rel == '.': rel = ''  # handle init case (where `pth` is the same as `tree`)
-            return rel.replace(os.sep, '/')  # using forward slash (because some OS are using backslash)
-        loc = parse_relative_path()  # must not contain spaces
-        printer(f'DEBUG: loc: {repr(loc)}')
 
         for fd in ordered:  # reminder: fd (file or directory)
             printer(f'DEBUG: fd: {repr(fd)}')
@@ -85,7 +78,7 @@ def header_writer(tree: AbsPath) -> str:
         printer(f'DEBUG: ------------')
         return out
 
-    header += recursion(tree)
+    header += recursion(tree, '')
     
     ## </build the nested divs recursively>
 

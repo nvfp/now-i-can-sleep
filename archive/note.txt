@@ -1,1 +1,4 @@
-There are two ways to compile the docs/ structure: via Python or by using Jekyll Liquid syntax. However, using the Jekyll Liquid way is simpler.
+
+
+pending features:
+- coloring_type: Allows users to choose the coloring style for the pages (with three options: full, signature, and template). Currently, only the signature option is being used.
