@@ -1,0 +1,37 @@
+
+
+# reminder: this only for dev purposes to make the testing faster
+
+name: 📦PyPI publish once tag created
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 🔥 Checkout code
+      uses: actions/checkout@v2
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+
+    # - name: 🛒 Install dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install build twine
+
+    # - name: 🛠️ Build..
+    #   run: python -m build
+
+    # - name: 🎉 Publish
+    #   env:
+    #     TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+    #     TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+    #   run: twine upload dist/*
