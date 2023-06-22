@@ -67,7 +67,7 @@ def run(container, target):
     printer(f'DEBUG: os.listdir(target): {os.listdir(target)}.')
 
     settings = KeyCrate(
-        os.path.join(container, '_nics', 'settings.txt'),
+        os.path.join(container, 'settings.txt'),
         key_is_var=True, eval_value=True
     )
     
