@@ -41,66 +41,49 @@ def header_writer(tree: AbsPath) -> str:
     ## <build the nested divs recursively>
 
     def recursion(pth) -> str:
+        out = ''
 
-        thedivs = ''
+        ## Somehow, os.listdir is not ordered, but remember the order matters
+        ## because nics allows users to arrange the order of the docs tree.
+        ordered = sorted(os.listdir(pth))  # a list of files and folders inside `pth`
+        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  ordered: {ordered}')
 
-        stuff = sorted(os.listdir(pth))
+        def parse_relative_path() -> str:  # reminder: using function to prevent variable name clash
+            rel = os.path.relpath(pth, tree)  # cut the path up to the tree/ path
+            if rel == '.': rel = ''  # handle init case (where `pth` is the same as `tree`)
+            return rel.replace(os.sep, '/')  # using forward slash (because some OS are using backslash)
+        loc = parse_relative_path()  # must not contain spaces
+        printer(f'DEBUG: loc: {repr(loc)}')
 
-        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  stuff: {stuff}')
+        for fd in ordered:  # reminder: fd (file or directory)
+            printer(f'DEBUG: fd: {repr(fd)}')
 
-        ## <parsing the path>
-
-        ## reminder: using function to prevent variable name clash
-        def parse_url() -> str:
-
-            ## cut the path up to the tree/ path
-            rel = os.path.relpath(pth, tree)
-
-            ## handle init case (where `pth` is the same as `tree`)
-            if rel == '.':
-                rel = ''
-
-            ## using forward slash (because some OS are using backslash)
-            url = rel.replace(os.sep, '/')
-
-            return url
-
-        current_url = parse_url()
-        printer(f'DEBUG: current_url: {repr(current_url)}')
-
-        ## </parsing the path>
-
-        for i in stuff:
-
-            printer(f'DEBUG: i: {repr(i)}')
-            
-            full_pth = os.path.join(pth, i)
+            fd_pth = os.path.join(pth, fd)
 
             ## this guarantees a match as the tree/ contents have already been inspected
-            res = re.match(r'(?:\d+ - )?(?P<name>[\w -]+)(?:.md)?', i)
+            res = re.match(r'(?:\d+ - )?(?P<name>[\w -]+)(?:.md)?', fd)
             name = res.group('name')
 
-            if os.path.isdir(full_pth):
+            if os.path.isdir(fd_pth):
 
-                thedivs += f'<button id="{i}">> {name}</button>'
-                thedivs += f'<div class="child" id="{i}-div">'
-                thedivs += recursion(full_pth)
-                thedivs += '</div>'
+                out += f'<button id="{loc}/{name}">> {name}</button>'
+                out += f'<div class="child" id="{loc}/{name}-div">'
+                out += recursion(fd_pth)
+                out += '</div>'
             else:
-                if os.path.isfile(full_pth):
+                if os.path.isfile(fd_pth):
 
-                    if i == 'index.md':
+                    if fd == 'index.md':
                         printer('DEBUG: index.md is skipped!')
                         continue
 
-                    thedivs += f'<a href="{current_url}/{name_url}">{name}</a>'
+                    out += f'<a href="{loc}/{name}">{name}</a>'
                 else:
                     ## this one should never be called, i guess
-                    raise AssertionError(f'full_pth is not either a file or a dir: {repr(full_pth)}')
+                    raise AssertionError(f'fd_pth is not either a file or a dir: {repr(fd_pth)}')
 
         printer(f'DEBUG: ------------')
-        
-        return thedivs
+        return out
 
     header += recursion(tree)
     

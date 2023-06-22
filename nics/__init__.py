@@ -49,6 +49,15 @@ def main():
     start_parser = subparsers.add_parser('start', help='')
     start_parser.add_argument('arg1', type=int, help='')
 
+    ## test command (letting users test locally whether some rules are violated or not before being run by GitHub Actions VM)
+    start_parser = subparsers.add_parser(
+        'test',
+        help=(
+            'You can use this command to check if the following conditions '
+            'are violated before errors are caught during GitHub workflows.'
+        )
+    )
+
     ## compile command (that users shouldn't run)
     compile_parser = subparsers.add_parser('_compile', help='')
     compile_parser.add_argument('container')
