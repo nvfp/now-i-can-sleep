@@ -31,7 +31,9 @@ def header_writer(tree: AbsPath) -> str:
 
     ## <build the nested divs recursively>
 
-    def recursion(pth):
+    def recursion(pth) -> str:
+
+        thedivs = ''
 
         stuff = sorted(os.listdir(pth))
 
@@ -39,15 +41,31 @@ def header_writer(tree: AbsPath) -> str:
 
         for i in stuff:
 
-            printer(f'DEBUG: {repr(i)}')
+            printer(f'DEBUG: i: {repr(i)}')
             
             full_pth = os.path.join(pth, i)
+            
             if os.path.isdir(full_pth):
-                recursion(full_pth)
-        
+
+                thedivs += f'<button id="{i}">> {i}</button>'
+                thedivs += f'<div class="child" id="{i}-div">'
+                thedivs += recursion(full_pth)
+                thedivs += '</div>'
+            else:
+                if os.path.isfile(full_pth):
+
+                    if i == 'index.md':
+                        printer('DEBUG: index.md is skipped!')
+                        continue
+
+                    thedivs += f'<a href="file0">{i}</a>'
+                else:
+                    ## this one should never be called, i guess
+                    raise AssertionError(f'full_pth is not either a file or a dir: {repr(full_pth)}')
+
         printer(f'DEBUG: ------------')
         
-        return 'x'
+        return thedivs
 
     header += recursion(tree)
     
