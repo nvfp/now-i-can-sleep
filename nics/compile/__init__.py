@@ -46,7 +46,7 @@ def header_writer(tree: AbsPath) -> str:
         ## Somehow, os.listdir is not ordered, but remember the order matters
         ## because nics allows users to arrange the order of the docs tree.
         ordered = sorted(os.listdir(pth))  # a list of files and folders inside `pth`
-        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  ordered: {ordered}')
+        printer(f'DEBUG: pth: {repr(pth)}  base: {repr(base)}  os.listdir(pth): {os.listdir(pth)}  ordered: {ordered}')
 
         for fd in ordered:  # reminder: fd (file or directory)
             printer(f'DEBUG: fd: {repr(fd)}')
@@ -56,21 +56,22 @@ def header_writer(tree: AbsPath) -> str:
             ## this guarantees a match as the tree/ contents have already been inspected
             res = re.match(r'(?:\d+ - )?(?P<name>[\w -]+)(?:.md)?', fd)
             name = res.group('name')
+            name_but_in_url = name.replace(' ', '-')  # replace all spaces with hyphen
+            printer(f'DEBUG: name: {repr(name)}  name_but_in_url: {repr(name_but_in_url)}')
 
             if os.path.isdir(fd_pth):
-
-                out += f'<button id="{loc}/{name}">> {name}</button>'
-                out += f'<div class="child" id="{loc}/{name}-div">'
-                out += recursion(fd_pth)
+                printer(f'DEBUG: fd is a dir: {repr(fd)}')
+                out += f'<button id="{base.replace("/", "-")}{name_but_in_url}">> {name}</button>'  # remember to replace all slashes to hyphens
+                out += f'<div class="child" id="{base.replace("/", "-")}{name_but_in_url}-div">'  # remember to replace all slashes to hyphens
+                out += recursion(fd_pth, base+name_but_in_url+'/')
                 out += '</div>'
             else:
                 if os.path.isfile(fd_pth):
-
+                    printer(f'DEBUG: fd is a file: {repr(fd)}')
                     if fd == 'index.md':
                         printer('DEBUG: index.md is skipped!')
                         continue
-
-                    out += f'<a href="{loc}/{name}">{name}</a>'
+                    out += f'<a href="{base}{name_but_in_url}">{name}</a>'
                 else:
                     ## this one should never be called, i guess
                     raise AssertionError(f'fd_pth is not either a file or a dir: {repr(fd_pth)}')
