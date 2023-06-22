@@ -1,4 +1,5 @@
 import os
+import re
 
 ## typehint
 from pathlib import Path as _Path
@@ -12,6 +13,16 @@ from mykit.kit.utils import printer
 AbsPath = Union[str, os.PathLike]
 
 
+"""
+
+reminder:
+
+- keep the printers (debuggers) printing (don't comment them out)
+  for easy debugging inside the GitHub Actions VM since we can't
+  enable the debuggers there
+"""
+
+
 def header_writer(tree: AbsPath) -> str:
     """
     reminder:
@@ -20,14 +31,12 @@ def header_writer(tree: AbsPath) -> str:
 
     header = (
         '<header>'
-
             '<h1>{{ page.title }}</h1>'
-
             '<div class="wrap">'
-
                 '<button id="_root__nav">v Navigation</button>'
                 '<div class="main" id="_root__nav-div">'
     )
+
 
     ## <build the nested divs recursively>
 
@@ -39,15 +48,41 @@ def header_writer(tree: AbsPath) -> str:
 
         printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  stuff: {stuff}')
 
+        ## <parsing the path>
+
+        ## reminder: using function to prevent variable name clash
+        def parse_url() -> str:
+
+            ## cut the path up to the tree/ path
+            rel = os.path.relpath(pth, tree)
+
+            ## handle init case (where `pth` is the same as `tree`)
+            if rel == '.':
+                rel = ''
+
+            ## using forward slash (because some OS are using backslash)
+            url = rel.replace(os.sep, '/')
+
+            return url
+
+        current_url = parse_url()
+        printer(f'DEBUG: current_url: {repr(current_url)}')
+
+        ## </parsing the path>
+
         for i in stuff:
 
             printer(f'DEBUG: i: {repr(i)}')
             
             full_pth = os.path.join(pth, i)
-            
+
+            ## this guarantees a match as the tree/ contents have already been inspected
+            res = re.match(r'(?:\d+ - )?(?P<name>[\w -]+)(?:.md)?', i)
+            name = res.group('name')
+
             if os.path.isdir(full_pth):
 
-                thedivs += f'<button id="{i}">> {i}</button>'
+                thedivs += f'<button id="{i}">> {name}</button>'
                 thedivs += f'<div class="child" id="{i}-div">'
                 thedivs += recursion(full_pth)
                 thedivs += '</div>'
@@ -58,7 +93,7 @@ def header_writer(tree: AbsPath) -> str:
                         printer('DEBUG: index.md is skipped!')
                         continue
 
-                    thedivs += f'<a href="file0">{i}</a>'
+                    thedivs += f'<a href="{current_url}/{name_url}">{name}</a>'
                 else:
                     ## this one should never be called, i guess
                     raise AssertionError(f'full_pth is not either a file or a dir: {repr(full_pth)}')
@@ -71,14 +106,12 @@ def header_writer(tree: AbsPath) -> str:
     
     ## </build the nested divs recursively>
 
+
     header += (
                 '</div>'
-            
             '</div>'
-
         '</header>'
     )
-    
     return header
 
 
