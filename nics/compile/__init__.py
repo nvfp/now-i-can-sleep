@@ -13,6 +13,10 @@ AbsPath = Union[str, os.PathLike]
 
 
 def header_writer(tree: AbsPath) -> str:
+    """
+    reminder:
+    - index.md will not be included in the header
+    """
 
     header = (
         '<header>'
@@ -112,11 +116,23 @@ def run(container: AbsPath, target: AbsPath) -> None:
     
     printer(f'DEBUG: settings.export(): {settings.export()}')
 
-    header = header_writer(container)
+    
+    ## <rewriting the header.html>
+    
+    header = header_writer( os.path.join(container, 'tree') )
 
     printer(f'DEBUG: header: {header}')
-
     
+    header_pth = os.path.join(target, '_includes', 'header.html')
+    printer(f'DEBUG: header_pth: {repr(header_pth)}')
+
+    printer(f'INFO: rewriting header.html...')
+    with open(header_pth, 'w') as file:
+        file.write(header)
+
+    ## </rewriting the header.html>
+
+
     printer(f'INFO: start copying assets..')
     printer(f'INFO: start copying 404.md..')
     printer(f'INFO: start copying favicon.png..')
