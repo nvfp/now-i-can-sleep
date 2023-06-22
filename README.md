@@ -2,6 +2,8 @@
 
 # Now-I-Can-Sleep
 
+(unstable)
+
 ## Usage
 
 1. Install via pip:

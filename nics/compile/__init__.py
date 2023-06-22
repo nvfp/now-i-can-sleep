@@ -54,9 +54,9 @@ def header_writer(tree: AbsPath) -> str:
             fd_pth = os.path.join(pth, fd)
 
             ## this guarantees a match as the tree/ contents have already been inspected
-            res = re.match(r'(?:\d+ - )?(?P<name>[\w -]+)(?:.md)?', fd)
+            res = re.match(r'(?:\d+ - )?(?P<name>[\w -.]+)(?:.md)?', fd)
             name = res.group('name')
-            name_but_in_url = name.replace(' ', '-')  # replace all spaces with hyphen
+            name_but_in_url = name.replace(' ', '-').replace('.', '-')  # replace all spaces and periods with hyphen
             printer(f'DEBUG: name: {repr(name)}  name_but_in_url: {repr(name_but_in_url)}')
 
             if os.path.isdir(fd_pth):
