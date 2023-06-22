@@ -29,9 +29,11 @@ def header_writer(tree: AbsPath) -> str:
 
     def recursion(pth):
 
-        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}')
+        stuff = sorted(os.listdir(pth))
 
-        for i in os.listdir(pth):
+        printer(f'DEBUG: pth: {repr(pth)}  os.listdir(pth): {os.listdir(pth)}  stuff: {stuff}')
+
+        for i in stuff:
 
             printer(f'DEBUG: {repr(i)}')
             
