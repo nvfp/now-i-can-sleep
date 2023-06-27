@@ -19,7 +19,7 @@ hue_signature: 22
 
 
 lowercase_the_url: True
-show_credit: False
+show_credit: True
 
 
 

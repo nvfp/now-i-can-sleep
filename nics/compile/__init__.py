@@ -54,16 +54,16 @@ def header_writer(tree: AbsPath) -> str:
             fd_pth = os.path.join(pth, fd)
 
             ## this guarantees a match as the tree/ contents have already been inspected
-            res = re.match(r'(?:\d+ - )?(?P<name>[\w -.]+?)(?:.md)?', fd)
+            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:.md)?', fd)
             name = res.group('name')
-            name_but_in_url = name.replace(' ', '-')  # replace all spaces and periods with hyphen
-            printer(f'DEBUG: name: {repr(name)}  name_but_in_url: {repr(name_but_in_url)}')
+            url = res.group('url')
+            printer(f'DEBUG: name: {repr(name)}  url: {repr(url)}')
 
             if os.path.isdir(fd_pth):
                 printer(f'DEBUG: fd is a dir: {repr(fd)}')
-                out += f'<button id="{base.replace("/", "-")}{name_but_in_url}">> {name}</button>'  # remember to replace all slashes to hyphens
-                out += f'<div class="child" id="{base.replace("/", "-")}{name_but_in_url}-div">'  # remember to replace all slashes to hyphens
-                out += recursion(fd_pth, base+name_but_in_url+'/')
+                out += f'<button id="{base.replace("/", "-")}{url}">> {name}</button>'  # remember to replace all slashes to hyphens
+                out += f'<div class="child" id="{base.replace("/", "-")}{url}-div">'  # remember to replace all slashes to hyphens
+                out += recursion(fd_pth, base+url+'/')
                 out += '</div>'
             else:
                 if os.path.isfile(fd_pth):
@@ -71,7 +71,7 @@ def header_writer(tree: AbsPath) -> str:
                     if fd == 'index.md':
                         printer('DEBUG: index.md is skipped!')
                         continue
-                    out += f'<a href="{base}{name_but_in_url}">{name}</a>'
+                    out += f'<a href="{base}{url}">{name}</a>'
                 else:
                     ## this one should never be called, i guess
                     raise AssertionError(f'fd_pth is not either a file or a dir: {repr(fd_pth)}')
