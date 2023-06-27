@@ -105,14 +105,14 @@ def run(container: AbsPath, target: AbsPath) -> None:
     inspect_the_tree()
 
 
-    printer(f'DEBUG: container: {repr(container)}.')
-    printer(f'DEBUG: target: {repr(target)}.')
+    # printer(f'DEBUG: container: {repr(container)}.')
+    # printer(f'DEBUG: target: {repr(target)}.')
 
-    printer(f'DEBUG: os.path.isdir(container): {os.path.isdir(container)}.')
-    printer(f'DEBUG: os.path.isdir(target): {os.path.isdir(target)}.')
+    # printer(f'DEBUG: os.path.isdir(container): {os.path.isdir(container)}.')
+    # printer(f'DEBUG: os.path.isdir(target): {os.path.isdir(target)}.')
 
-    printer(f'DEBUG: os.listdir(container): {os.listdir(container)}.')
-    printer(f'DEBUG: os.listdir(target): {os.listdir(target)}.')
+    # printer(f'DEBUG: os.listdir(container): {os.listdir(container)}.')
+    # printer(f'DEBUG: os.listdir(target): {os.listdir(target)}.')
 
     settings = KeyCrate(
         os.path.join(container, 'settings.txt'),
@@ -138,6 +138,33 @@ def run(container: AbsPath, target: AbsPath) -> None:
     ## </rewriting the header.html>
 
 
+    ## <rewriting 404.md>
+    
+    page404_pth = os.path.join(container, '404.md')
+    if os.path.isfile(page404_pth):
+        printer('DEBUG: Copying 404.md.')
+        text = (
+            '---\n'
+            'permalink: /404.html\n'
+            'layout: no-header\n'
+            'title: Page not found\n'
+            '---\n\n'
+        )
+        with open(page404_pth, 'r') as f:
+            text += f.read()
+        
+        dst = os.path.join(target, '404.md')
+        printer(f'DEBUG: writing to {repr(dst)}')
+        with open(dst, 'w') as f:
+            f.write(text)
+
+    ## </rewriting 404.md>
+
+
+    ## <rewriting the docs>
+
+    ## </rewriting the docs>
+
+
     printer(f'INFO: start copying assets..')
-    printer(f'INFO: start copying 404.md..')
     printer(f'INFO: start copying favicon.png..')
