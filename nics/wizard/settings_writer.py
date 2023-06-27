@@ -3,11 +3,10 @@
 
 
 text = f"""
-#-- Welcome to NICS settings!
+#-- Welcome to nics settings
 #----------------------------
 
 #-- Everything starts with "#--" is a comment.
-#-- Visit https://nvfp.github.io/now-i-can-sleep to read the latest documentation.
 
 
 
@@ -20,7 +19,7 @@ hue_signature: 22
 
 
 lowercase_the_url: True
-show_credit: True
+show_credit: False
 
 
 
