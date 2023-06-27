@@ -42,16 +42,13 @@ def header_writer(tree: AbsPath) -> str:
     def build_the_nested_divs_recursively(pth, base) -> str:
         out = ''
 
-        for fd in sorted(os.listdir(pth)):  # reminder: the file/dir `fd` order in `pth` matters
-            printer(f'DEBUG: fd: {repr(fd)}')
-
+        for fd in sorted(os.listdir(pth)):  # reminder: the file/dir `fd` order in `pth` matters.
+            if fd == 'index.md': continue  # index.md will not be shown in navigation bar
             fd_pth = os.path.join(pth, fd)
 
-            ## this guarantees a match as the tree/ contents have already been inspected
             res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:.md)?', fd)
             name = res.group('name')
             url = res.group('url')
-            printer(f'DEBUG: name: {repr(name)}  url: {repr(url)}')
 
             if os.path.isdir(fd_pth):
                 out += f'<button id="{base.replace("/", "-")}{url}">> {name}</button>'  # remember to replace all slashes to hyphens
@@ -59,12 +56,8 @@ def header_writer(tree: AbsPath) -> str:
                 out += build_the_nested_divs_recursively(fd_pth, base+url+'/')
                 out += '</div>'
             else:
-                if fd == 'index.md':
-                    printer('DEBUG: index.md is skipped!')
-                    continue
                 out += f'<a href="{base}{url}">{name}</a>'
 
-        printer(f'DEBUG: ------------')
         return out
     header += build_the_nested_divs_recursively(tree, '')
 
