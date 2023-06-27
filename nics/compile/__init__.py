@@ -37,18 +37,12 @@ def header_writer(tree: AbsPath) -> str:
                 '<div class="main" id="_root__nav-div">'
     )
 
-
-    ## <build the nested divs recursively>
-
-    def recursion(pth, base) -> str:  # reminder: `base` is the X in foo.com/baseurl/{X}page (e.g. nvfp.github.io/mykit/docs/guide/foo, then X='docs/guide/')
+    ## reminder: `base` is the X in foo.com/baseurl/{X}page
+    ##           (e.g. nvfp.github.io/mykit/docs/guide/foo, then X='docs/guide/')
+    def build_the_nested_divs_recursively(pth, base) -> str:
         out = ''
 
-        ## Somehow, os.listdir is not ordered, but remember the order matters
-        ## because nics allows users to arrange the order of the docs tree.
-        ordered = sorted(os.listdir(pth))  # a list of files and folders inside `pth`
-        printer(f'DEBUG: pth: {repr(pth)}  base: {repr(base)}  os.listdir(pth): {os.listdir(pth)}  ordered: {ordered}')
-
-        for fd in ordered:  # reminder: fd (file or directory)
+        for fd in sorted(os.listdir(pth)):  # reminder: the file/dir `fd` order in `pth` matters
             printer(f'DEBUG: fd: {repr(fd)}')
 
             fd_pth = os.path.join(pth, fd)
@@ -63,7 +57,7 @@ def header_writer(tree: AbsPath) -> str:
                 printer(f'DEBUG: fd is a dir: {repr(fd)}')
                 out += f'<button id="{base.replace("/", "-")}{url}">> {name}</button>'  # remember to replace all slashes to hyphens
                 out += f'<div class="child" id="{base.replace("/", "-")}{url}-div">'  # remember to replace all slashes to hyphens
-                out += recursion(fd_pth, base+url+'/')
+                out += build_the_nested_divs_recursively(fd_pth, base+url+'/')
                 out += '</div>'
             else:
                 if os.path.isfile(fd_pth):
@@ -78,11 +72,7 @@ def header_writer(tree: AbsPath) -> str:
 
         printer(f'DEBUG: ------------')
         return out
-
-    header += recursion(tree, '')
-    
-    ## </build the nested divs recursively>
-
+    header += build_the_nested_divs_recursively(tree, '')
 
     header += (
                 '</div>'
