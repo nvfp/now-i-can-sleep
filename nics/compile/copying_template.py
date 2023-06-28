@@ -9,6 +9,8 @@ def copying_template(dock):
     x = os.path.join(ASSETS_DIR_PTH, 'template', '_layouts')
     print(x)
     print(os.path.isdir(x))
+    print(ASSETS_DIR_PTH)
+    print(os.listdir(ASSETS_DIR_PTH))
 
     shutil.copytree(
         os.path.join(ASSETS_DIR_PTH, 'template', '_layouts'),
