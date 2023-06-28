@@ -41,6 +41,11 @@ def run(container, dock):
     settings = KeyCrate(C_SETTINGS, True, True)
 
 
+    ## handle init case
+    if not os.path.isdir( os.path.join(dock, '_includes') ):
+        os.mkdir(os.path.join(dock, '_includes'))
+
+
     rewrite_the_header(C_TREE, D_HEADER)
     rewrite_the_footer(D_FOOTER, settings.show_credit)
 
