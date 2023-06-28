@@ -1,26 +1,14 @@
 import os
 import re
-
-## typehint
-from pathlib import Path as _Path
-from typing import Union, NoReturn
+from typing import Union
 
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
+from .inspect import inspect_the_container
 
-## typehint
+
 AbsPath = Union[str, os.PathLike]
-
-
-"""
-
-reminder:
-
-- keep the printers (debuggers) printing (don't comment them out)
-  for easy debugging inside the GitHub Actions VM since we can't
-  enable the debuggers there
-"""
 
 
 def header_writer(tree: AbsPath) -> str:
@@ -69,27 +57,6 @@ def header_writer(tree: AbsPath) -> str:
     return header
 
 
-def inspect_the_container(container: AbsPath) -> Union[None, NoReturn]:
-    """
-    Asserting the required core elements for deploying the pages.
-    """
-    
-    ## settings.txt must exist
-    if not os.path.isfile( os.path.join(container, 'settings.txt') ):
-        raise AssertionError('The main settings file "settings.txt" is not found in the container.')
-
-    ## tree/ folder must exist
-    if not os.path.isdir( os.path.join(container, 'tree') ):
-        raise AssertionError('The docs structure folder "tree/" is not found in the container.')
-
-
-def inspect_the_tree():
-    """
-    The 'tree/' folder has a quite strict rules: only the necessary stuff should be there,
-    and the names of files and folders should follow certain patterns.
-    This makes things easier later on, with fewer checks needed.
-    """
-
 
 def run(container: AbsPath, target: AbsPath) -> None:
     """
@@ -109,13 +76,10 @@ def run(container: AbsPath, target: AbsPath) -> None:
     ## validate the requirements
     inspect_the_container(container)
 
-    ## validate
-    inspect_the_tree()
-
 
     settings = KeyCrate(C_SETTINGS, True, True)
 
-    
+
     ## <rewriting the header.html>
     
     header = header_writer( os.path.join(container, 'tree') )
