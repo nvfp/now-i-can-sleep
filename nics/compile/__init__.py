@@ -184,7 +184,20 @@ def run(container: AbsPath, target: AbsPath) -> None:
                     printer(f'DEBUG: writing to {repr(dst)}')
                     with open(dst, 'w') as f: f.write(text)
                 else:
-                    pass
+                    text = (
+                        '---\n'
+                        f'permalink: {base}\n'
+                        'layout: main\n'
+                        f"title: {list(filter(lambda s:s!='', base.split('/')))[-1]}\n"
+                        '---\n\n'
+                    )
+                    src = os.path.join( pth, 'index.md' )
+                    printer(f'DEBUG: src: {repr(src)}')
+                    with open(src, 'r') as f: text += f.read()
+                    
+                    dst = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), 'index.md')
+                    printer(f'DEBUG: writing to {repr(dst)}')
+                    with open(dst, 'w') as f: f.write(text)
 
                 continue
 
@@ -195,9 +208,29 @@ def run(container: AbsPath, target: AbsPath) -> None:
             url = res.group('url')
 
             if os.path.isdir(pth2):
+                
+                ## if the dir not exist -> create a new one
+                dir = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), name )
+                if not os.path.isdir(dir):
+                    printer(f'DEBUG: Creating new dir: {repr(dir)}.')
+                    os.mkdir(dir)
+
                 rewrite_the_docs_tree_recursively(pth2, base+name+'/')
             else:
-                pass
+                text = (
+                    '---\n'
+                    f'permalink: {base}/{url}/\n'
+                    'layout: main\n'
+                    f'title: {name}\n'
+                    '---\n\n'
+                )
+                src = os.path.join( pth, i )
+                printer(f'DEBUG: src: {repr(src)}')
+                with open(src, 'r') as f: text += f.read()
+                
+                dst = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
+                printer(f'DEBUG: writing to {repr(dst)}')
+                with open(dst, 'w') as f: f.write(text)
     rewrite_the_docs_tree_recursively( os.path.join(container, 'tree'), '/' )
 
     ## </rewriting the docs>
