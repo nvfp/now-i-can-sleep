@@ -98,6 +98,14 @@ def run(container: AbsPath, target: AbsPath) -> None:
     - `target`: the branch
     """
 
+
+    C_ASSETS = os.path.join(container, 'assets')
+    C_TREE = os.path.join(container, 'tree')
+    C_404 = os.path.join(container, '404.md')
+    C_ICON = os.path.join(container, 'favicon.png')
+    C_SETTINGS = os.path.join(container, 'settings.txt')
+
+
     ## validate the requirements
     inspect_the_container(container)
 
@@ -105,21 +113,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
     inspect_the_tree()
 
 
-    # printer(f'DEBUG: container: {repr(container)}.')
-    # printer(f'DEBUG: target: {repr(target)}.')
-
-    # printer(f'DEBUG: os.path.isdir(container): {os.path.isdir(container)}.')
-    # printer(f'DEBUG: os.path.isdir(target): {os.path.isdir(target)}.')
-
-    # printer(f'DEBUG: os.listdir(container): {os.listdir(container)}.')
-    # printer(f'DEBUG: os.listdir(target): {os.listdir(target)}.')
-
-    settings = KeyCrate(
-        os.path.join(container, 'settings.txt'),
-        key_is_var=True, eval_value=True
-    )
-    
-    printer(f'DEBUG: settings.export(): {settings.export()}')
+    settings = KeyCrate(C_SETTINGS, True, True)
 
     
     ## <rewriting the header.html>
