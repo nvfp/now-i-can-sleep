@@ -219,7 +219,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
             else:
                 text = (
                     '---\n'
-                    f'permalink: {base}/{url}/\n'
+                    f'permalink: {base}{url}/\n'
                     'layout: main\n'
                     f'title: {name}\n'
                     '---\n\n'
