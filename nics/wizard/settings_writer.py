@@ -28,11 +28,12 @@ show_credit: True
 #--
 #-- Inside this folder (the folder that contains this setting.txt file),
 #-- nics will strictly look at the following things:
-#--    (optional) assets/ . . : the folder for storing items used in markdown files
-#--    (REQUIRED) tree/ . . . : the docs structure
-#--    (optional) 404.md  . . : 404 page
-#--    (optional) favicon.png : currently, only PNG format is supported
-#--    (REQUIRED) settings.txt: the main settings
+#--    (optional) assets/  . . : the folder for storing items used in markdown files
+#--    (REQUIRED) tree/  . . . : the docs structure folder
+#--    (REQUIRED) tree/index.md: the homepage
+#--    (optional) 404.md . . . : 404 page
+#--    (optional) favicon.png  : currently, only PNG format is supported
+#--    (REQUIRED) settings.txt : the main settings
 #-- And nics will not touch any other files/folders that are being added to this folder
 #--
 #--
