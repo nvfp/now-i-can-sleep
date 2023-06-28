@@ -56,7 +56,7 @@ def header_writer(tree: AbsPath) -> str:
                 out += build_the_nested_divs_recursively(fd_pth, base+url+'/')
                 out += '</div>'
             else:
-                out += f'<a href="{base}{url}">{name}</a>'
+                out += f'<a href="{{ site.baseurl }}/{base}{url}">{name}</a>'
 
         return out
     header += build_the_nested_divs_recursively(tree, '')
