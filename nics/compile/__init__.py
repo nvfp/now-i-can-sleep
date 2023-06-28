@@ -146,7 +146,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
         text = (
             '---\n'
             'permalink: /404.html\n'
-            'layout: no-header\n'
+            'layout: main\n'
             'title: Page not found\n'
             '---\n\n'
         )
@@ -162,6 +162,43 @@ def run(container: AbsPath, target: AbsPath) -> None:
 
 
     ## <rewriting the docs>
+
+    def rewrite_the_docs_tree_recursively(pth, base):
+        for i in os.listdir(pth):
+
+            if i == 'index.md':
+
+                if base == '/':  # homepage
+                    text = (
+                        '---\n'
+                        'permalink: /\n'
+                        'layout: main\n'
+                        'title: Home\n'
+                        '---\n\n'
+                    )
+                    src = os.path.join( pth, 'index.md' )
+                    printer(f'DEBUG: src: {repr(src)}')
+                    with open(src, 'r') as f: text += f.read()
+                    
+                    dst = os.path.join(target, 'index.md')
+                    printer(f'DEBUG: writing to {repr(dst)}')
+                    with open(dst, 'w') as f: f.write(text)
+                else:
+                    pass
+
+                continue
+
+            pth2 = os.path.join(pth, i)
+
+            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:.md)?', i)
+            name = res.group('name')
+            url = res.group('url')
+
+            if os.path.isdir(pth2):
+                rewrite_the_docs_tree_recursively(pth2, base+name+'/')
+            else:
+                pass
+    rewrite_the_docs_tree_recursively( os.path.join(container, 'tree'), '/' )
 
     ## </rewriting the docs>
 
