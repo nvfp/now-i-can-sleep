@@ -1,8 +1,9 @@
 
 
-# Now-I-Can-Sleep
+# Now-I-Can-Sleep (unstable)
 
-(unstable)
+NICS is a minimalist automated documentation generation tool for a GitHub repository.
+
 
 ## Usage
 
