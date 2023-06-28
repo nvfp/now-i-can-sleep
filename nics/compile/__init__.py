@@ -8,6 +8,8 @@ from mykit.kit.utils import printer
 from .inspect import inspect_the_container, inspect_the_dock
 from .rewrite_the_header import rewrite_the_header
 from .rewrite_the_footer import rewrite_the_footer
+from .rewrite_jekyll_config import rewrite_jekyll_config
+from .copying_template import copying_template
 
 
 def run(container, dock):
@@ -28,6 +30,7 @@ def run(container, dock):
     D_ASSETS = os.path.join(dock, 'assets')
     D_404 = os.path.join(dock, '404.md')
     D_ICON = os.path.join(dock, 'favicon.png')
+    D_JEKYLL_CONFIG = os.path.join(dock, '_config.yml')
 
 
     ## validate the requirements
@@ -35,11 +38,15 @@ def run(container, dock):
     # inspect_the_dock()
 
 
-    settings = KeyCrate(C_SETTINGS, True, True, ['author', 'color_hue', 'show_credit'], ['author', 'color_hue', 'show_credit'])
+    settings = KeyCrate(C_SETTINGS, True, True)
 
 
     rewrite_the_header(C_TREE, D_HEADER)
     rewrite_the_footer(D_FOOTER, settings.show_credit)
+
+    rewrite_jekyll_config(D_JEKYLL_CONFIG, settings.author, settings._gh_username, settings._gh_repo)
+
+    copying_template(dock)
 
 
     ## <rewriting 404.md>

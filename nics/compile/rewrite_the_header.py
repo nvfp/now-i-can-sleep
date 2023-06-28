@@ -1,4 +1,5 @@
-
+import os
+import re
 
 
 def rewrite_the_header(tree, header_pth):

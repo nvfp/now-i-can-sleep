@@ -62,5 +62,8 @@ def inspect_the_container(container: AbsPath) -> Union[None, NoReturn]:
     _inspect_tree_recursively( os.path.join(container, 'tree') )
 
 
-def inspect_the_dock(dock: AbsPath):
-    pass
+def inspect_the_dock(dock):
+    """shallow inspection to ensure that we are on the correct branch"""
+
+    # if not os.path.isdir( os.path.join(dock, '_includes') ):
+    #     raise AssertionError("Folder '_includes' ")
