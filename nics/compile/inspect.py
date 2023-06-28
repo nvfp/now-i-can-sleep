@@ -51,7 +51,7 @@ def inspect_the_container(container: AbsPath) -> Union[None, NoReturn]:
         raise AssertionError("Couldn't find 'tree/' in the container.")
 
     ## homepage
-    if not os.path.isdir( os.path.join(container, 'tree', 'index.md') ):
+    if not os.path.isfile( os.path.join(container, 'tree', 'index.md') ):
         raise AssertionError("Couldn't find 'tree/index.md' in the container.")
 
     ## settings file
