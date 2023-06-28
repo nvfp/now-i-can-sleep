@@ -60,3 +60,7 @@ def inspect_the_container(container: AbsPath) -> Union[None, NoReturn]:
 
     ## inspecting the tree/
     _inspect_tree_recursively( os.path.join(container, 'tree') )
+
+
+def inspect_the_dock(dock: AbsPath):
+    pass

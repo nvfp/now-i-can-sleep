@@ -5,13 +5,13 @@ from typing import Union
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
-from .inspect import inspect_the_container
+from .inspect import inspect_the_container, inspect_the_dock
 
 
 AbsPath = Union[str, os.PathLike]
 
 
-def header_writer(tree: AbsPath) -> str:
+def update_header(tree: AbsPath, header_pth) -> str:
     """
     reminder:
     - index.md will not be included in the header
@@ -54,15 +54,17 @@ def header_writer(tree: AbsPath) -> str:
             '</div>'
         '</header>'
     )
-    return header
+    
+    with open(header_pth, 'w') as file:
+        file.write(header)
 
 
 
-def run(container: AbsPath, target: AbsPath) -> None:
+def run(container: AbsPath, dock: AbsPath) -> None:
     """
     ## Params
     - `container`: the nics folder bundle
-    - `target`: the branch
+    - `dock`: the branch
     """
 
 
@@ -72,28 +74,18 @@ def run(container: AbsPath, target: AbsPath) -> None:
     C_ICON = os.path.join(container, 'favicon.png')
     C_SETTINGS = os.path.join(container, 'settings.txt')
 
+    T_HEADER = os.path.join(dock, '_includes', 'header.html')
+
 
     ## validate the requirements
     inspect_the_container(container)
+    inspect_the_dock()
 
 
     settings = KeyCrate(C_SETTINGS, True, True)
 
 
-    ## <rewriting the header.html>
-    
-    header = header_writer( os.path.join(container, 'tree') )
-
-    printer(f'DEBUG: header: {header}')
-    
-    header_pth = os.path.join(target, '_includes', 'header.html')
-    printer(f'DEBUG: header_pth: {repr(header_pth)}')
-
-    printer(f'INFO: rewriting header.html...')
-    with open(header_pth, 'w') as file:
-        file.write(header)
-
-    ## </rewriting the header.html>
+    update_header(C_TREE, T_HEADER)
 
 
     ## <rewriting 404.md>
@@ -111,7 +103,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
         with open(page404_pth, 'r') as f:
             text += f.read()
         
-        dst = os.path.join(target, '404.md')
+        dst = os.path.join(dock, '404.md')
         printer(f'DEBUG: writing to {repr(dst)}')
         with open(dst, 'w') as f:
             f.write(text)
@@ -138,7 +130,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
                     printer(f'DEBUG: src: {repr(src)}')
                     with open(src, 'r') as f: text += f.read()
                     
-                    dst = os.path.join(target, 'index.md')
+                    dst = os.path.join(dock, 'index.md')
                     printer(f'DEBUG: writing to {repr(dst)}')
                     with open(dst, 'w') as f: f.write(text)
                 else:
@@ -153,7 +145,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
                     printer(f'DEBUG: src: {repr(src)}')
                     with open(src, 'r') as f: text += f.read()
                     
-                    dst = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), 'index.md')
+                    dst = os.path.join( dock, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), 'index.md')
                     printer(f'DEBUG: writing to {repr(dst)}')
                     with open(dst, 'w') as f: f.write(text)
 
@@ -168,7 +160,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
             if os.path.isdir(pth2):
                 
                 ## if the dir not exist -> create a new one
-                dir = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), name )
+                dir = os.path.join( dock, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), name )
                 if not os.path.isdir(dir):
                     printer(f'DEBUG: Creating new dir: {repr(dir)}.')
                     os.mkdir(dir)
@@ -186,7 +178,7 @@ def run(container: AbsPath, target: AbsPath) -> None:
                 printer(f'DEBUG: src: {repr(src)}')
                 with open(src, 'r') as f: text += f.read()
                 
-                dst = os.path.join( target, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
+                dst = os.path.join( dock, '_pages', os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
                 printer(f'DEBUG: writing to {repr(dst)}')
                 with open(dst, 'w') as f: f.write(text)
     rewrite_the_docs_tree_recursively( os.path.join(container, 'tree'), '/' )

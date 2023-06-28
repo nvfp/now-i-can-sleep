@@ -61,7 +61,7 @@ def main():
     ## compile command (that users shouldn't run)
     compile_parser = subparsers.add_parser('_compile', help='')
     compile_parser.add_argument('container')
-    compile_parser.add_argument('target')
+    compile_parser.add_argument('dock')
 
 
     args = parser.parse_args()
@@ -69,4 +69,4 @@ def main():
     printer(f'INFO: running command {repr(args.cmd)}.')
 
     if args.cmd == '_compile':
-        run_compile(args.container, args.target)
+        run_compile(args.container, args.dock)
