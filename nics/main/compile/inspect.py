@@ -8,23 +8,18 @@ def _inspect_tree_recursively(pth):
         pth2 = os.path.join(pth, i)
 
         if os.path.isdir(pth2):
-
             ## check dir name format
-            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)', i)
-            if res is None:
+            if re.match(r'(?:\d+ -- )?[\w -.]+ -- [\w -]+', i) is None:
                 raise AssertionError(f'Dir name {repr(i)} format is invalid.')
-
+            ## inspect the dir
             _inspect_tree_recursively(pth2)
         else:
-            
             ## only .md files are allowed
             if not i.endswith('.md'):
                 raise AssertionError(f"File {repr(i)} isn't an .md file.")
-
             ## check file name format
             if i != 'index.md':
-                res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:.md)?', i)
-                if res is None:
+                if re.match(r'(?:\d+ -- )?[\w -.]+ -- [\w -]+\.md$', i) is None:
                     raise AssertionError(f'File name {repr(i)} format is invalid.')
 
 

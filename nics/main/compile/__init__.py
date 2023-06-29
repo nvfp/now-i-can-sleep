@@ -30,10 +30,10 @@ def run(container, dock):
     D__PAGES = os.path.join(dock, '_pages')
     D_HEADER = os.path.join(dock, '_includes', 'header.html')
     D_FOOTER = os.path.join(dock, '_includes', 'footer.html')
-    D_ASSETS = os.path.join(dock, 'assets')
+    D_JEKYLL_CONFIG = os.path.join(dock, '_config.yml')
     D_404 = os.path.join(dock, '404.md')
     D_ICON = os.path.join(dock, 'favicon.png')
-    D_JEKYLL_CONFIG = os.path.join(dock, '_config.yml')
+    D_ASSETS = os.path.join(dock, 'assets')
     D_SASS_CONSTANTS = os.path.join(dock, '_sass', 'constants.scss')
 
     ## inspection
