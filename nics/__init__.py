@@ -17,15 +17,18 @@ def main():
     )
     psr.add_argument(
         '-v', '--version', action='version', version=f'%(prog)s-{__version__}',
-        help='show app\'s version then exit'
+        help='show software version then exit'
     )
     subpsr = psr.add_subparsers(dest='cmd')
 
     ## command 'init'
-    subpsr.add_parser('init', help='')
+    subpsr.add_parser(
+        'init',
+        help=argparse.SUPPRESS  # to hide the help message
+    )
 
     ## command '_compile' (that users shouldn't run)
-    c = subpsr.add_parser('_compile', help='')
+    c = subpsr.add_parser('_compile', help=argparse.SUPPRESS)
     c.add_argument('container')
     c.add_argument('dock')
 
