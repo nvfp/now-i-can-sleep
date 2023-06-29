@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 
 from mykit.kit.utils import printer, print_screen
 
@@ -20,24 +21,34 @@ def run():
     ## inspection
     inspect(CONTAINER_DIR_PTH, WORKFLOW_FILE_PTH)
 
+    ## intro
     print_screen(
         'Welcome to NICS!\n'
         '================\n\n'
     )
+    usr = input('Continue?  (Y/n): ')
+    if usr not in ['', 'y', 'Y']:
+        printer('INFO: Exited.')
+        sys.exit(0)
 
+    ## saving user's information
     author = input('Enter your name: ')
     email = input('Enter your email: ')
     gh_username = input('Enter your GitHub username: ')
     gh_repo = input('Enter this GitHub repository name: ')
-    main_branch_name = input("Your main branch name (e.g. 'master'): ")
+    main_branch_name = input("Your main branch name (e.g., master): ")
 
-    ## if the dirs don't exist
-    if not os.path.isdir( os.path.join(CWD, '.github') ):
-        os.mkdir( os.path.join(CWD, '.github') )
-        printer(f"INFO: Dir {repr( os.path.join(CWD, '.github') )} is created.")
-    if not os.path.isdir( os.path.join(CWD, '.github', 'workflows') ):
-        os.mkdir( os.path.join(CWD, '.github', 'workflows') )
-        printer(f"INFO: Dir {repr( os.path.join(CWD, '.github', 'workflows') )} is created.")
+    ## handle the case where the '.github/workflows/' directory does not exist yet
+    def handle_workflow_dirs():
+        pth = os.path.join(CWD, '.github')
+        if not os.path.isdir(pth):
+            os.mkdir(pth)
+            printer(f"INFO: Folder {repr(pth)} is created.")
+        pth = os.path.join(CWD, '.github', 'workflows')
+        if not os.path.isdir(pth):
+            os.mkdir(pth)
+            printer(f"INFO: Folder {repr(pth)} is created.")
+    handle_workflow_dirs()
 
     workflows_writer(WORKFLOW_FILE_PTH, author, email, gh_repo, main_branch_name)
     
@@ -47,6 +58,7 @@ def run():
 
     settings_writer(SETTINGS_FILE_PTH, author, gh_username, gh_repo)
 
+    ## outro
     print_screen(
         'Everything is done, now follow these last steps:\n'
         '1. foo\n'
