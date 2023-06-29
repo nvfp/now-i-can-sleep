@@ -3,7 +3,7 @@ from mykit.kit.utils import printer
 from ..constants import __version__
 
 
-def workflows_writer(pth, author, email):
+def workflows_writer(pth, author, email, gh_repo):
     printer(f'INFO: Writing GitHub workflows.')
 
     text = f"""
@@ -40,7 +40,7 @@ jobs:
           cd ..
           mkdir __nics_work_dir__
           cd __nics_work_dir__
-          cp -r ../mykit/docs/ .
+          cp -r ../{gh_repo}/docs/ .
 
       - name: 🐍Set up Python
         uses: actions/setup-python@v2
@@ -61,7 +61,7 @@ jobs:
         run: |
           cd ..
           cd __nics_work_dir__
-          nics _compile "$(pwd)/docs" "$(pwd)/../mykit"
+          nics _compile "$(pwd)/docs" "$(pwd)/../{gh_repo}"
 
       - name: 🚀Deploy
         run: |

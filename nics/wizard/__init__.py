@@ -37,7 +37,7 @@ def run():
     gh_username = input('Enter your GitHub username: ')
     gh_repo = input('Enter this GitHub repository name: ')
 
-    workflows_writer(WORKFLOWS, author, email)
+    workflows_writer(WORKFLOWS, author, email, gh_repo)
     
     printer(f"INFO: Copying 'docs/' folder.")
     shutil.copytree( os.path.join(TEMPLATE_DIR_PTH, 'docs'), DOCS )
