@@ -17,16 +17,16 @@ def copying_template(dock):
 
 
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, '_layouts'),
+        os.path.join(TEMPLATE_DIR_PTH, 'web', '_layouts'),
         os.path.join(dock, '_layouts')
     )
 
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, '_sass'),
+        os.path.join(TEMPLATE_DIR_PTH, 'web', '_sass'),
         os.path.join(dock, '_sass')
     )
 
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, 'scripts'),
+        os.path.join(TEMPLATE_DIR_PTH, 'web', 'scripts'),
         os.path.join(dock, 'scripts')
     )
