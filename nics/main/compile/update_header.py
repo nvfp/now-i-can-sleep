@@ -1,14 +1,13 @@
 import os
 import re
 
+from mykit.kit.utils import printer
 
-def update_header(tree, header_pth):
-    """
-    reminder:
-    - index.md will not be included in the header
-    """
 
-    header = (
+def update_header(C_TREE, D_HEADER):
+    ## reminder: index.md will not be included in the header
+
+    text = (
         '<header>'
             '<h1>{{ page.title }}</h1>'
             '<div class="wrap">'
@@ -18,14 +17,14 @@ def update_header(tree, header_pth):
 
     ## reminder: `base` is the X in foo.com/baseurl/{X}page
     ##           (e.g. nvfp.github.io/mykit/docs/guide/foo, then X='docs/guide/')
-    def build_the_nested_divs_recursively(pth, base) -> str:
+    def build_the_nested_divs_recursively(pth, base):
         out = ''
 
         for fd in sorted(os.listdir(pth)):  # reminder: the file/dir `fd` order in `pth` matters.
             if fd == 'index.md': continue  # index.md will not be shown in navigation bar
             fd_pth = os.path.join(pth, fd)
 
-            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:.md)?', fd)
+            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:\.md)?', fd)
             name = res.group('name')
             url = res.group('url')
 
@@ -38,13 +37,13 @@ def update_header(tree, header_pth):
                 out += '<a href="{{ site.baseurl }}/' + f'{base}{url}">{name}</a>'
 
         return out
-    header += build_the_nested_divs_recursively(tree, '')
+    text += build_the_nested_divs_recursively(C_TREE, '')
 
-    header += (
+    text += (
                 '</div>'
             '</div>'
         '</header>'
     )
-    
-    with open(header_pth, 'w') as file:
-        file.write(header)
+
+    with open(D_HEADER, 'w') as f: f.write(text)
+    printer(f'INFO: Updated header {repr(D_HEADER)}.')
