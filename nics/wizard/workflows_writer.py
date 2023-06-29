@@ -30,40 +30,40 @@ jobs:
 
     steps:
 
-      - name: 📂Checkout main branch
+      - name: Checkout main branch
         uses: actions/checkout@v3
         with:
           ref: main
 
-      - name: 🛠️ Creating NICS working directory
+      - name: Creating NICS working directory
         run: |
           cd ..
           mkdir __nics_work_dir__
           cd __nics_work_dir__
           cp -r ../{gh_repo}/docs/ .
 
-      - name: 🐍Set up Python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
 
-      - name: 🐱Installing NICS
+      - name: Installing NICS
         run: |
           python -m pip install --upgrade pip
           pip install nics=={__version__}
 
-      - name: 📂Checkout docs branch
+      - name: Checkout docs branch
         uses: actions/checkout@v3
         with:
           ref: docs
 
-      - name: ⚙️ Compile
+      - name: Compile
         run: |
           cd ..
           cd __nics_work_dir__
           nics _compile "$(pwd)/docs" "$(pwd)/../{gh_repo}"
 
-      - name: 🚀Deploy
+      - name: Deploy
         run: |
           git config user.name "{author} (via NICS)"
           git config user.email "{email}"
