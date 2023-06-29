@@ -3,7 +3,7 @@ import shutil
 
 from mykit.kit.utils import printer
 
-from ..constants import TEMPLATE_DIR_PTH
+from ..constants import TMPL_WEB_DIR_PTH
 
 
 def copying_template(dock):
@@ -18,15 +18,15 @@ def copying_template(dock):
     if os.path.isdir(SCRIPTS): shutil.rmtree(SCRIPTS)
 
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, 'web', '_layouts'),
+        os.path.join(TMPL_WEB_DIR_PTH, '_layouts'),
         LAYOUTS
     )
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, 'web', '_sass'),
+        os.path.join(TMPL_WEB_DIR_PTH, '_sass'),
         SASS
     )
     shutil.copytree(
-        os.path.join(TEMPLATE_DIR_PTH, 'web', 'scripts'),
+        os.path.join(TMPL_WEB_DIR_PTH, 'scripts'),
         SCRIPTS
     )
     printer(f'INFO: Template copied.')
