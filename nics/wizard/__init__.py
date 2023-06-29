@@ -2,7 +2,7 @@ import os
 import shutil
 import sys
 
-from mykit.kit.utils import printer
+from mykit.kit.utils import printer, print_screen
 
 from ..constants import TEMPLATE_DIR_PTH
 from .workflows_writer import workflows_writer
@@ -32,6 +32,8 @@ def run():
     
     inspect(DOCS, WORKFLOWS)
 
+    print_screen('Welcome to NICS!')
+
     author = input('Enter your name: ')
     email = input('Enter your email: ')
     gh_username = input('Enter your GitHub username: ')
@@ -44,3 +46,9 @@ def run():
     printer(f'INFO: Done, {repr(DOCS)} is created.')
 
     settings_writer(SETTINGS, author, gh_username, gh_repo)
+
+    print_screen(
+        'Everything is done, now follow these last steps:\n'
+        '1. foo\n'
+        '2. \n'
+    )
