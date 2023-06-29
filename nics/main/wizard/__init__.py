@@ -1,25 +1,12 @@
 import os
 import shutil
-import sys
 
 from mykit.kit.utils import printer, print_screen
 
 from ..constants import TEMPLATE_DIR_PTH
+from .inspect import inspect
 from .workflows_writer import workflows_writer
 from .settings_writer import settings_writer
-
-
-def inspect(container_dir_pth, workflow_file_pth):
-    
-    ## the container ('docs/' folder) should not exist
-    if os.path.isdir(container_dir_pth):
-        printer(f"ERROR: Folder {repr(container_dir_pth)} already exists.")
-        sys.exit(1)
-
-    ## the GitHub Action workflow file 'rebuild-docs.yml' should not exist
-    if os.path.isfile(workflow_file_pth):
-        printer(f"ERROR: File {repr(workflow_file_pth)} already exists.")
-        sys.exit(1)
 
 
 def run():
@@ -30,6 +17,7 @@ def run():
     CONTAINER_DIR_PTH = os.path.join(CWD, 'docs')
     SETTINGS_FILE_PTH = os.path.join(CWD, 'docs', 'settings.txt')
 
+    ## inspection
     inspect(CONTAINER_DIR_PTH, WORKFLOW_FILE_PTH)
 
     print_screen(
