@@ -76,6 +76,6 @@ def update_docs_tree(C_TREE, D__PAGES):
     if os.path.isdir(D__PAGES):  # reminder: initially, '_pages' doesn't exist
         printer(f'DEBUG: Deleting {repr(D__PAGES)} recursively.')
         shutil.rmtree(D__PAGES)
-        os.mkdir(D__PAGES)
+    os.mkdir(D__PAGES)
 
     update_recursively(D__PAGES, C_TREE, '/')
