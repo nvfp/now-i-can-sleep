@@ -4,8 +4,7 @@ import pkg_resources
 
 try:
     __version__ = pkg_resources.get_distribution('nics').version
-except pkg_resources.DistributionNotFound:
-    ## this exception occurred during development (before the software installed via pip)
+except pkg_resources.DistributionNotFound:  # this exception occurred during development (before the software installed via pip)
     __version__ = 'dev'
 
 
