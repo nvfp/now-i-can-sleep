@@ -153,8 +153,9 @@ def run(container, dock):
 
 
     printer(f'INFO: start copying assets..')
-    printer(f'INFO: Deleting {repr(D_ASSETS)} recursively..')
-    shutil.rmtree(D_ASSETS)
+    if os.path.isdir(D_ASSETS):  # handle init case
+        printer(f'INFO: Deleting {repr(D_ASSETS)} recursively..')
+        shutil.rmtree(D_ASSETS)
     printer(f'INFO: Copying from {repr(C_ASSETS)} to {repr(D_ASSETS)}.')
     shutil.copytree(C_ASSETS, D_ASSETS)
 

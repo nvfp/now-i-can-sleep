@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nics"
-version = "0.26.0"
+version = "0.27.0"
 description = "Automated docs repo generator"
 readme = "README.md"
 requires-python = ">=3.8"
