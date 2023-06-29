@@ -1,6 +1,5 @@
 import os
 import re
-import shutil
 
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
@@ -12,6 +11,7 @@ from .rewrite_the_footer import rewrite_the_footer
 from .rewrite_jekyll_config import rewrite_jekyll_config
 from .copying_template import copying_template
 from .update_404_and_favicon import update_404_and_favicon
+from .update_assets import update_assets
 
 
 def run(container, dock):
@@ -56,6 +56,7 @@ def run(container, dock):
     copying_template(dock)
 
     update_404_and_favicon(C_404, C_ICON, D_404, D_ICON)
+    update_assets(C_ASSETS, D_ASSETS)
 
 
 
@@ -132,13 +133,3 @@ def run(container, dock):
     rewrite_the_docs_tree_recursively( os.path.join(container, 'tree'), '/' )
 
     ## </rewriting the docs>
-
-
-    printer(f'INFO: start copying assets..')
-    if os.path.isdir(D_ASSETS):  # handle init case
-        printer(f'INFO: Deleting {repr(D_ASSETS)} recursively..')
-        shutil.rmtree(D_ASSETS)
-    printer(f'INFO: Copying from {repr(C_ASSETS)} to {repr(D_ASSETS)}.')
-    shutil.copytree(C_ASSETS, D_ASSETS)
-
-    
