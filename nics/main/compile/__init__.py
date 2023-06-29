@@ -53,6 +53,6 @@ def run(container, dock):
     update_assets(C_ASSETS, D_ASSETS)
 
     copying_template(dock)
-    update_sass_constants(D_SASS_CONSTANTS)
+    update_sass_constants(D_SASS_CONSTANTS, cfg.color_hue)
 
     update_docs_tree(dock, C_TREE, D__PAGES)
