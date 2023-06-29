@@ -1,10 +1,8 @@
+from mykit.kit.utils import printer
 
 
-
-
-def update_jekyll_config(pth, author, gh_username, gh_repo):
-
-    text = f"""
+def _writer(author, gh_username, gh_repo):
+	return f"""
 
 # website
 
@@ -30,5 +28,9 @@ sass:
   sass_dir: _sass    
 """
 
-    with open(pth, 'w') as f:
-        f.write(text)
+
+def update_jekyll_config(D_JEKYLL_CONFIG, author, gh_username, gh_repo):
+
+	text = _writer(author, gh_username, gh_repo)
+	with open(D_JEKYLL_CONFIG, 'w') as f: f.write(text)
+	printer(f"INFO: Updated Jekyll '_config.yml' file {repr(D_JEKYLL_CONFIG)}.")
