@@ -1,8 +1,13 @@
+from mykit.kit.utils import printer
+
+from ..constants import __version__
 
 
+def settings_writer(pth, author, gh_username, gh_repo):
+    printer(f'INFO: Writing settings file.')
 
+    text = f"""
 
-text = f"""
 #-- Welcome to NICS settings!
 #----------------------------
 
@@ -10,13 +15,18 @@ text = f"""
 #-- Help: https://nvfp.github.io/now-i-can-sleep
 
 
-author: 'Nicholas Valentinus'
+author: '{author}'
 color_hue: 28
 show_credit: True
 
 
 #-- The variables below should not be changed and are for NICS internal use only.
 
-_gh_username: 'nvfp'
-_gh_repo: 'now-i-can-sleep'
+_gh_username: '{gh_username}'
+_gh_repo: '{gh_repo}'
 """
+
+    with open(pth, 'w') as f:
+        f.write(text)
+
+    printer(f'INFO: Done, {repr(pth)} is created.')
