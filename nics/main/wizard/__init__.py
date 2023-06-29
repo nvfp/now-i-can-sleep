@@ -67,6 +67,7 @@ Almost done, now you need to do these final steps:
    - Under 'Build and deployment' section,
      - For 'Source', select 'Deploy from a branch'
      - For 'Branch', select 'docs' branch
+     - Click the 'Save' button
 3. Back to {main_branch_name} branch
    - git checkout {main_branch_name}
    - git push
