@@ -11,7 +11,7 @@ from .rewrite_the_header import rewrite_the_header
 from .rewrite_the_footer import rewrite_the_footer
 from .rewrite_jekyll_config import rewrite_jekyll_config
 from .copying_template import copying_template
-from .copying_404_and_favicon import copying_404_and_favicon
+from .update_404_and_favicon import update_404_and_favicon
 
 
 def run(container, dock):
@@ -55,7 +55,7 @@ def run(container, dock):
 
     copying_template(dock)
 
-    copying_404_and_favicon(C_404, C_ICON, D_404, D_ICON)
+    update_404_and_favicon(C_404, C_ICON, D_404, D_ICON)
 
 
 

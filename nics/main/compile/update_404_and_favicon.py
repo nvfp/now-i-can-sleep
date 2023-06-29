@@ -4,7 +4,7 @@ import shutil
 from mykit.kit.utils import printer
 
 
-def copying_404_and_favicon(C_404, C_ICON, D_404, D_ICON):
+def update_404_and_favicon(C_404, C_ICON, D_404, D_ICON):
 
     ## 404 page
     printer(f"DEBUG: Attempting to copy '404.md'.")
