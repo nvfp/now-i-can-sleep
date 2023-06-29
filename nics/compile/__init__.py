@@ -44,6 +44,8 @@ def run(container, dock):
     ## handle init case
     if not os.path.isdir( os.path.join(dock, '_includes') ):
         os.mkdir(os.path.join(dock, '_includes'))
+    if not os.path.isdir( os.path.join(dock, '_pages') ):  # os.mkdir needs the '_pages' folder to already exist before creating the folders inside.
+        os.mkdir(os.path.join(dock, '_pages'))
 
 
     rewrite_the_header(C_TREE, D_HEADER)
