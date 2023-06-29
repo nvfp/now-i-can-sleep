@@ -1,7 +1,7 @@
 
 
 
-def rewrite_the_footer(footer_pth, show_credit):
+def update_footer(footer_pth, show_credit):
 
     text = (
         '<footer>'

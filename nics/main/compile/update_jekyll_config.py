@@ -2,7 +2,7 @@
 
 
 
-def rewrite_jekyll_config(pth, author, gh_username, gh_repo):
+def update_jekyll_config(pth, author, gh_username, gh_repo):
 
     text = f"""
 

@@ -2,7 +2,7 @@ import os
 import re
 
 
-def rewrite_the_header(tree, header_pth):
+def update_header(tree, header_pth):
     """
     reminder:
     - index.md will not be included in the header

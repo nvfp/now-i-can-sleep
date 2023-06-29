@@ -5,13 +5,14 @@ from mykit.kit.utils import printer
 
 from ..constants import __version__, SOFTWARE_DIST_NAME, SETTINGS_KEYS
 from .inspect import inspect_the_container, inspect_the_dock
-from .rewrite_the_header import rewrite_the_header
-from .rewrite_the_footer import rewrite_the_footer
-from .rewrite_jekyll_config import rewrite_jekyll_config
+from .update_header import update_header
+from .update_footer import update_footer
+from .update_jekyll_config import update_jekyll_config
 from .copying_template import copying_template
 from .update_404_and_favicon import update_404_and_favicon
 from .update_assets import update_assets
 from .update_docs_tree import update_docs_tree
+from .update_sass_constants import update_sass_constants
 
 
 def run(container, dock):
@@ -33,6 +34,7 @@ def run(container, dock):
     D_404 = os.path.join(dock, '404.md')
     D_ICON = os.path.join(dock, 'favicon.png')
     D_JEKYLL_CONFIG = os.path.join(dock, '_config.yml')
+    D_SASS_CONSTANTS = os.path.join(dock, '_sass', 'constants.scss')
 
 
     ## validate the requirements
@@ -43,18 +45,16 @@ def run(container, dock):
     cfg = KeyCrate(C_SETTINGS, True, True, SETTINGS_KEYS, SETTINGS_KEYS)
 
 
-    ## handle init case
-    if not os.path.isdir(D__INCLUDES):
+    if not os.path.isdir(D__INCLUDES):  # handle init case: initially, '_includes' folder doesn't exist in docs branch
         os.mkdir(D__INCLUDES)
-    rewrite_the_header(C_TREE, D_HEADER)
-    rewrite_the_footer(D_FOOTER, cfg.show_credit)
+    update_header(C_TREE, D_HEADER)
+    update_footer(D_FOOTER, cfg.show_credit)
 
-    rewrite_jekyll_config(D_JEKYLL_CONFIG, cfg.author, cfg._gh_username, cfg._gh_repo)
+    update_jekyll_config(D_JEKYLL_CONFIG, cfg.author, cfg._gh_username, cfg._gh_repo)
     update_404_and_favicon(C_404, C_ICON, D_404, D_ICON)
     update_assets(C_ASSETS, D_ASSETS)
 
     copying_template(dock)
-    # update_main_sass()
-
+    update_sass_constants()
 
     update_docs_tree(dock, C_TREE, D__PAGES)
