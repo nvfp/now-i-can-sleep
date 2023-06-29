@@ -4,15 +4,15 @@ from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
 from ..constants import __version__, SOFTWARE_DIST_NAME, SETTINGS_KEYS
-from .inspect import inspect_the_container, inspect_the_dock
+from .inspect import inspect_the_container
 from .update_header import update_header
 from .update_footer import update_footer
 from .update_jekyll_config import update_jekyll_config
-from .copying_template import copying_template
 from .update_404_and_favicon import update_404_and_favicon
 from .update_assets import update_assets
-from .update_docs_tree import update_docs_tree
+from .copying_template import copying_template
 from .update_sass_constants import update_sass_constants
+from .update_docs_tree import update_docs_tree
 
 
 def run(container, dock):
@@ -36,12 +36,10 @@ def run(container, dock):
     D_JEKYLL_CONFIG = os.path.join(dock, '_config.yml')
     D_SASS_CONSTANTS = os.path.join(dock, '_sass', 'constants.scss')
 
-
-    ## validate the requirements
+    ## inspection
     inspect_the_container(container)
-    # inspect_the_dock()
 
-
+    ## parse the settings
     cfg = KeyCrate(C_SETTINGS, True, True, SETTINGS_KEYS, SETTINGS_KEYS)
 
 
@@ -55,6 +53,6 @@ def run(container, dock):
     update_assets(C_ASSETS, D_ASSETS)
 
     copying_template(dock)
-    update_sass_constants()
+    update_sass_constants(D_SASS_CONSTANTS)
 
     update_docs_tree(dock, C_TREE, D__PAGES)
