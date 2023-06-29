@@ -40,6 +40,7 @@ def run():
     email = input('Enter your email: ')
     gh_username = input('Enter your GitHub username: ')
     gh_repo = input('Enter this GitHub repository name: ')
+    main_branch_name = input("Your main branch name (e.g. 'master'): ")
 
     ## if the dirs don't exist
     if not os.path.isdir( os.path.join(CWD, '.github') ):
@@ -49,7 +50,7 @@ def run():
         os.mkdir( os.path.join(CWD, '.github', 'workflows') )
         printer(f"INFO: Dir {repr( os.path.join(CWD, '.github', 'workflows') )} is created.")
 
-    workflows_writer(WORKFLOWS, author, email, gh_repo)
+    workflows_writer(WORKFLOWS, author, email, gh_repo, main_branch_name)
     
     printer(f"INFO: Copying 'docs/' folder.")
     shutil.copytree( os.path.join(TEMPLATE_DIR_PTH, 'docs'), DOCS )

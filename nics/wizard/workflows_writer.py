@@ -3,17 +3,14 @@ from mykit.kit.utils import printer
 from ..constants import __version__
 
 
-def workflows_writer(pth, author, email, gh_repo):
-    printer(f'INFO: Writing GitHub workflows.')
-
-    text = f"""
-
+def _writer(author, email, gh_repo, main_branch_name):
+    return f"""
 name: Rebuild docs
 
 on:
   push:
     branches:
-      - main
+      - {main_branch_name}
 
     paths:
       - 'docs/**'  # only rebuild docs webpage if docs/ folder is modified
@@ -30,10 +27,10 @@ jobs:
 
     steps:
 
-      - name: Checkout main branch
+      - name: Checkout {main_branch_name} branch
         uses: actions/checkout@v3
         with:
-          ref: main
+          ref: {main_branch_name}
 
       - name: Creating NICS working directory
         run: |
@@ -72,6 +69,11 @@ jobs:
           git push
 """
 
+
+def workflows_writer(pth, author, email, gh_repo, main_branch_name):
+    printer(f'INFO: Writing GitHub workflows.')
+
+    text = _writer(author, email, gh_repo, main_branch_name)
     with open(pth, 'w') as f:
         f.write(text)
 

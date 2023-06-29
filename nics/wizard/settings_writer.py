@@ -1,3 +1,5 @@
+import random
+
 from mykit.kit.utils import printer
 
 
@@ -11,7 +13,7 @@ def _writer(author, gh_username, gh_repo):
 
 
 author: '{author}'
-color_hue: 28
+color_hue: {random.randint(0, 359)}
 show_credit: True
 
 
