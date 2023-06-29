@@ -1,1 +1,1 @@
-include nics/template*
+include nics/template/_layouts/*.html
