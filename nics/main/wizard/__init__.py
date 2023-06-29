@@ -9,16 +9,16 @@ from .workflows_writer import workflows_writer
 from .settings_writer import settings_writer
 
 
-def inspect(docs, workflows):
+def inspect(container_dir_pth, workflow_file_pth):
     
-    ## docs/
-    if os.path.isdir(docs):
-        printer(f"ERROR: 'docs/' folder already exists.")
+    ## the container ('docs/' folder) should not exist
+    if os.path.isdir(container_dir_pth):
+        printer(f"ERROR: Folder {repr(container_dir_pth)} already exists.")
         sys.exit(1)
-    
-    ## workflows
-    if os.path.isfile(workflows):
-        printer(f"ERROR: 'rebuild-docs.yml' file already exists.")
+
+    ## the GitHub Action workflow file 'rebuild-docs.yml' should not exist
+    if os.path.isfile(workflow_file_pth):
+        printer(f"ERROR: File {repr(workflow_file_pth)} already exists.")
         sys.exit(1)
 
 
@@ -26,14 +26,15 @@ def run():
 
     CWD = os.getcwd()
 
-    WORKFLOWS = os.path.join(CWD, '.github', 'workflows', 'rebuild-docs.yml')
-    DOCS = os.path.join(CWD, 'docs')
-    SETTINGS = os.path.join(CWD, 'docs', 'settings.txt')
+    WORKFLOW_FILE_PTH = os.path.join(CWD, '.github', 'workflows', 'rebuild-docs.yml')
+    CONTAINER_DIR_PTH = os.path.join(CWD, 'docs')
+    SETTINGS_FILE_PTH = os.path.join(CWD, 'docs', 'settings.txt')
 
-    inspect(DOCS, WORKFLOWS)
+    inspect(CONTAINER_DIR_PTH, WORKFLOW_FILE_PTH)
 
     print_screen(
-        'Welcome to NICS!\n\n'
+        'Welcome to NICS!\n'
+        '================\n\n'
     )
 
     author = input('Enter your name: ')
@@ -50,13 +51,13 @@ def run():
         os.mkdir( os.path.join(CWD, '.github', 'workflows') )
         printer(f"INFO: Dir {repr( os.path.join(CWD, '.github', 'workflows') )} is created.")
 
-    workflows_writer(WORKFLOWS, author, email, gh_repo, main_branch_name)
+    workflows_writer(WORKFLOW_FILE_PTH, author, email, gh_repo, main_branch_name)
     
     printer(f"INFO: Copying 'docs/' folder.")
-    shutil.copytree( os.path.join(TEMPLATE_DIR_PTH, 'docs'), DOCS )
-    printer(f'INFO: Done, {repr(DOCS)} is created.')
+    shutil.copytree( os.path.join(TEMPLATE_DIR_PTH, 'docs'), CONTAINER_DIR_PTH )
+    printer(f'INFO: Done, {repr(CONTAINER_DIR_PTH)} is created.')
 
-    settings_writer(SETTINGS, author, gh_username, gh_repo)
+    settings_writer(SETTINGS_FILE_PTH, author, gh_username, gh_repo)
 
     print_screen(
         'Everything is done, now follow these last steps:\n'
