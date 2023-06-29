@@ -29,15 +29,25 @@ def run():
     WORKFLOWS = os.path.join(CWD, '.github', 'workflows', 'rebuild-docs.yml')
     DOCS = os.path.join(CWD, 'docs')
     SETTINGS = os.path.join(CWD, 'docs', 'settings.txt')
-    
+
     inspect(DOCS, WORKFLOWS)
 
-    print_screen('Welcome to NICS!')
+    print_screen(
+        'Welcome to NICS!\n\n'
+    )
 
     author = input('Enter your name: ')
     email = input('Enter your email: ')
     gh_username = input('Enter your GitHub username: ')
     gh_repo = input('Enter this GitHub repository name: ')
+
+    ## if the dirs don't exist
+    if not os.path.isdir( os.path.join(CWD, '.github') ):
+        os.mkdir( os.path.join(CWD, '.github') )
+        printer(f"INFO: Dir {repr( os.path.join(CWD, '.github') )} is created.")
+    if not os.path.isdir( os.path.join(CWD, '.github', 'workflows') ):
+        os.mkdir( os.path.join(CWD, '.github', 'workflows') )
+        printer(f"INFO: Dir {repr( os.path.join(CWD, '.github', 'workflows') )} is created.")
 
     workflows_writer(WORKFLOWS, author, email, gh_repo)
     
