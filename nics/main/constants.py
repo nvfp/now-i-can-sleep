@@ -16,3 +16,13 @@ ROOT_DIR_PTH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 DIST_DIR_PTH = os.path.join(ROOT_DIR_PTH, SOFTWARE_DIST_NAME)
 
 TEMPLATE_DIR_PTH = os.path.join(DIST_DIR_PTH, '_template')
+TMPL_DOCS_DIR_PTH = os.path.join(TEMPLATE_DIR_PTH, 'docs')
+TMPL_WEB_DIR_PTH = os.path.join(TEMPLATE_DIR_PTH, 'web')
+
+SETTINGS_KEYS = [
+    'author',
+    'color_hue',
+    'show_credit',
+    '_gh_username',
+    '_gh_repo',
+]
