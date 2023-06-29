@@ -5,19 +5,19 @@ import shutil
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
+from ..constants import __version__, SOFTWARE_DIST_NAME, SETTINGS_KEYS
 from .inspect import inspect_the_container, inspect_the_dock
 from .rewrite_the_header import rewrite_the_header
 from .rewrite_the_footer import rewrite_the_footer
 from .rewrite_jekyll_config import rewrite_jekyll_config
 from .copying_template import copying_template
+from .copying_404_and_favicon import copying_404_and_favicon
 
 
 def run(container, dock):
-    """
-    ## Params
-    - `container`: the nics folder bundle
-    - `dock`: the branch
-    """
+    ## `container`: the 'docs/' folder (in main branch)
+    ## `dock`: the 'docs' branch
+    printer(f"INFO: Running '_compile' command ({SOFTWARE_DIST_NAME}-v{__version__})")
 
     C_ASSETS = os.path.join(container, 'assets')
     C_TREE = os.path.join(container, 'tree')
@@ -38,7 +38,7 @@ def run(container, dock):
     # inspect_the_dock()
 
 
-    settings = KeyCrate(C_SETTINGS, True, True)
+    settings = KeyCrate(C_SETTINGS, True, True, SETTINGS_KEYS, SETTINGS_KEYS)
 
 
     ## handle init case
@@ -55,26 +55,8 @@ def run(container, dock):
 
     copying_template(dock)
 
+    copying_404_and_favicon(C_404, C_ICON, D_404, D_ICON)
 
-    ## <rewriting 404.md>
-    
-    if os.path.isfile(C_404):
-        printer('DEBUG: Copying 404.md.')
-        text = (
-            '---\n'
-            'permalink: /404.html\n'
-            'layout: main\n'
-            'title: Page not found\n'
-            '---\n\n'
-        )
-        with open(C_404, 'r') as f:
-            text += f.read()
-        
-        printer(f'DEBUG: writing to {repr(D_404)}')
-        with open(D_404, 'w') as f:
-            f.write(text)
-
-    ## </rewriting 404.md>
 
 
     ## <rewriting the docs>
@@ -159,6 +141,4 @@ def run(container, dock):
     printer(f'INFO: Copying from {repr(C_ASSETS)} to {repr(D_ASSETS)}.')
     shutil.copytree(C_ASSETS, D_ASSETS)
 
-    if os.path.isfile(C_ICON):
-        printer(f'INFO: start copying favicon.png..')
-        shutil.copy(C_ICON, D_ICON)
+    
