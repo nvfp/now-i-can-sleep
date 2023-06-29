@@ -48,7 +48,7 @@ def update_recursively(dock, D__PAGES, pth, base):
                 os.mkdir(dir)
                 printer(f'DEBUG: Dir created: {repr(dir)}.')
             ## do it again
-            update_recursively(dock, D__PAGES, pth2, base+name+'/')
+            update_recursively(dock, D__PAGES, pth2, base+url+'/')
         else:
             dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
             text = (
