@@ -1,3 +1,5 @@
+import os
+
 from mykit.kit.utils import printer
 
 
@@ -9,7 +11,5 @@ def run():
 
     inspect()
 
-    print_screen(
-        'Welcome to NICS!\n'
-    )
-    usr = input(': ')
+    cwd = os.getcwd()
+    print(cwd)
