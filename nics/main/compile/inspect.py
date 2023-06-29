@@ -11,16 +11,15 @@ def _inspect_tree_recursively(pth):
             ## check dir name format
             if re.match(r'(?:\d+ -- )?[\w -.]+ -- [\w -]+', i) is None:
                 raise AssertionError(f'Dir name {repr(i)} format is invalid.')
-            ## inspect the dir
+            ## inspect the subdir
             _inspect_tree_recursively(pth2)
         else:
-            ## only .md files are allowed
-            if not i.endswith('.md'):
-                raise AssertionError(f"File {repr(i)} isn't an .md file.")
-            ## check file name format
-            if i != 'index.md':
-                if re.match(r'(?:\d+ -- )?[\w -.]+ -- [\w -]+\.md$', i) is None:
-                    raise AssertionError(f'File name {repr(i)} format is invalid.')
+            ## non-markdown files don't need to be checked (only check .md files)
+            if i.endswith('.md'):
+                ## check file name format
+                if i != 'index.md':
+                    if re.match(r'(?:\d+ -- )?[\w -.]+ -- [\w -]+\.md$', i) is None:
+                        raise AssertionError(f'File name {repr(i)} format is invalid.')
 
 
 def inspect_the_container(container):

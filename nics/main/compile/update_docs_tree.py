@@ -5,16 +5,23 @@ import shutil
 from mykit.kit.utils import printer
 
 
-def update_recursively(dock, D__PAGES, pth, base):
+def update_recursively(D__PAGES, pth, base):
     printer(f'DEBUG: Updating docs-tree, pth: {repr(pth)}, base: {repr(base)}')
 
     for i in os.listdir(pth):
         pth2 = os.path.join(pth, i)
 
+        ## handle non-markdown files
+        if os.path.isfile(pth2) and (not i.endswith('.md')):
+            dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), i)
+            shutil.copy(pth2, dst)
+            printer(f'DEBUG: Copied non-markdown files from {repr(pth2)} to {repr(dst)}.')
+            continue
+
         ## <handling the index.md>
         if i == 'index.md':
             if base == '/':  # homepage
-                dst = os.path.join(dock, 'index.md')
+                dst = os.path.join(D__PAGES, 'index.md')
                 text = (
                     '---\n'
                     'permalink: /\n'
@@ -48,7 +55,7 @@ def update_recursively(dock, D__PAGES, pth, base):
                 os.mkdir(dir)
                 printer(f'DEBUG: Dir created: {repr(dir)}.')
             ## do it again
-            update_recursively(dock, D__PAGES, pth2, base+url+'/')
+            update_recursively(D__PAGES, pth2, base+url+'/')
         else:
             dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
             text = (
@@ -63,7 +70,7 @@ def update_recursively(dock, D__PAGES, pth, base):
             printer(f'DEBUG: Updated docs-tree file from {repr(pth2)} to {repr(dst)}.')
 
 
-def update_docs_tree(dock, C_TREE, D__PAGES):
+def update_docs_tree(C_TREE, D__PAGES):
 
     ## delete the old '_pages' folder in docs branch
     if os.path.isdir(D__PAGES):  # reminder: initially, '_pages' doesn't exist
@@ -71,4 +78,4 @@ def update_docs_tree(dock, C_TREE, D__PAGES):
         shutil.rmtree(D__PAGES)
         os.mkdir(D__PAGES)
 
-    update_recursively(dock, D__PAGES, C_TREE, '/')
+    update_recursively(D__PAGES, C_TREE, '/')

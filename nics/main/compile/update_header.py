@@ -21,8 +21,10 @@ def update_header(C_TREE, D_HEADER):
         out = ''
 
         for fd in sorted(os.listdir(pth)):  # reminder: the file/dir `fd` order in `pth` matters.
-            if fd == 'index.md': continue  # index.md will not be shown in navigation bar
             fd_pth = os.path.join(pth, fd)
+
+            if fd == 'index.md': continue  # index.md will not be shown in navigation bar
+            if os.path.isfile(fd_pth) and (not fd.endswith('.md')): continue  # ignore non-markdown files
 
             res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:\.md)?', fd)
             name = res.group('name')
@@ -35,6 +37,7 @@ def update_header(C_TREE, D_HEADER):
                 out += '</div>'
             else:
                 out += '<a href="{{ site.baseurl }}/' + f'{base}{url}">{name}</a>'
+                printer(f'DEBUG: href {repr(name)} added.')
 
         return out
     text += build_the_nested_divs_recursively(C_TREE, '')
