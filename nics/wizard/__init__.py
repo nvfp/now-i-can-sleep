@@ -1,8 +1,10 @@
 import os
+import shutil
 import sys
 
 from mykit.kit.utils import printer
 
+from ..constants import TEMPLATE_DIR_PTH
 from .workflows_writer import workflows_writer
 from .settings_writer import settings_writer
 
@@ -36,4 +38,9 @@ def run():
     gh_repo = input('Enter this GitHub repository name: ')
 
     workflows_writer(WORKFLOWS, author, email)
+    
+    printer(f"INFO: Copying 'docs/' folder.")
+    shutil.copytree( os.path.join(TEMPLATE_DIR_PTH, 'docs'), DOCS )
+    printer(f'INFO: Done, {repr(DOCS)} is created.')
+
     settings_writer(SETTINGS, author, gh_username, gh_repo)

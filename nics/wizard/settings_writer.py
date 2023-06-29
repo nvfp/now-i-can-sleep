@@ -1,13 +1,10 @@
 from mykit.kit.utils import printer
 
-from ..constants import __version__
-
 
 def settings_writer(pth, author, gh_username, gh_repo):
     printer(f'INFO: Writing settings file.')
 
     text = f"""
-
 #-- Welcome to NICS settings!
 #----------------------------
 

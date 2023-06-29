@@ -1,1 +1,1 @@
-recursive-include nics/template/ *
+recursive-include nics/_template/ *
