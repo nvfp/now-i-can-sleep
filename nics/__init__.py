@@ -17,7 +17,7 @@ def main():
     )
     psr.add_argument(
         '-v', '--version', action='version', version=f'%(prog)s-{__version__}',
-        help='show software version then exit'
+        help='show software version'
     )
     subpsr = psr.add_subparsers(dest='cmd')
 
