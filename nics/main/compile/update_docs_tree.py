@@ -14,8 +14,8 @@ def update_recursively(D__PAGES, pth, base):
         ## handle non-markdown files
         if os.path.isfile(pth2) and (not i.endswith('.md')):
             dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), i)
+            printer(f'DEBUG: Copying non-markdown files from {repr(pth2)} to {repr(dst)}.')
             shutil.copy(pth2, dst)
-            printer(f'DEBUG: Copied non-markdown files from {repr(pth2)} to {repr(dst)}.')
             continue
 
         ## <handling the index.md>
@@ -76,6 +76,8 @@ def update_docs_tree(C_TREE, D__PAGES):
     if os.path.isdir(D__PAGES):  # reminder: initially, '_pages' doesn't exist
         printer(f'DEBUG: Deleting {repr(D__PAGES)} recursively.')
         shutil.rmtree(D__PAGES)
+
+    printer(f'DEBUG: Creating dir {repr(D__PAGES)}.')
     os.mkdir(D__PAGES)
 
     update_recursively(D__PAGES, C_TREE, '/')
