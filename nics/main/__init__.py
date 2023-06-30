@@ -11,7 +11,8 @@ def main():
         prog=SOFTWARE_DIST_NAME,
         usage=(
             '\n'
-            '└─ %(prog)s init'
+            '├─ %(prog)s init   : Set up NICS environment\n'
+            '└─ %(prog)s upgrade: Reconfigure NICS environment'
         ),
         formatter_class=argparse.RawTextHelpFormatter  # to use line breaks (\n) in the help message
     )
@@ -19,13 +20,16 @@ def main():
         '-v', '--version', action='version', version=f'%(prog)s-{__version__}',
         help='show software version'
     )
-    subpsr = psr.add_subparsers(dest='cmd')
+    subpsr = psr.add_subparsers(dest='cmd', help=argparse.SUPPRESS)
 
     ## command 'init'
     subpsr.add_parser(
         'init',
         help=argparse.SUPPRESS  # to hide the help message
     )
+
+    ## command 'upgrade'
+    subpsr.add_parser('upgrade', help=argparse.SUPPRESS)
 
     ## command '_compile' (that users shouldn't run)
     c = subpsr.add_parser('_compile', help=argparse.SUPPRESS)
