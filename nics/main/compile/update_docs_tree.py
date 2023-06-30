@@ -50,7 +50,7 @@ def update_recursively(D__PAGES, pth, base):
 
         if os.path.isdir(pth2):
             ## if the folder doesn't exist, create a new one.
-            dir = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), name)
+            dir = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), url)
             if not os.path.isdir(dir):
                 os.mkdir(dir)
                 printer(f'DEBUG: Dir created: {repr(dir)}.')
