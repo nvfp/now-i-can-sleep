@@ -2,6 +2,7 @@ import argparse
 
 from .constants import __version__, SOFTWARE_DIST_NAME
 from .wizard import run as run_init
+from .upgrade import run as run_upgrade
 from .compile import run as run_compile
 
 
@@ -11,8 +12,8 @@ def main():
         prog=SOFTWARE_DIST_NAME,
         usage=(
             '\n'
-            '├─ %(prog)s init   : Set up NICS environment\n'
-            '└─ %(prog)s upgrade: Reconfigure NICS environment'
+            '├─ Run `%(prog)s init`   : Set up NICS environment\n'
+            '└─ Run `%(prog)s upgrade`: Reconfigure NICS environment'
         ),
         formatter_class=argparse.RawTextHelpFormatter  # to use line breaks (\n) in the help message
     )
@@ -20,13 +21,10 @@ def main():
         '-v', '--version', action='version', version=f'%(prog)s-{__version__}',
         help='show software version'
     )
-    subpsr = psr.add_subparsers(dest='cmd', help=argparse.SUPPRESS)
+    subpsr = psr.add_subparsers(dest='cmd', help=argparse.SUPPRESS)  # `help=argparse.SUPPRESS` to hide the help message
 
     ## command 'init'
-    subpsr.add_parser(
-        'init',
-        help=argparse.SUPPRESS  # to hide the help message
-    )
+    subpsr.add_parser('init', help=argparse.SUPPRESS)
 
     ## command 'upgrade'
     subpsr.add_parser('upgrade', help=argparse.SUPPRESS)
@@ -40,5 +38,7 @@ def main():
 
     if args.cmd == 'init':
         run_init()
+    elif args.cmd == 'upgrade':
+        run_upgrade()
     elif args.cmd == '_compile':
         run_compile(args.container, args.dock)
