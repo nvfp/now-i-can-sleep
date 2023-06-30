@@ -9,3 +9,8 @@ title: Home
 using an image:
 
 ![nics-logo](nics-logo500.jpg)
+
+- foo:
+
+    - bar
+- foo2
