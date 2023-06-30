@@ -25,7 +25,7 @@ permalink: pretty
 
 sass:
   style: compact # possible values: nested expanded compact compressed
-  sass_dir: _sass    
+  sass_dir: _sass
 """
 
 
