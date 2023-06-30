@@ -5,7 +5,7 @@ from mykit.kit.utils import printer, print_screen
 
 from ..constants import TMPL_DOCS_DIR_PTH
 from .inspect import inspect
-from .workflows_writer import workflows_writer
+from .workflow_writer import workflow_writer
 from .settings_writer import settings_writer
 
 
@@ -45,7 +45,7 @@ def run():
             printer(f"INFO: Folder {repr(pth)} is created.")
     handle_workflow_dirs()
 
-    workflows_writer(WORKFLOW_FILE_PTH, author, email, gh_repo, main_branch_name)
+    workflow_writer(WORKFLOW_FILE_PTH, author, email, gh_repo, main_branch_name)
     
     printer(f"INFO: Copying 'docs/' folder.")
     shutil.copytree(TMPL_DOCS_DIR_PTH, CONTAINER_DIR_PTH)
