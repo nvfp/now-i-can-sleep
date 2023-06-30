@@ -74,7 +74,7 @@ jobs:
 """
 
 
-def workflows_writer(pth, author, email, gh_repo, main_branch_name):
+def workflow_writer(pth, author, email, gh_repo, main_branch_name):
     printer(f'INFO: Writing GitHub workflow file.')
 
     text = _writer(author, email, gh_repo, main_branch_name)
