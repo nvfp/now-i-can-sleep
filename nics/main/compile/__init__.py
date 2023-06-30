@@ -52,4 +52,4 @@ def run(container, dock):
     copying_template(dock)
     update_sass_constants(D_SASS_CONSTANTS, cfg.color_hue)
 
-    update_docs_tree(C_TREE, D__PAGES)
+    update_docs_tree(C_TREE, D__PAGES, cfg.lowercase_the_url)

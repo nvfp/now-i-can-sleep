@@ -46,12 +46,12 @@ def run():
     handle_workflow_dirs()
 
     workflow_writer(WORKFLOW_FILE_PTH, author, email, gh_repo, main_branch_name)
-    
+
     printer(f"INFO: Copying 'docs/' folder.")
     shutil.copytree(TMPL_DOCS_DIR_PTH, CONTAINER_DIR_PTH)
     printer(f'INFO: Done, {repr(CONTAINER_DIR_PTH)} is created.')
 
-    settings_writer(SETTINGS_FILE_PTH, author, gh_username, gh_repo)
+    settings_writer(SETTINGS_FILE_PTH, author, email, gh_username, gh_repo, main_branch_name)
 
     ## outro
     print_screen(f"""

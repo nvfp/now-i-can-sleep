@@ -4,7 +4,7 @@ import re
 from mykit.kit.utils import printer
 
 
-def update_header(C_TREE, D_HEADER):
+def update_header(C_TREE, D_HEADER, lowercase_the_url):
     ## reminder: index.md will not be included in the header
 
     text = (
@@ -26,9 +26,12 @@ def update_header(C_TREE, D_HEADER):
             if fd == 'index.md': continue  # index.md will not be shown in navigation bar
             if os.path.isfile(fd_pth) and (not fd.endswith('.md')): continue  # ignore non-markdown files
 
-            res = re.match(r'(?:\d+ -- )?(?P<name>[\w -.]+) -- (?P<url>[\w -]+)(?:\.md)?', fd)
+            res = re.match(r"^(?:\d+ - )?(?P<name>[\w \-'&\(\).]+)(?:\.md)?$", fd)
+            if res is None: raise AssertionError(f'Invalid docs-tree format: {repr(fd)}')
             name = res.group('name')
-            url = res.group('url')
+            url = name.replace(' ', '-').replace("'", '').replace('&', 'and').replace('(', '').replace(')', '').replace('.', '-')
+            if lowercase_the_url: url = url.lower()
+            printer(f'DEBUG: name: {repr(name)}; url: {repr(url)}')
 
             if os.path.isdir(fd_pth):
                 out += f'<button id="{base.replace("/", "-")}{url}">> {name}</button>'  # remember to replace all slashes to hyphens

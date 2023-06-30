@@ -23,7 +23,13 @@ TMPL_WEB_DIR_PTH = os.path.join(TEMPLATE_DIR_PTH, 'web')
 SETTINGS_KEYS = [
     'author',
     'color_hue',
+    'lowercase_the_url',
     'show_credit',
+    
+    '_email',
     '_gh_username',
     '_gh_repo',
+    '_main_branch_name',
+    
+    '_nics_version',
 ]
