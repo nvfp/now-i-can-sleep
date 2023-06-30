@@ -41,6 +41,7 @@ def run(container, dock):
 
 
     if not os.path.isdir(D__INCLUDES):  # handle init case: initially, '_includes' folder doesn't exist in docs branch
+        printer(f'DEBUG: Creating dir {repr(D__INCLUDES)}.')
         os.mkdir(D__INCLUDES)
     update_header(C_TREE, D_HEADER)
     update_footer(D_FOOTER, cfg.show_credit)
