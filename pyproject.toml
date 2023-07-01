@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "nics"
 version = "2.6.0"
-description = "Minimalist GitHub documentation tool"
+description = "Automated markdown-based documentation tool"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
