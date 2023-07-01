@@ -43,7 +43,7 @@ def run(container, dock):
     if not os.path.isdir(D__INCLUDES):  # handle init case: initially, '_includes' folder doesn't exist in docs branch
         printer(f'DEBUG: Creating dir {repr(D__INCLUDES)}.')
         os.mkdir(D__INCLUDES)
-    update_header(C_TREE, D_HEADER)
+    update_header(C_TREE, D_HEADER, cfg.lowercase_the_url)
     update_footer(D_FOOTER, cfg.show_credit)
 
     update_jekyll_config(D_JEKYLL_CONFIG, cfg.author, cfg._gh_username, cfg._gh_repo)

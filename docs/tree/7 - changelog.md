@@ -1,5 +1,7 @@
 # Changelog
 
+- 2.1.1 (June 30, 2023):
+    - Bug fixed: `TypeError: update_header() missing 1 required positional argument: 'lowercase_the_url'` in `compile/__init__.py`
 - 2.1.0 (June 30, 2023):
     - `nics init` command can now be used even when workflow file and docs/ folder already exist
 - 2.0.0 (June 30, 2023):
