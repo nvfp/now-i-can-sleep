@@ -2,15 +2,15 @@
 
 # Now I Can Sleep
 
-A minimalist automated documentation generation tool for a GitHub repository.
+An automatic markdown-based documentation tool for GitHub repos.
 
-![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/20230627-nics-logo.png)
+![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
 
 ## Installation
 
-1. Install via pip `pip install nics`
-2. Navigate to your project root directory
+1. Install via pip, run `pip install nics`
+2. Navigate to your project root folder
 3. Run `nics init`
 4. Follow the wizard, and you all set!
 
@@ -24,7 +24,7 @@ A minimalist automated documentation generation tool for a GitHub repository.
 
 ## Troubleshoot
 
-- To report bugs or ask questions, you can open an issue or submit a pull request.
+- To report bugs or ask questions, please open an issue or submit a pull request.
 
 
 ## License
