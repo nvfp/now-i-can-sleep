@@ -1,5 +1,7 @@
 # Changelog
 
+- 2.2.0 (July 1):
+    - SCSS updates
 - 2.1.2 (June 30, 2023):
     - Bug fixed: modified the regex into non-greedy ([#2](https://github.com/nvfp/now-i-can-sleep/pull/2/commits/e8af69495f8c6fb9871a2a8a4f5ee26c5b578638))
 - 2.1.1 (June 30, 2023):
