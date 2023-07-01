@@ -6,7 +6,7 @@ title: Home
 
 # Now I Can Sleep
 
-An automatic markdown-based documentation tool for GitHub repos.
+A minimalist, markdown-based tool for automating repository documentation creation.
 
 ![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
