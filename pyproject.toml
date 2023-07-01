@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nics"
-version = "2.2.2"
+version = "2.2.3"
 description = "Minimalist GitHub documentation tool."
 readme = "README.md"
 requires-python = ">=3.8"
@@ -36,10 +36,10 @@ exclude = [
 
 
 [project.urls]
-documentation = "https://nvfp.github.io/now-i-can-sleep/docs"
-"report bugs" = "https://github.com/nvfp/now-i-can-sleep/issues"
-repo = "https://github.com/nvfp/now-i-can-sleep"
-changelog = "https://nvfp.github.io/now-i-can-sleep/changelog"
+Documentation = "https://nvfp.github.io/now-i-can-sleep/docs"
+"Report bugs" = "https://github.com/nvfp/now-i-can-sleep/issues"
+Repository = "https://github.com/nvfp/now-i-can-sleep"
+Changelog = "https://nvfp.github.io/now-i-can-sleep/changelog"
 
 
 [project.scripts]

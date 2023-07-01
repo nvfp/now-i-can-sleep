@@ -4,22 +4,17 @@ layout: main
 title: Home
 ---
 
+# Test
+
+foo bar 
+
+## Header
+
+foo
+
 ## This is Homepage
 
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
-foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarbarbarbarbar barbarbarbarbarbar
+foofoo
 
 ![nics-logo](nics-logo500.jpg)
 
@@ -33,8 +28,14 @@ foofoofoofoofoofoofoofoofoofoofoo barbarbarbar barbarbarbarbarbar barbarbarbarba
     - bar2
 - foo3
 
+    ```sh
+    pip install x
+    ```
+
 install `pip install nics` via pip.
 
 
-[https:/foo.com](test-img-hd.jpg)
+foo [https:/foo.com](test-img-hd.jpg) foo
+
+
 ![https:/foo.com](test-img-hd.jpg)
