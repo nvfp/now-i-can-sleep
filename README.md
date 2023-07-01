@@ -1,5 +1,3 @@
-
-
 # Now I Can Sleep
 
 An automatic markdown-based documentation tool for GitHub repos.

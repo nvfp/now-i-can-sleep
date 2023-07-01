@@ -1,9 +1,5 @@
 # Frequently Asked Questions
 
-## How to upgrade
+## Foo
 
-> do this
-
-## Foo bar
-
-> baz baz
+> Bar
