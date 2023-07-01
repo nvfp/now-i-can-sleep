@@ -44,7 +44,7 @@ def update_recursively(D__PAGES, lowercase_the_url, pth, base):
             continue
         ## </handling the index.md>
 
-        res = re.match(r"^(?:\d+ - )?(?P<name>[\w \-'&\(\).]+)(?:\.md)?$", i)
+        res = re.match(r"^(?:\d+ - )?(?P<name>[\w \-'&\(\).]+?)(?:\.md)?$", i)
         if res is None: raise AssertionError(f'Invalid docs-tree format: {repr(i)}')
         name = res.group('name')
         url = name.replace(' ', '-').replace("'", '').replace('&', 'and').replace('(', '').replace(')', '').replace('.', '-')

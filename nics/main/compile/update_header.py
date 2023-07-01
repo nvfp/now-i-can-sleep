@@ -26,7 +26,7 @@ def update_header(C_TREE, D_HEADER, lowercase_the_url):
             if fd == 'index.md': continue  # index.md will not be shown in navigation bar
             if os.path.isfile(fd_pth) and (not fd.endswith('.md')): continue  # ignore non-markdown files
 
-            res = re.match(r"^(?:\d+ - )?(?P<name>[\w \-'&\(\).]+)(?:\.md)?$", fd)
+            res = re.match(r"^(?:\d+ - )?(?P<name>[\w \-'&\(\).]+?)(?:\.md)?$", fd)
             if res is None: raise AssertionError(f'Invalid docs-tree format: {repr(fd)}')
             name = res.group('name')
             url = name.replace(' ', '-').replace("'", '').replace('&', 'and').replace('(', '').replace(')', '').replace('.', '-')
