@@ -1,11 +1,12 @@
 import os
 import re
+import requests
 import shutil
 
 from mykit.kit.utils import printer
 
 
-def update_recursively(D__PAGES, lowercase_the_url, pth, base):
+def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, base):
     printer(f'DEBUG: Updating docs-tree, pth: {repr(pth)}, base: {repr(base)}')
 
     for i in os.listdir(pth):
@@ -29,6 +30,19 @@ def update_recursively(D__PAGES, lowercase_the_url, pth, base):
                     'title: Home\n'
                     '---\n\n'
                 )
+                with open(pth2, 'r') as f:
+                    homepage = f.read()
+                    if homepage.strip() == 'use-repo-readme':
+                        printer('INFO: Using GitHub repo readme.')
+                        repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/README.md')
+                        if repo_readme == '404: Not Found':
+                            repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/readme.md')
+                        if repo_readme == '404: Not Found':
+                            raise FileNotFoundError('Readme file not found in GitHub repository.')
+                        text += repo_readme
+                    else:
+                        text += homepage
+                with open(dst, 'w') as f: f.write(text)
             else:
                 dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), 'index.md')
                 text = (
@@ -38,8 +52,8 @@ def update_recursively(D__PAGES, lowercase_the_url, pth, base):
                     f"title: {list(filter(lambda s:s!='', base.split('/')))[-1]}\n"
                     '---\n\n'
                 )
-            with open(pth2, 'r') as f: text += f.read()
-            with open(dst, 'w') as f: f.write(text)
+                with open(pth2, 'r') as f: text += f.read()
+                with open(dst, 'w') as f: f.write(text)
             printer(f'DEBUG: Updated index.md from {repr(pth2)} to {repr(dst)}.')
             continue
         ## </handling the index.md>
@@ -58,7 +72,7 @@ def update_recursively(D__PAGES, lowercase_the_url, pth, base):
                 os.mkdir(dir)
                 printer(f'DEBUG: Dir created: {repr(dir)}.')
             ## do it again
-            update_recursively(D__PAGES, lowercase_the_url, pth2, base+url+'/')
+            update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth2, base+url+'/')
         else:
             dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
             text = (
@@ -73,7 +87,7 @@ def update_recursively(D__PAGES, lowercase_the_url, pth, base):
             printer(f'DEBUG: Updated docs-tree file from {repr(pth2)} to {repr(dst)}.')
 
 
-def update_docs_tree(C_TREE, D__PAGES, lowercase_the_url):
+def update_docs_tree(C_TREE, D__PAGES, lowercase_the_url, gh_username, gh_repo):
 
     ## delete the old '_pages' folder in docs branch
     if os.path.isdir(D__PAGES):  # reminder: initially, '_pages' doesn't exist
@@ -83,4 +97,4 @@ def update_docs_tree(C_TREE, D__PAGES, lowercase_the_url):
     printer(f'DEBUG: Creating dir {repr(D__PAGES)}.')
     os.mkdir(D__PAGES)
 
-    update_recursively(D__PAGES, lowercase_the_url, C_TREE, '/')
+    update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, C_TREE, '/')
