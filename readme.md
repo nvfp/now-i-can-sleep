@@ -20,6 +20,7 @@ A minimalist, markdown-based tool for automating repository documentation creati
 - [Documentation](https://nvfp.github.io/now-i-can-sleep)
 - [Changelog](https://nvfp.github.io/now-i-can-sleep/changelog)
 - [💙Many Thanks](https://nvfp.github.io/now-i-can-sleep/many-thanks)
+- [FAQ](https://nvfp.github.io/now-i-can-sleep/faqs)
 
 
 ## Troubleshoot
