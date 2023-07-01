@@ -34,9 +34,9 @@ def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, b
                     homepage = f.read()
                     if homepage.strip() == 'use-repo-readme':
                         printer('INFO: Using GitHub repo readme.')
-                        repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/README.md')
+                        repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/README.md').text
                         if repo_readme == '404: Not Found':
-                            repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/readme.md')
+                            repo_readme = requests.get(f'https://raw.githubusercontent.com/{gh_username}/{gh_repo}/main/readme.md').text
                         if repo_readme == '404: Not Found':
                             raise FileNotFoundError('Readme file not found in GitHub repository.')
                         text += repo_readme
