@@ -19,7 +19,7 @@ An automatic markdown-based documentation tool for GitHub repos.
 
 - [Documentation](https://nvfp.github.io/now-i-can-sleep)
 - [Changelog](https://nvfp.github.io/now-i-can-sleep/changelog)
-- [💙Supporters](https://nvfp.github.io/now-i-can-sleep/supporters)
+- [💙Many Thanks](https://nvfp.github.io/now-i-can-sleep/many-thanks)
 
 
 ## Troubleshoot
