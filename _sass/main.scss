@@ -1,0 +1,98 @@
+---
+# Jekyll requires this front matter, including the "#" sign, to convert main.scss to main.css.
+---
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Grandstander&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+$font: 'Caveat', cursive;
+$font2: 'Grandstander', cursive;
+$font3: 'Ubuntu Mono', monospace;
+
+$font-size-mobile: 16px;
+$mobile-width: 850px;
+
+@import "constants";  // will be created during compilation
+@import "header";
+@import "footer";
+
+body {
+  
+	// remove the unwanted margin
+	margin: 0;
+
+	// keep showing the scrollbar to prevent glitching
+	overflow-y: scroll;
+
+	background-color: hsl($hue-signature, 15%, 87%);
+
+	font-family: $font;
+
+	// main scrollbar
+	&::-webkit-scrollbar {
+		width: 7px;
+		background-color: inherit;
+	}
+	&::-webkit-scrollbar-thumb {
+		background-color: hsl($hue-signature, 21%, 71%);
+	}
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: hsl($hue-signature, 21%, 50%);
+	}
+}
+
+main {
+	min-height: 100vh;
+
+	width: 68%;
+	@media (max-width: $mobile-width) {
+		width: 91%;
+	}
+
+	margin: 0 auto;
+	margin-top: 41px;
+	margin-bottom: 81px;
+
+	font-family: $font2;
+	font-size: 17px;
+	@media (max-width: $mobile-width) {
+		font-size: $font-size-mobile;
+	}
+
+	color: hsl($hue-signature, 50%, 3%);
+
+	a {
+		color: inherit;
+	}
+	a:hover {
+		font-style: italic;
+	}
+
+	p {
+		line-height: 1.5;
+	}
+
+	ul {
+		line-height: 1.5;
+	}
+
+	img {
+		max-width: 100%;
+	}
+
+	pre, code {
+		background-color: hsl($hue-signature, 7%, 77%);
+		border-radius: 5px;
+		font-family: $font3;
+	}
+	pre {
+		padding: 11px 0;
+	}
+	code {
+		padding: 2px 5px;
+	}
+
+	h1, h2 {
+		padding-top: 13px;
+	}
+}
