@@ -1,5 +1,8 @@
 # Changelog
 
+- 2.5.0 (July 1):
+    - New feature:
+        - Use `use-repo-readme` keyword in `tree/index.md` to use repository `README.md` as documentation homepage
 - 2.3.0 (July 1):
     - The `_compile` command will now erase everything before compiling
 - 2.2.0 - 2.2.3 (July 1):
