@@ -4,6 +4,8 @@ An automatic markdown-based documentation tool for GitHub repos.
 
 ![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
+[![Rebuild docs](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml/badge.svg)](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml)
+
 
 ## Installation
 
