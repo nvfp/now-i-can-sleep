@@ -1,5 +1,5 @@
 ---
-permalink: /docss/nics-engine-breakdown/
+permalink: /docs/nics-engine-breakdown/
 layout: main
 title: NICS engine breakdown
 ---

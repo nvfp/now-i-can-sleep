@@ -1,7 +1,7 @@
 ---
-permalink: /abouts/
+permalink: /about/
 layout: main
-title: Abouts
+title: About
 ---
 
 # About
