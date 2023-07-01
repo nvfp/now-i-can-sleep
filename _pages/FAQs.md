@@ -1,7 +1,7 @@
 ---
-permalink: /faq/
+permalink: /faqs/
 layout: main
-title: faq
+title: FAQs
 ---
 
 # Frequently Asked Questions

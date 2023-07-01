@@ -1,7 +1,7 @@
 ---
-permalink: /changelog/
+permalink: /changelogs/
 layout: main
-title: changelog
+title: Changelogs
 ---
 
 # Changelog
