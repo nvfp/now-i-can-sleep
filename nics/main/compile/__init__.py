@@ -42,6 +42,7 @@ def run(container, dock):
 
     ## erase everything
     for stuff in os.listdir(dock):
+        if stuff == '.git': continue  # except git folder
         pth = os.path.join(dock, stuff)
         if os.path.isdir(pth):
             shutil.rmtree(pth)
