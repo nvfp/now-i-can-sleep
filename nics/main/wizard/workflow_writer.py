@@ -18,6 +18,7 @@ on:
 
     paths:
       - 'docs/**'  # only rebuild if 'docs/' folder is modified
+      - README.md  # if using `use-repo-readme` keyword in 'tree/index.md'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
