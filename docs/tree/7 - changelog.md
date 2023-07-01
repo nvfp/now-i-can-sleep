@@ -1,5 +1,7 @@
 # Changelog
 
+- 2.3.0 (July 1):
+    - The `_compile` command will now erase everything before compiling
 - 2.2.0 - 2.2.3 (July 1):
     - SCSS updates
 - 2.1.2 (June 30, 2023):

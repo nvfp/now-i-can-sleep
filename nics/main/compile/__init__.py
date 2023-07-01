@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
@@ -38,6 +39,16 @@ def run(container, dock):
 
     ## parse the settings
     cfg = KeyCrate(C_SETTINGS, True, True, SETTINGS_KEYS, SETTINGS_KEYS)
+
+    ## erase everything
+    for stuff in os.listdir(dock):
+        pth = os.path.join(dock, stuff)
+        if os.path.isdir(pth):
+            shutil.rmtree(pth)
+            printer(f'Deleted dir {repr(pth)}.')
+        else:
+            os.remove(pth)
+            printer(f'Deleted file {repr(pth)}.')
 
 
     if not os.path.isdir(D__INCLUDES):  # handle init case: initially, '_includes' folder doesn't exist in docs branch
