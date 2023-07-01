@@ -1,0 +1,22 @@
+
+#-- Welcome to NICS settings!
+#----------------------------
+
+#-- Everything starts with "#--" is a comment.
+#-- Read documentation at https://nvfp.github.io/now-i-can-sleep
+
+
+author: 'Nicholas Valentinus'
+color_hue: 247
+lowercase_the_url: True
+show_credit: True
+
+
+#-- The below variables are for NICS internal use only and should not be changed.
+
+_email: 'nicho@scapeville.com'
+_gh_username: 'nvfp'
+_gh_repo: 'now-i-can-sleep'
+_main_branch_name: 'main'
+
+_nics_version: '2.4.0'
