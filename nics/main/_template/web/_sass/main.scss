@@ -3,11 +3,12 @@
 ---
 
 @import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Grandstander&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 $font: 'Caveat', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Caveat&family=Grandstander&display=swap');
 $font2: 'Grandstander', cursive;
-$font3: 'Ubuntu Mono', monospace;
+// monospace font
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+$font3: 'IBM Plex Mono', monospace;
 
 $font-size-mobile: 16px;
 $mobile-width: 850px;
