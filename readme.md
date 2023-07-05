@@ -5,6 +5,8 @@ A minimalist, markdown-based tool for automating repository documentation creati
 ![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
 [![Rebuild docs](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml/badge.svg)](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml)
+[![pypi version](https://img.shields.io/pypi/v/nics?logo=pypi)](https://pypi.org/project/nics/)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://choosealicense.com/licenses/mit/)
 
 
 ## Installation
