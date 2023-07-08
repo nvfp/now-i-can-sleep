@@ -35,6 +35,17 @@ foofoo
 install `pip install nics` via pip.
 
 
+```python
+from mykit.kit.text import byteFmt
+from mykit.app.arrow import Arrow
+from mykit.app.slider import Slider
+
+
+x = byteFmt(3141592653589793)
+print(x)  # 2.79 PiB
+```
+
+
 foo [https:/foo.com](test-img-hd.jpg) foo
 
 
