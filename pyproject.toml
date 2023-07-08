@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nics"
-version = "2.6.1"
+version = "2.7.0"
 description = "Automated markdown-based documentation tool"
 readme = "readme.md"
 requires-python = ">=3.8"
