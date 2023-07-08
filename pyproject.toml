@@ -22,7 +22,7 @@ classifiers = [
     "Topic :: Scientific/Engineering",
 ]
 dependencies = [
-    "mykit==4.1.0",
+    "mykit==6.0.0",
     "requests>=2.31.0",
 ]
 
