@@ -1,6 +1,26 @@
 # Now I Can Sleep
 
-A minimalist, markdown-based tool for automating repository documentation creation.
+A minimalist, readable, easy-to-configure, and markdown-based automated documentation workflow for GitHub repositories.
+
+```txt
+🐈BEFORE🐈
+
+           ┌──────────>  Make changes  ────────────┐
+           |                                       v
+
+    Deploy docs-page                       Update docs-files
+
+           ^                                       │
+           └─────────  Rebuild docs-page  <────────┘
+
+
+
+🐾with NICS🐾
+
+           ┌──────────>  Make changes  ────────────┐
+           |                                       |
+           └─────────  Update docs-files  <────────┘
+```
 
 ![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
