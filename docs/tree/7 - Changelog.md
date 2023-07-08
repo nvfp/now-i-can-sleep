@@ -3,6 +3,7 @@
 - 2.7.0 (July 7):
     - Update `nics/main/_template/docs/` template
     - Update dependencies: `mykit==4.1.0` -> `mykit==6.0.0`
+    - Update workflow file template (`nics/main/wizard/workflow_writer.py`)
 - 2.5.0 (July 1):
     - New feature:
         - Use `use-repo-readme` keyword in `tree/index.md` to use repository `README.md` as documentation homepage
