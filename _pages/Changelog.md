@@ -6,6 +6,9 @@ title: Changelog
 
 # Changelog
 
+- 2.7.2 (July 8):
+    - Improved debuggers
+    - Added `encoding='utf-8'` for writings
 - 2.7.1 (July 8):
     - Reupload the `2.7.0` (nvfp/fast-pypi-release bug; Upgraded it to 1.1.0)
 - 2.7.0 (July 7):
