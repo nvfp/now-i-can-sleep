@@ -71,7 +71,7 @@ jobs:
           git config user.name "{author}"
           git config user.email "{email}"
 
-          current_date=$(date +"%b %e, %l:%M %p")
+          current_date=$(date +"%Y %b %e, %l:%M %p")
           git commit -am "NICS rebuilds the docs — $current_date"
 
           git push
@@ -82,7 +82,7 @@ def workflow_writer(pth, author, email, gh_repo, main_branch_name):
     printer(f'INFO: Writing GitHub workflow file.')
 
     text = _writer(author, email, gh_repo, main_branch_name)
-    with open(pth, 'w') as f:
+    with open(pth, 'w', encoding='utf-8') as f:
         f.write(text)
 
     printer(f'INFO: Done, {repr(pth)} is created.')

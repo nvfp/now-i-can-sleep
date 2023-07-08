@@ -37,7 +37,7 @@ def run():
 
 
     text = the_workflow_writer(cfg.author, cfg._email, cfg._gh_repo, cfg._main_branch_name)
-    with open(WORKFLOW_FILE_PTH, 'w') as f: f.write(text)
+    with open(WORKFLOW_FILE_PTH, 'w', encoding='utf-8') as f: f.write(text)
     printer(f'INFO: Workflow file {repr(WORKFLOW_FILE_PTH)} is updated.')
 
     text = the_settings_writer(
