@@ -1,5 +1,7 @@
 # Changelog
 
+- 2.7.1 (July 8):
+    - Reupload the `2.7.0` (nvfp/fast-pypi-release bug)
 - 2.7.0 (July 7):
     - Update `nics/main/_template/docs/` template
     - Update dependencies: `mykit==4.1.0` -> `mykit==6.0.0`
