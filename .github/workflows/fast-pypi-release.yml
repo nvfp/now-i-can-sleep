@@ -1,11 +1,11 @@
-# Fast PyPI Release (https://github.com/nvfp/fast-pypi-release) version 1.1.0
+# Fast PyPI Release (https://github.com/nvfp/fast-pypi-release) version 1.1.1
 
 name: Fast PyPI release
 
 on:
   push:
     branches:
-      - main
+      - main  # EDITME
 
 jobs:
   check-commit-message:
@@ -164,7 +164,7 @@ jobs:
           git config user.name "nvfp/fast-pypi-release"    # EDITME
           git config user.email "nicho@scapeville.com"  # EDITME
 
-          current_date=$(date +"%b %e, %l:%M %p")
+          current_date=$(date +"%Y %b %e, %l:%M %p")
           git commit -am "Update the version in \`pyproject.toml\` — $current_date"
 
           git push
