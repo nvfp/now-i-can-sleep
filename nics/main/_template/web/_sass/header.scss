@@ -55,7 +55,6 @@ header {
     border: none;
     border-radius: 7px;
 
-    font-family: $font2;
     font-size: 23px;
     text-align: left;
     cursor: pointer;
@@ -76,14 +75,12 @@ header {
     border: none;
     border-radius: 7px;
 
-    font-family: $font2;
     font-size: 17px;
     text-align: left;
     cursor: pointer;
 }
-.main a {
-    font-family: $font2;
-}
+// .main a {
+// }
 
 .child {
     display: none;
