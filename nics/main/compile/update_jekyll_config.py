@@ -4,28 +4,39 @@ from mykit.kit.utils import printer
 def _writer(author, gh_username, gh_repo):
 	return f"""
 
-# website
+# ~~ Website ~~
 
 baseurl: /{gh_repo}
 url: https://{gh_username}.github.io/{gh_repo}
 
 
-# personal
+# ~~ Personal ~~
 
 title: {gh_repo}
 author:
   name: {author}
 
 
-# internal
+# ~~ Internal ~~
 
 include: [_pages, _sass, scripts]
-
-permalink: pretty
 
 sass:
   style: compact # possible values: nested expanded compact compressed
   sass_dir: _sass
+
+# Redirection purposes
+plugins:
+  - jekyll-redirect-from
+whitelist:
+  - jekyll-redirect-from
+
+# Syntax highlighting
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 """
 
 
