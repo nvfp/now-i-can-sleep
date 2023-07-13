@@ -6,6 +6,13 @@ title: Changelog
 
 # Changelog
 
+- 2.8.0 (Jul 12):
+    - New features:
+        - Trim trailing slash: Redirect `foo.github.io/lib/page/` to `foo.github.io/lib/page`.
+    - Design updates:
+        - Changed the main font
+        - New syntax highlighting
+        - The font size is set to 16px for both desktop and mobile
 - 2.7.2 (July 8):
     - Improved debuggers
     - Added `encoding='utf-8'` for writings
