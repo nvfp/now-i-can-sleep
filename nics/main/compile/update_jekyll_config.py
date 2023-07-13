@@ -7,7 +7,7 @@ def _writer(author, gh_username, gh_repo):
 # ~~ Website ~~
 
 baseurl: /{gh_repo}
-url: https://{gh_username}.github.io/{gh_repo}
+url: https://{gh_username}.github.io
 
 
 # ~~ Personal ~~
