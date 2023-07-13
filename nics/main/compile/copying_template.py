@@ -12,6 +12,11 @@ def copying_template(dock):
     SASS = os.path.join(dock, '_sass')
     SCRIPTS = os.path.join(dock, 'scripts')
 
+    ## Debuggers
+    printer(f'DEBUG: os.listdir(LAYOUTS): {os.listdir(LAYOUTS)}')
+    printer(f'DEBUG: os.listdir(SASS): {os.listdir(SASS)}')
+    printer(f'DEBUG: os.listdir(SCRIPTS): {os.listdir(SCRIPTS)}')
+
     ## handle the case when the template already exists
     if os.path.isdir(LAYOUTS): shutil.rmtree(LAYOUTS)
     if os.path.isdir(SASS): shutil.rmtree(SASS)
