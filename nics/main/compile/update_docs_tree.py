@@ -27,9 +27,7 @@ def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, b
                     '---\n'
                     'layout: main\n'
                     'title: Home\n'
-                    'permalink: ""\n'
-                    'redirect_from:\n'
-                    '  - /\n'
+                    'permalink: /\n'  # The Homepage trailing slash URL could't be trimmed
                     '---\n\n'
                 )
                 with open(pth2, 'r') as f:

@@ -1,5 +1,6 @@
 # Changelog
 
+- 2.8.2: Bug fixed: The trailing slash in the homepage URL couldn't be trimmed due to an error thrown by GitHub Pages during the build process. In other words, `foo.github.io/REPO/` couldn't be redirected to `foo.github.io/REPO`.
 - 2.8.1: Reuploaded `2.8.0`: Fixed the invalid dependency syntax in `pyproject.toml`.
 - 2.8.0 (Jul 12):
     - New features:
