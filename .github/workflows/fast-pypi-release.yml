@@ -1,4 +1,5 @@
-# Fast PyPI Release (https://github.com/nvfp/fast-pypi-release) version 1.1.1
+# Fast PyPI release (version 1.2.0).
+# Documentation: https://nvfp.github.io/fast-pypi-release
 
 name: Fast PyPI release
 
@@ -23,7 +24,8 @@ jobs:
         run: |
           echo "INFO: Commit message: '$COMMIT_MESSAGE'"
 
-          # The regex ignore the word's casing (Release, RELEASE, release)  (https://stackoverflow.com/questions/44106842/case-insensitive-regex-in-bash)
+          # The regex ignore the word's casing (Release, RELEASE, release),
+          # ref: https://stackoverflow.com/questions/44106842/case-insensitive-regex-in-bash .
           # set nocasematch option
           shopt -s nocasematch
           regex="^([0-9]+\.[0-9]+\.[0-9]+) Release.*"
@@ -49,7 +51,6 @@ jobs:
     runs-on: ubuntu-latest
     
     outputs:
-      status: ${{ steps.match.outputs.status }}
       latest_changelog: ${{ steps.parse.outputs.latest_changelog }}
 
     steps:
@@ -63,7 +64,7 @@ jobs:
           files=$(find docs -iname "*changelog*")
           echo "DEBUG: files: '$files'"
 
-          # Validation I: Only one changelog file should be in the "docs" folder
+          # Only one changelog file should be in the "docs" folder
           file_count=$(echo "$files" | wc -l)
           echo "DEBUG: file_count: $file_count"
           if [ "$file_count" -ne 1 ]; then
@@ -71,77 +72,50 @@ jobs:
             exit 1
           fi
 
-          # Parse the changelog file
-          text=$(cat "$files")
-          echo "DEBUG: text: '$text'"
-          
-          # Store the multi-line `text` into outputs
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "text<<$EOF" >> $GITHUB_OUTPUT
-          echo "$text" >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
+          # Pass the Changelog file path
+          echo "pth=$files" >> $GITHUB_OUTPUT
 
       - id: parse
         name: Parse the latest changelog
         shell: python
         run: |
+          import os
           import re
-          import subprocess as sp
           import sys
+          import uuid
 
-
-          # Get the changelog file text from previous step
-          script = """
-          # Note: Don't use `echo "$foo"`; instead use `echo '$foo'` to prevent `` blocks from being executed (See #1.1.0 changelog)
-          echo '${{ steps.validation.outputs.text }}'
-          """
-          text = sp.check_output(['bash', '-c', script]).decode().strip()
-          print(f'DEBUG: repr(text): {repr(text)}')
+          ## Open the Changelog file
+          with open('${{ steps.validation.outputs.pth }}', 'r') as file:
+            text = file.read()
           print(f'DEBUG: text: "{text}"')
 
+          ## Parse the latest changelog
           res = re.search(r'^(?P<latest>- \d+\.\d+\.\d+.+?)\n-', text, re.MULTILINE | re.DOTALL)
           if res is None:
             print(f'ERROR: No latest changelog matches.')
             sys.exit(1)
-          else:
-            latest_changelog = res.group('latest')
-            print(f'INFO: latest_changelog: "{latest_changelog}"')
+          latest_changelog = res.group('latest')
+          print(f'INFO: latest_changelog: "{latest_changelog}"')
 
-          script = f"""
-          echo "DEBUG: Using subprocess."
+          ## Parse the version from the latest changelog
+          ver_from_changelog = re.search(r'\d+\.\d+\.\d+', latest_changelog).group()
 
-          # Store the multi-line `latest_changelog` into steps outputs
-          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "latest_changelog<<$EOF" >> $GITHUB_OUTPUT
-          echo '{latest_changelog}' >> $GITHUB_OUTPUT
-          echo "$EOF" >> $GITHUB_OUTPUT
-          """
-          sp.run(['bash', '-c', script])
+          ## Match the versions
+          ver_from_commit = '${{ needs.check-commit-message.outputs.version }}'
+          if ver_from_changelog != ver_from_commit:
+            print(f"ERROR: Versions don't match ({ver_from_commit} != {ver_from_changelog}).")
+            sys.exit(1)
+          print('INFO: Versions matched.')
 
-      - id: match
-        name: Match the versions
-        run: |
-          # Get the parsed latest changelog
-          latest_changelog='${{ steps.parse.outputs.latest_changelog }}'
-          echo "DEBUG: latest_changelog: '$latest_changelog'"
-
-          # Parse the version from the changelog file
-          ver_from_changelog=$(echo "$latest_changelog" | grep -oP '\d+\.\d+\.\d+' | head -n 1)
-          echo "DEBUG: ver_from_changelog: '$ver_from_changelog'"
-
-          # Match the versions
-          ver_from_commit="${{ needs.check-commit-message.outputs.version }}"
-          if [[ "$ver_from_commit" != "$ver_from_changelog" ]]; then
-            echo "ERROR: Versions don't match ($ver_from_commit != $ver_from_changelog)."
-            exit 1
-          else
-            echo "INFO: Versions matched."
-            echo "status=success" >> $GITHUB_OUTPUT
-          fi
+          ## Pass the latest changelog for the step 'create-gh-release'
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+            delimiter = uuid.uuid1()
+            print(f'latest_changelog<<{delimiter}', file=fh)
+            print(latest_changelog, file=fh)
+            print(delimiter, file=fh)
 
   rewrite-pyproject-toml:
     needs: [check-commit-message, check-changelog-file]
-    if: needs.check-changelog-file.outputs.status == 'success'
 
     runs-on: ubuntu-latest
     permissions:
@@ -163,10 +137,7 @@ jobs:
         run: |
           git config user.name "nvfp/fast-pypi-release"    # EDITME
           git config user.email "nicho@scapeville.com"  # EDITME
-
-          current_date=$(date +"%Y %b %e, %l:%M %p")
-          git commit -am "Update the version in \`pyproject.toml\` — $current_date"
-
+          git commit -am "Update the version in \`pyproject.toml\` — $(date +'%Y %b %e, %l:%M %p')"
           git push
 
   create-gh-release:
@@ -180,18 +151,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
       - name: Manual pull
         run: | 
-          # Seems like actions/checkout@v3 doesn't grab the latest commit
-          # from the 'rewrite-pyproject-toml' job. To get it, perform a manual 'git pull'.
           git pull
-
-          # Check it
-          echo "::group:: Debugging"
           echo "DEBUG: Run 'git log -2'"
           git log -2
-          echo "---"
-          echo "::endgroup::"
 
       - name: Release
         uses: nvfp/gh-action-simple-release@1.8.0
@@ -220,18 +185,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+      # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
       - name: Manual pull
         run: | 
-          # Seems like actions/checkout@v3 doesn't grab the latest commit
-          # from the 'rewrite-pyproject-toml' job. To get it, perform a manual 'git pull'.
           git pull
-
-          # Check it
-          echo "::group:: Debugging"
           echo "DEBUG: Run 'git log -2'"
           git log -2
-          echo "---"
-          echo "::endgroup::"
 
       - name: Build
         run: python -m build
