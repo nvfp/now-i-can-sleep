@@ -25,9 +25,11 @@ def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, b
                 dst = os.path.join(D__PAGES, 'index.md')
                 text = (
                     '---\n'
-                    'permalink: /\n'
                     'layout: main\n'
                     'title: Home\n'
+                    'permalink: ""\n'
+                    'redirect_from:\n'
+                    '  - /\n'
                     '---\n\n'
                 )
                 with open(pth2, 'r') as f:
@@ -47,9 +49,11 @@ def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, b
                 dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), 'index.md')
                 text = (
                     '---\n'
-                    f'permalink: {base}\n'
                     'layout: main\n'
                     f"title: {list(filter(lambda s:s!='', base.split('/')))[-1]}\n"
+                    f'permalink: {base[:-1]}\n'  # Trim the last '/'
+                    f'redirect_from:\n'
+                    f'  - {base}\n'
                     '---\n\n'
                 )
                 with open(pth2, 'r') as f: text += f.read()
@@ -77,9 +81,11 @@ def update_recursively(D__PAGES, lowercase_the_url, gh_username, gh_repo, pth, b
             dst = os.path.join(D__PAGES, os.sep.join(filter(lambda s:s!='', base.split('/'))), f'{name}.md')
             text = (
                 '---\n'
-                f'permalink: {base}{url}/\n'
                 'layout: main\n'
                 f'title: {name}\n'
+                f'permalink: {base}{url}\n'
+                f'redirect_from:\n'
+                f'  - {base}{url}/\n'
                 '---\n\n'
             )
             with open(pth2, 'r') as f: text += f.read()
