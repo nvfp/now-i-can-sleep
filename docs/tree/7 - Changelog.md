@@ -3,6 +3,12 @@
 - 2.8.0 (Jul 12):
     - New features:
         - Trim trailing slash: Redirect `foo.github.io/lib/page/` to `foo.github.io/lib/page`.
+        - Handle lowercase URL: Redirect `foo.github.io/my-lib-case-sensitive` to `foo.github.io/My-LIB-Case-Sensitive`.
+        - If a favicon is not specified, the default favicon will be used.
+    - Design updates:
+        - Changed the main font
+        - New syntax highlighting
+        - The font size is set to 16px for both desktop and mobile
 - 2.7.2 (July 8):
     - Improved debuggers
     - Added `encoding='utf-8'` for writings
