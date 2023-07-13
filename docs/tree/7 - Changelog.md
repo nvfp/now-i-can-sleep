@@ -1,5 +1,6 @@
 # Changelog
 
+- 2.8.1: Reuploaded `2.8.0`: Fixed the invalid dependency syntax in `pyproject.toml`.
 - 2.8.0 (Jul 12):
     - New features:
         - Trim trailing slash: Redirect `foo.github.io/lib/page/` to `foo.github.io/lib/page`.
