@@ -1,5 +1,6 @@
 # Changelog
 
+- 2.8.4 (UNSTABLE): Fixed `copying_template.py` debuggers.
 - 2.8.3: Added debuggers to `copying_template.py`: Investigating an issue where `sass-code-highlighting.scss` didn't get copied.
 - 2.8.2: Bug fixed: The trailing slash in the homepage URL couldn't be trimmed due to an error thrown by GitHub Pages during the build process. In other words, `foo.github.io/REPO/` couldn't be redirected to `foo.github.io/REPO`.
 - 2.8.1: Reuploaded `2.8.0`: Fixed the invalid dependency syntax in `pyproject.toml`.
