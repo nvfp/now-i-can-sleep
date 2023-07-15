@@ -9,29 +9,41 @@
     {% include nav.html %}
     <!-- Navigation script -->
     <script>
-        // Select all buttons in <nav>
-        const NAV_BUTTONS = document.querySelectorAll("nav button");
+        function toggleHolder(master) {
+            // Note: The initial toggle sets the '.expanded' class on `master`,
+            //       making master.classList.contains("expanded") evaluate to true.
+            master.classList.toggle("expanded");
+            const svgExpanded = master.querySelector('.head .expanded');
+            const svgShrinked = master.querySelector('.head .shrinked');
+            const holder = master.querySelector('.holder');
 
-        // Add click listener to each button
-        NAV_BUTTONS.forEach((btn) => {
-            btn.addEventListener("click", () => {
+            if (master.classList.contains("expanded")) {
+                svgExpanded.style.display = 'block';
+                svgShrinked.style.display = 'none';
+                holder.style.display = 'flex';
+            } else {
+                svgExpanded.style.display = 'none';
+                svgShrinked.style.display = 'block';
+                holder.style.display = 'none';
+            }
+        }
 
-                let id = btn.id;
-                let text = btn.textContent;
-                // console.log(`DEBUG: id: ${id}`)
+        // Select all div with class 'master' in <nav>
+        const masters = document.querySelectorAll("nav .master");
 
-                // The div
-                let div = document.querySelector(`nav #${id}-div`);
-
-                if (text.startsWith("v")) {  // When expanded
-                    div.style.display = 'none';
-                    btn.textContent = ">" + text.slice(1);
-                } else {  // When closed
-                    div.style.display = 'flex';
-                    btn.textContent = "v" + text.slice(1);
-                }
-            });
+        // For each master, bind click listener to the div 'head'
+        masters.forEach((master) => {
+            const head = master.querySelector('.head');
+            head.addEventListener("click", () => toggleHolder(master));
         });
+
+        // Get the navigation master.
+        // The querySelector will find the first '.master' it comes across,
+        // which is the outermost one and represents the navigation master.
+        const navMaster = document.querySelector('nav .master');
+
+        // Initial state: Expand only the navigation master
+        toggleHolder(navMaster)
     </script>
 
     <main>
