@@ -1,9 +1,9 @@
 # Now I Can Sleep
 
-A minimalist, readable, easy-to-configure, and markdown-based automated documentation workflow for GitHub repositories.
+Minimal settings, markdown-based automated documentation workflow for GitHub repositories.
 
 ```txt
-🐈BEFORE🐈
+Manual workflow:
 
            ┌──────────>  Make changes  ────────────┐
            |                                       v
@@ -15,14 +15,14 @@ A minimalist, readable, easy-to-configure, and markdown-based automated document
 
 
 
-🐾with NICS🐾
+With NICS:
 
            ┌──────────>  Make changes  ────────────┐
            |                                       |
            └─────────  Update docs-files  <────────┘
 ```
 
-![nics' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
+![NICS' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
 [![Rebuild docs](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml/badge.svg)](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml)
 [![pypi version](https://img.shields.io/pypi/v/nics?logo=pypi)](https://pypi.org/project/nics/)
