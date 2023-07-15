@@ -1,6 +1,5 @@
 
 
-
 __pycache__/
 
 
@@ -9,7 +8,7 @@ dist/
 *.egg-info/
 
 
-# files generated during docs webpage building
+# Ignore Jekyll and Sass related files
 _site
 .sass-cache
 .jekyll-cache
