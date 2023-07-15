@@ -5,7 +5,7 @@ from mykit.kit.keycrate import KeyCrate
 from nics.main.constants import SETTINGS_KEYS
 from nics.main.compile.inspect import inspect_the_container, inspect_the_dock
 from nics.main.compile.docking import docking
-from nics.main.compile.writer import customize_template_with_user_data
+from nics.main.compile.customize import customize_template_with_user_data
 
 
 def run(container, dock):

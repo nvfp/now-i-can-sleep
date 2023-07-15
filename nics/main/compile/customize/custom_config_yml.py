@@ -38,7 +38,7 @@ kramdown:
 """
 
 
-def rewrite_config_yml(dock, cfg):
+def custom_config_yml(dock, cfg):
 	printer('DEBUG: Rewriting _config.yml file.')
 
 	text = get_text(cfg)
