@@ -51,11 +51,8 @@ main {
 	// }
 }
 
-// I suspect these imports must be placed at the bottom,
-// or some SCSS styles might not be applied to them.
-// 
-//   					~ Nicholas @ July 12, 2023
 @import "header";
+@import "nav";
 @import "footer";
 
 // Syntax highlighting

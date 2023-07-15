@@ -1,91 +1,13 @@
 header {
     display: flex;
-    flex-direction: column;
-    margin: 0;
-    color: hsl($hue-signature, 33%, 7%);
 
-    h1 {
-        margin: 0;
-        margin-top: 0;
-        margin-bottom: 37px;
-        padding: 13px;
-        padding-left: 41px;
-    
-        // Same color as footer
-        background-color: hsl($hue-signature, 81%, 4%);
-        color: hsl($hue-signature, 65%, 91%);
+    svg {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: hsl($hue-signature, 50%, 50%);
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
     }
-
-    a {
-        text-decoration: none;
-        color: inherit;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    button {
-        color: inherit;
-    }
-}
-
-
-
-.wrap {
-
-    width: 73%;
-    @media (max-width: $mobile-width) {
-        width: 97%;
-    }
-
-    margin: 0 auto;
-
-    background-color: hsl($hue-signature, 31%, 88%);
-    border: 1px solid hsl($hue-signature, 22%, 76%);
-    border-radius: 7px;
-
-    box-shadow: 0 2px 4px hsl($hue-signature, 22%, 71%);;
-}
-.wrap #_root__nav {
-
-    width: 100%;
-    padding: 15px;
-
-    background-color: hsl($hue-signature, 35%, 76%);
-    border: none;
-    border-radius: 7px;
-
-    font-size: 23px;
-    text-align: left;
-    cursor: pointer;
-}
-
-.main {
-    display: flex;
-    flex-direction: column;
-
-    padding: 17px;
-    gap: 7px;
-}
-.main button {
-
-    padding: 9px;
-
-    background-color: hsl($hue-signature, 35%, 79%);
-    border: none;
-    border-radius: 7px;
-
-    font-size: 17px;
-    text-align: left;
-    cursor: pointer;
-}
-// .main a {
-// }
-
-.child {
-    display: none;
-    flex-direction: column;
-
-    padding: 0 21px;
-    gap: 7px;
 }

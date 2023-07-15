@@ -1,0 +1,19 @@
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page.title }} — {{ site.title }}</title>
+
+    <!-- Favicon -->
+    {% if site.static_files contains '/assets/images/favicon.svg' %}
+        <!-- Default favicon -->
+        <link rel="icon" type="image/svg+xml" href="{{ site.baseurl }}/assets/images/favicon.svg">
+    {% elsif site.static_files contains '/assets/images/favicon.png' %}
+        <link rel="icon" type="image/png" href="{{ site.baseurl }}/assets/images/favicon.png">
+    {% endif %}
+
+    <!-- Main CSS; Make sure to use `.css` instead of `.scss`, otherwise it won't work. -->
+    <link rel="stylesheet" href="{{ site.baseurl }}/_sass/main.css">
+
+</head>
