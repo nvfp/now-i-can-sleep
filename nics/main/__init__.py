@@ -1,12 +1,15 @@
 import argparse
 
-from .constants import __version__, SOFTWARE_DIST_NAME
-from .wizard import run as run_init
-from .upgrade import run as run_upgrade
-from .compile import run as run_compile
+from mykit.kit.utils import printer
+
+from nics.main.constants import __version__, SOFTWARE_DIST_NAME
+from nics.main.wizard import run as run_init
+from nics.main.upgrade import run as run_upgrade
+from nics.main.compile import run as run_compile
 
 
 def main():
+    printer(f'INFO: Running {SOFTWARE_DIST_NAME} ({__version__}).')
 
     psr = argparse.ArgumentParser(
         prog=SOFTWARE_DIST_NAME,
@@ -36,6 +39,7 @@ def main():
 
     args = psr.parse_args()
 
+    printer(f'INFO: Running {repr(args.cmd)} command.')
     if args.cmd == 'init':
         run_init()
     elif args.cmd == 'upgrade':
