@@ -3,8 +3,10 @@ import shutil
 
 from mykit.kit.utils import printer
 
+from nics.main.utils.favicon_maker import create_favicon_svg_file
 
-def update_404_and_favicon(C_404, C_ICON, D_404, D_ICON):
+
+def custom_favicon(C_404, C_ICON, D_404, D_ICON):
 
     ## 404 page
     printer(f"DEBUG: Attempting to copy '404.md'.")
