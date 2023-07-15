@@ -24,5 +24,5 @@ def run(container, dock):
     ## Docking
     docking(dock)
 
-    ## Rewrites the template using user-provided data
+    ## Rewrite the template using user-provided data
     customize_template_with_user_data(container, dock, cfg)
