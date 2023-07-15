@@ -1,4 +1,4 @@
-# Fast PyPI release (version 1.2.0).
+# Fast PyPI release (version 1.3.0).
 # Documentation: https://nvfp.github.io/fast-pypi-release
 
 name: Fast PyPI release
@@ -8,169 +8,215 @@ on:
     branches:
       - main  # EDITME
 
+env:
+  pypi-dist-name: nics  # EDITME
+  git-name: nvfp/fast-pypi-release  # EDITME
+  git-email: nicho@scapeville.com  # EDITME
+
 jobs:
-  check-commit-message:
+  check-commit-msg:
     runs-on: ubuntu-latest
-
     outputs:
-      status: ${{ steps.check.outputs.status }}
-      version: ${{ steps.check.outputs.version }}
-
+      match: ${{ steps.run.outputs.match }}
+      ver: ${{ steps.run.outputs.ver }}
+      desc: ${{ steps.run.outputs.desc }}
+      prerelease: ${{ steps.run.outputs.prerelease }}
     steps:
-      - id: check
-        name: Check commit message
+      - name: Run
+        id: run
         env:
           COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+        shell: python
         run: |
-          echo "INFO: Commit message: '$COMMIT_MESSAGE'"
+          import os, re, sys
 
-          # The regex ignore the word's casing (Release, RELEASE, release),
-          # ref: https://stackoverflow.com/questions/44106842/case-insensitive-regex-in-bash .
-          # set nocasematch option
-          shopt -s nocasematch
-          regex="^([0-9]+\.[0-9]+\.[0-9]+) Release.*"
-          
-          if [[ $COMMIT_MESSAGE =~ $regex ]]; then 
-            echo "INFO: Pattern matched."
-            ver="${BASH_REMATCH[1]}"
-            echo "INFO: Version: $ver"
-            echo "status=success" >> $GITHUB_OUTPUT
-            echo "version=$ver" >> $GITHUB_OUTPUT
-          else
-            echo "INFO: Pattern doesn't match."
-            echo "status=fail" >> $GITHUB_OUTPUT
+          res = re.match(r'^(?P<ver>\d+\.\d+\.\d+(?:b\d*)?)[ ]+RELEASE(?P<desc>.*)', os.environ['COMMIT_MESSAGE'], re.IGNORECASE)
+          if res is None:
+            print("INFO: Pattern doesn't match.")
+            sys.exit(0)
+
+          ver = res.group('ver')
+          desc = re.sub(r'^(?::)?\s+', '', res.group('desc'))  # Parse description without colon and leading spaces
+          prerelease = True if 'b' in ver else False
+          print(f"INFO: Pattern matched [ver: {repr(ver)}] [desc: {repr(desc)}] [prerelease: {prerelease}].")
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
+            print(f'match=true', file=f)
+            print(f'ver={ver}', file=f)
+            print(f'desc={desc}', file=f)
+            print(f'prerelease={prerelease}', file=f)
+
+  verify-version-availability:
+    needs: check-commit-msg
+    if: needs.check-commit-msg.outputs.match
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Fetch all tags
+
+      - name: Inspect Git tag
+        run: |
+          tag="${{ needs.check-commit-msg.outputs.ver }}"
+          if [[ -n $(git tag -l "$tag") ]]; then
+            echo "ERROR: Tag already exists: '$tag'"
+            exit 1
           fi
 
-          # unset nocasematch option
-          shopt -u nocasematch
+      - name: Inspect PyPI version
+        run: |
+          name="${{ env.pypi-dist-name }}"
+          ver="${{ needs.check-commit-msg.outputs.ver }}"
+          echo "INFO: Inspecting package '$name' version '$ver'."
 
-  check-changelog-file:
-    needs: check-commit-message
-    if: needs.check-commit-message.outputs.status == 'success'
+          # WARNING: pip index is currently an experimental command. It may be removed/changed in a future release without prior warning.
 
+          # Capturing pip output before piping to grep prevents BrokenPipeError caused by pip warnings (above)
+          output=$(pip index versions $name --pre)
+
+          if echo "$output" | grep -q "$ver"; then
+            echo "ERROR: Package '$name' version '$ver' already exists."
+            exit 1
+          fi
+
+  get-latest-changelog:
+    needs: [check-commit-msg, verify-version-availability]
     runs-on: ubuntu-latest
-    
     outputs:
-      latest_changelog: ${{ steps.parse.outputs.latest_changelog }}
-
+      changelog: ${{ steps.parse.outputs.changelog }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - id: validation
-        name: Validating
+      - name: Check latest/prerelease version
+        id: check
+        run: |
+          if [ "${{ needs.check-commit-msg.outputs.prerelease }}" = "True" ]; then
+            echo "INFO: It's prerelease! Skip the steps below."
+          else
+            echo "INFO: It's latest! Continue to parse the latest changelog."
+            echo "latest=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Verify single changelog file
+        id: verify
+        if: steps.check.outputs.latest
         run: |
           # Look (recursively) for files in the "docs" folder with "changelog" in their name (ignore case)
           files=$(find docs -iname "*changelog*")
           echo "DEBUG: files: '$files'"
 
           # Only one changelog file should be in the "docs" folder
-          file_count=$(echo "$files" | wc -l)
-          echo "DEBUG: file_count: $file_count"
-          if [ "$file_count" -ne 1 ]; then
-            echo "ERROR: Multiple changelog files found in the "docs" folder."
+          if [ "$(echo "$files" | wc -l)" -ne 1 ]; then
+            echo "ERROR: Multiple changelog files found in the 'docs/' folder."
             exit 1
           fi
 
-          # Pass the Changelog file path
+          # Pass the Changelog file path to the next step
           echo "pth=$files" >> $GITHUB_OUTPUT
 
-      - id: parse
-        name: Parse the latest changelog
+      - name: Parse the latest changelog
+        id: parse
+        if: steps.verify.outcome == 'success'
         shell: python
         run: |
-          import os
-          import re
-          import sys
-          import uuid
+          import os, re, sys, uuid
 
           ## Open the Changelog file
-          with open('${{ steps.validation.outputs.pth }}', 'r') as file:
+          with open('${{ steps.verify.outputs.pth }}', 'r') as file:
             text = file.read()
           print(f'DEBUG: text: "{text}"')
 
-          ## Parse the latest changelog
-          res = re.search(r'^(?P<latest>- \d+\.\d+\.\d+.+?)\n-', text, re.MULTILINE | re.DOTALL)
+          ## Parse the latest changelog.
+          ## Note: This step runs only for non-prereleases, so the regex matches only the X.X.X pattern.
+          res = re.search(r'^(?P<changelog>- \d+\.\d+\.\d+.+?)\n-', text, re.MULTILINE | re.DOTALL)
           if res is None:
             print(f'ERROR: No latest changelog matches.')
             sys.exit(1)
-          latest_changelog = res.group('latest')
-          print(f'INFO: latest_changelog: "{latest_changelog}"')
+          changelog = res.group('changelog')
+          print(f'INFO: changelog: "{changelog}"')
 
           ## Parse the version from the latest changelog
-          ver_from_changelog = re.search(r'\d+\.\d+\.\d+', latest_changelog).group()
+          ver_changelog = re.search(r'\d+\.\d+\.\d+', changelog).group()
 
           ## Match the versions
-          ver_from_commit = '${{ needs.check-commit-message.outputs.version }}'
-          if ver_from_changelog != ver_from_commit:
-            print(f"ERROR: Versions don't match ({ver_from_commit} != {ver_from_changelog}).")
+          ver_commit = '${{ needs.check-commit-msg.outputs.ver }}'
+          if ver_changelog != ver_commit:
+            print(f"ERROR: Versions don't match ({ver_commit} != {ver_changelog}).")
             sys.exit(1)
           print('INFO: Versions matched.')
 
-          ## Pass the latest changelog for the step 'create-gh-release'
+          ## Pass the latest changelog to 'create-gh-release' step
           with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
             delimiter = uuid.uuid1()
-            print(f'latest_changelog<<{delimiter}', file=fh)
-            print(latest_changelog, file=fh)
+            print(f'changelog<<{delimiter}', file=fh)
+            print(changelog, file=fh)
             print(delimiter, file=fh)
 
-  rewrite-pyproject-toml:
-    needs: [check-commit-message, check-changelog-file]
-
+  update-pyproject-toml:
+    needs: [check-commit-msg, get-latest-changelog]
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Rewriting
-        run: |
-          version="${{ needs.check-commit-message.outputs.version }}"
-          echo "INFO: New version: '$version'"
-
-          # Change the version
-          sed -E -i "s/(version = \")[0-9]+\.[0-9]+\.[0-9]+/\1$version/" pyproject.toml
+      - name: Update the version in pyproject.toml
+        run: sed -i "s/version = \".*\"/version = \"${{ needs.check-commit-msg.outputs.ver }}\"/" pyproject.toml
 
       - name: Commit
         run: |
-          git config user.name "nvfp/fast-pypi-release"    # EDITME
-          git config user.email "nicho@scapeville.com"  # EDITME
+          git config user.name "${{ env.git-name }}"
+          git config user.email "${{ env.git-email }}"
           git commit -am "Update the version in \`pyproject.toml\` — $(date +'%Y %b %e, %l:%M %p')"
           git push
 
   create-gh-release:
-    needs: [check-commit-message, check-changelog-file, rewrite-pyproject-toml]
-
+    needs: [check-commit-msg, get-latest-changelog, update-pyproject-toml]
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      
-      # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
-      - name: Manual pull
+
+      - name: Manual pull  # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
         run: | 
           git pull
           echo "DEBUG: Run 'git log -2'"
           git log -2
 
+      - name: Select description
+        id: select
+        env:
+          DESC: ${{ needs.check-commit-msg.outputs.desc }}
+          CHANGELOG: ${{ needs.get-latest-changelog.outputs.changelog }}
+        run: |
+          if [ "${{ needs.check-commit-msg.outputs.prerelease }}" = "True" ]; then
+            desc=$DESC
+          else
+            desc=$CHANGELOG
+          fi
+          echo "INFO: desc: '$desc'"
+
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "desc<<$EOF" >> $GITHUB_OUTPUT
+          echo "$desc" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+
       - name: Release
-        uses: nvfp/gh-action-simple-release@1.8.0
+        uses: nvfp/gh-action-simple-release@1.13.0
         env:
           GH_TOKEN: ${{ github.token }}
         with:
-          tag: ${{ needs.check-commit-message.outputs.version }}
-          desc: ${{ needs.check-changelog-file.outputs.latest_changelog }}
+          tag: ${{ needs.check-commit-msg.outputs.ver }}
+          desc: ${{ steps.select.outputs.desc }}
 
   publish-to-PyPI:
-    needs: [check-commit-message, check-changelog-file, rewrite-pyproject-toml]
-
+    needs: update-pyproject-toml
     runs-on: ubuntu-latest
-
     steps:
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -185,8 +231,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
-      - name: Manual pull
+      - name: Manual pull  # actions/checkout@v3 doesn't grab the latest commit. Perform a manual 'git pull' to get it.
         run: | 
           git pull
           echo "DEBUG: Run 'git log -2'"
