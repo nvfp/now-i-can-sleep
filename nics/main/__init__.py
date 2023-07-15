@@ -23,13 +23,13 @@ def main():
     )
     subpsr = psr.add_subparsers(dest='cmd', help=argparse.SUPPRESS)  # `help=argparse.SUPPRESS` to hide the help message
 
-    ## command 'init'
+    ## The 'init' command
     subpsr.add_parser('init', help=argparse.SUPPRESS)
 
-    ## command 'upgrade'
+    ## The 'upgrade' command
     subpsr.add_parser('upgrade', help=argparse.SUPPRESS)
 
-    ## command '_compile' (that users shouldn't run)
+    ## The '_compile' command (not to be run by users)
     c = subpsr.add_parser('_compile', help=argparse.SUPPRESS)
     c.add_argument('container')
     c.add_argument('dock')
