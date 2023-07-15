@@ -1,4 +1,4 @@
-# Baz
+# A page
 
 Showing images:
 
