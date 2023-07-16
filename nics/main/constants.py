@@ -9,12 +9,13 @@ except pkg_resources.DistributionNotFound:  # This exception occurred during dev
 
 
 ROOT_DIR_PTH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 DIST_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics')
 MAIN_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'main')
+NICS_COMPILER_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics-compiler')
 
-TEMPLATE_DIR_PTH = os.path.join(MAIN_DIR_PTH, '_template')
-TMPL_DOCS_DIR_PTH = os.path.join(TEMPLATE_DIR_PTH, 'docs')
-TMPL_WEB_DIR_PTH = os.path.join(TEMPLATE_DIR_PTH, 'web')
+TEMPLATE_DOCS_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'template')
+TEMPLATE_WEB_DIR_PTH  = os.path.join(ROOT_DIR_PTH, 'nics-compiler', 'template')
 
 SETTINGS_KEYS = [
     'author',

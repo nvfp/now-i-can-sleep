@@ -2,11 +2,12 @@ import os
 import shutil
 import sys
 
-from mykit.kit.utils import printer, print_screen
+from mykit.kit.utils import printer
 
-from ..constants import TMPL_DOCS_DIR_PTH
 from .workflow_writer import workflow_writer
 from .settings_writer import settings_writer
+
+from nics.main.constants import TEMPLATE_DOCS_DIR_PTH
 
 
 def run():
@@ -67,7 +68,7 @@ def run():
 
     if not already_use:
         printer(f"INFO: Copying 'docs/' folder.")
-        shutil.copytree(TMPL_DOCS_DIR_PTH, CONTAINER_DIR_PTH)
+        shutil.copytree(TEMPLATE_DOCS_DIR_PTH, CONTAINER_DIR_PTH)
         printer(f'INFO: Done, {repr(CONTAINER_DIR_PTH)} is created.')
 
     settings_writer(SETTINGS_FILE_PTH, author, email, gh_username, gh_repo, main_branch_name)

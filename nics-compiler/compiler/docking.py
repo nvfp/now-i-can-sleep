@@ -3,7 +3,7 @@ import shutil
 
 from mykit.kit.utils import printer
 
-from nics.main.constants import TMPL_WEB_DIR_PTH
+from nics.main.constants import TEMPLATE_WEB_DIR_PTH
 
 
 def clean_up_the_dock(dock):
@@ -27,9 +27,9 @@ def clean_up_the_dock(dock):
 def copy_the_template(dock):
     """Copy everything from 'nics/main/_template/web/' folder to `dock`"""
 
-    for stuff in os.listdir(TMPL_WEB_DIR_PTH):
+    for stuff in os.listdir(TEMPLATE_WEB_DIR_PTH):
 
-        src = os.path.join(TMPL_WEB_DIR_PTH, stuff)  # Source
+        src = os.path.join(TEMPLATE_WEB_DIR_PTH, stuff)  # Source
         dst = os.path.join(dock, stuff)              # Destination
 
         if os.path.isfile(src):
