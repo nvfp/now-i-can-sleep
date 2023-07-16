@@ -53,3 +53,19 @@ def update_header(C_TREE, D_HEADER, lowercase_the_url):
 
     with open(D_HEADER, 'w') as f: f.write(text)
     printer(f'INFO: Updated header {repr(D_HEADER)}.')
+
+
+
+
+def get_text():
+    text = '<nav>'
+    text += '</nav>'
+    return text
+
+
+def custom_nav_html(container, dock, lowercase_the_url):
+    printer(f'DEBUG: Rewriting _includes/nav.html file.')
+
+    text = get_text()
+    with open(os.path.join(dock, '_includes', 'nav.html'), 'w') as f:
+        f.write(text)
