@@ -2,17 +2,17 @@ import argparse
 
 from mykit.kit.utils import printer
 
-from nics.main.constants import __version__, SOFTWARE_DIST_NAME
+from nics.main.constants import __version__
 from nics.main.wizard import run as run_init
 from nics.main.upgrade import run as run_upgrade
 from nics.main.compile import run as run_compile
 
 
 def main():
-    printer(f'INFO: Running {SOFTWARE_DIST_NAME} ({__version__}).')
+    printer(f'INFO: Running NICS ({__version__}).')
 
     psr = argparse.ArgumentParser(
-        prog=SOFTWARE_DIST_NAME,
+        prog='nics',
         usage=(
             '\n'
             '├─ Run `%(prog)s init`   : Set up NICS environment\n'
