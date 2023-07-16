@@ -1,0 +1,21 @@
+name: "NICS Backend"
+description: "This action is a part of the NICS workflow and should not be used directly."
+author: "Nicholas Valentinus"
+branding:
+  icon: settings
+  color: black
+
+inputs:
+  foo:
+    description: "foo"
+    required: true
+
+runs:
+  using: 'composite'
+  steps:      
+    - shell: bash
+      env:
+        FOO: ${{ inputs.foo }}
+      run: |
+        chmod +x $GITHUB_ACTION_PATH/main.sh
+        $GITHUB_ACTION_PATH/main.sh
