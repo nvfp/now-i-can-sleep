@@ -1,17 +1,15 @@
-import random
+import os
 
 from mykit.kit.utils import printer
 
-from ..constants import __version__
+from nics.main.constants import __version__
 
 
-def full_writer(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name):
+def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name):
     return f"""
 #-- Welcome to NICS settings!
-#----------------------------
-
 #-- Everything starts with "#--" is a comment.
-#-- Read documentation at https://nvfp.github.io/now-i-can-sleep
+#-- Documentation: https://nvfp.github.io/now-i-can-sleep
 
 
 author: '{author}'
@@ -20,7 +18,7 @@ lowercase_the_url: {lowercase_the_url}
 show_credit: {show_credit}
 
 
-#-- The below variables are for NICS internal use only and should not be changed.
+#-- The variables below are for NICS internal use only and shouldn't be modified.
 
 _email: '{email}'
 _gh_username: '{gh_username}'
@@ -31,37 +29,12 @@ _nics_version: '{__version__}'
 """
 
 
-def _writer(author, email, gh_username, gh_repo, main_branch_name):
-    return f"""
-#-- Welcome to NICS settings!
-#----------------------------
+def settings_writer(cwd, author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name):
+    printer('INFO: Writing /docs/settings.txt file.')
 
-#-- Everything starts with "#--" is a comment.
-#-- Read documentation at https://nvfp.github.io/now-i-can-sleep
-
-
-author: '{author}'
-color_hue: {random.randint(0, 359)}
-lowercase_the_url: True
-show_credit: True
-
-
-#-- The below variables are for NICS internal use only and should not be changed.
-
-_email: '{email}'
-_gh_username: '{gh_username}'
-_gh_repo: '{gh_repo}'
-_main_branch_name: '{main_branch_name}'
-
-_nics_version: '{__version__}'
-"""
-
-
-def settings_writer(pth, author, email, gh_username, gh_repo, main_branch_name):
-    printer(f'INFO: Writing settings file.')
-
-    text = _writer(author, email, gh_username, gh_repo, main_branch_name)
-    with open(pth, 'w') as f:
+    file_path = os.path.join(cwd, 'docs', 'settings.txt')
+    text = get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name)
+    with open(file_path, 'w') as f:
         f.write(text)
 
-    printer(f'INFO: Done, {repr(pth)} is created.')
+    printer(f'INFO: Done, {repr(file_path)} file is created.')
