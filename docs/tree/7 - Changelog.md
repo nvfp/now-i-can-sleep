@@ -8,6 +8,7 @@
         - New options: `custom_license`, `char_map`
         - Users can now use custom `container` name and `Dock` branch name.
         - Added `reinit` command that lets users easily reconfigure NICS environment after NICS major update.
+        - Support `.ico` format for favicon.
     - Breaking changes:
         - New URL mapping scheme
         - New plans for how `cmd_init`, `cmd_upgrade`, and `cmd_reinit` will work in the future.
