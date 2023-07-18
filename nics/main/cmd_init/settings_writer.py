@@ -5,7 +5,7 @@ from mykit.kit.utils import printer
 from nics.main.constants import __version__
 
 
-def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name):
+def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name, char_map):
     return f"""
 #-- Welcome to NICS settings!
 #-- Everything starts with "#--" is a comment.
@@ -13,9 +13,11 @@ def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_userna
 
 
 author: '{author}'
+custom_license: None
 color_hue: {color_hue}
 lowercase_the_url: {lowercase_the_url}
 show_credit: {show_credit}
+char_map: {char_map}
 
 
 #-- The variables below are for NICS internal use only and shouldn't be modified.
