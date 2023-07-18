@@ -55,8 +55,8 @@ def workflow_writer(load, dock, container, git_name, git_email, gh_repo_name):
 
     ## Handle missing intermediate directories
     workflows_dir = os.path.dirname(file_path)
-    logger.debug(f'Creating dir {repr(workflows_dir)}.')
-    os.makedirs(workflows_dir)
+    logger.debug(f'Creating dirs {repr(workflows_dir)}.')
+    os.makedirs(workflows_dir, exist_ok=True)
 
     text = get_text(load, dock, container, git_name, git_email, gh_repo_name)
     with open(file_path, 'w') as f:
