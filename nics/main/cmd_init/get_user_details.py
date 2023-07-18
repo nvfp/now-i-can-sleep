@@ -7,11 +7,15 @@ def get_user_details():
     
     class usr: ...
 
-    usr.name = input('Enter your Git username: ')
+    usr.load = input('Enter the main branch name (e.g. master): ')
+    usr.dock = input('Enter the documentation branch name (e.g. docs): ')
+    usr.container = input('Enter the documentation folder name (e.g. docs): ')
+    
     usr.author = input('Enter your name: ')
-    usr.email = input('Enter your email: ')
+    usr.git_name = input('Enter your git username: ')
+    usr.git_email = input('Enter your git email: ')
+    
     usr.gh_username = input('Enter your GitHub username: ')
-    usr.gh_repo = input('Enter this GitHub repository name: ')
-    usr.main_branch_name = input('Enter the main branch name (e.g. master): ')
+    usr.gh_repo_name = input('Enter this GitHub repository name: ')
 
     return usr

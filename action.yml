@@ -42,18 +42,6 @@ runs:
       shell: bash
       run: find $GITHUB_ACTION_PATH/nics-compiler/workflows -type f -name "*.sh" -exec chmod +x {} \;
 
-    - name: Checks
-      shell: bash
-      env:
-        LOAD: ${{ inputs.load }}
-        DOCK: ${{ inputs.dock }}
-        CONTAINER: ${{ inputs.container }}
-        GIT_NAME: ${{ inputs.git-name }}
-        GIT_EMAIL: ${{ inputs.git-email }}
-        GH_REPO_NAME: ${{ inputs.gh-repo-name }}
-        NICS_VERSION: ${{ inputs.nics-version }}
-      run: $GITHUB_ACTION_PATH/nics-compiler/workflows/checks.sh
-
     - name: Checkout Load branch
       uses: actions/checkout@v3
       with:

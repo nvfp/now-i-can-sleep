@@ -1,11 +1,16 @@
+import logging
 import os
-
-from mykit.kit.utils import printer
 
 from nics.main.constants import __version__
 
 
-def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name, char_map):
+logger = logging.getLogger(__name__)
+
+
+def get_text(
+    author, custom_license, color_hue, lowercase_the_url, show_credit, char_map,
+    git_name, git_email, gh_username, gh_repo_name, load, dock, container
+):
     return f"""
 #-- Welcome to NICS settings!
 #-- Everything starts with "#--" is a comment.
@@ -13,7 +18,7 @@ def get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_userna
 
 
 author: '{author}'
-custom_license: None
+custom_license: {custom_license}
 color_hue: {color_hue}
 lowercase_the_url: {lowercase_the_url}
 show_credit: {show_credit}
@@ -21,22 +26,30 @@ char_map: {char_map}
 
 
 #-- The variables below are for NICS internal use only and shouldn't be modified.
-
-_email: '{email}'
+_git_name: '{git_name}'
+_git_email: '{git_email}'
 _gh_username: '{gh_username}'
-_gh_repo: '{gh_repo}'
-_main_branch_name: '{main_branch_name}'
-
+_gh_repo_name: '{gh_repo_name}'
+_load: '{load}'
+_dock: '{dock}'
+_container: '{container}'
 _nics_version: '{__version__}'
 """
 
 
-def settings_writer(cwd, author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name):
-    printer('INFO: Writing /docs/settings.txt file.')
+def settings_writer(
+    load_path,
+    author, custom_license, color_hue, lowercase_the_url, show_credit, char_map,
+    git_name, git_email, gh_username, gh_repo_name, load, dock, container
+):
+    logger.debug('Writing settings.txt file.')
 
-    file_path = os.path.join(cwd, 'docs', 'settings.txt')
-    text = get_text(author, color_hue, lowercase_the_url, show_credit, email, gh_username, gh_repo, main_branch_name)
+    file_path = os.path.join(load_path, container, 'settings.txt')
+    text = get_text(
+        author, custom_license, color_hue, lowercase_the_url, show_credit, char_map,
+        git_name, git_email, gh_username, gh_repo_name, load, dock, container
+    )
     with open(file_path, 'w') as f:
         f.write(text)
 
-    printer(f'INFO: Done, {repr(file_path)} file is created.')
+    logger.debug(f'Done, created at {repr(file_path)}.')

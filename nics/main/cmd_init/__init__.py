@@ -9,19 +9,24 @@ from nics.main.cmd_init.print_outro import print_outro
 
 def run():
 
-    CWD = os.getcwd()
+    load_path = os.getcwd()
 
     ## Check I
-    ensure_a_git_repo(CWD)
+    ensure_a_git_repo(load_path)
 
     ## Get user details
     usr = get_user_details()
 
     ## Check II
-    ensure_nics_env_can_be_installed(CWD, usr.container)
+    ensure_nics_env_can_be_installed(load_path, usr.container)
 
     ## Loading to the Container
-    loading()
+    loading(
+        load_path,
+        usr.load, usr.dock, usr.container,
+        usr.author, usr.git_name, usr.git_email,
+        usr.gh_username, usr.gh_repo_name
+    )
 
     ## Outro
-    print_outro()
+    print_outro(usr.load, usr.dock, usr.gh_username, usr.gh_repo_name)

@@ -27,6 +27,8 @@ def run(dock, container):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('dock_path')
-    parser.add_argument('container')
+    parser.add_argument('container_path')
     args = parser.parse_args()
-    run(args.load, args.dock, args.container)
+    print(f'dock_path: {repr(args.dock_path)}.')
+    print(f'container_path: {repr(args.container_path)}.')
+    # run(args.load, args.dock, args.container)

@@ -29,12 +29,14 @@ class TestEnsureNicsEnvCanBeInstalled(unittest.TestCase):
         open(file_path, 'w').close()
 
         ## Call the function and check that it exits with an error message
-        with patch('sys.stdout', new=StringIO()) as fake_out:
+        with patch('nics.main.cmd_init.ensure_nics_env_can_be_installed.logger') as mock_logger, \
+                patch('sys.exit') as mock_exit:
             with self.assertRaises(SystemExit) as cm:
                 ensure_nics_env_can_be_installed(self.cwd, self.container)
         self.assertEqual(cm.exception.code, 1)
         expected_msg = f'Cannot initialize NICS. This file already exists: {repr(file_path)}.'
-        self.assertEqual(fake_out.getvalue().strip(), expected_msg)
+        mock_logger.error.assert_called_with(expected_msg)
+        mock_exit.assert_called_with(1)
 
     def test_existing_container_dir(self):
 

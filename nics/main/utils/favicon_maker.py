@@ -1,11 +1,11 @@
-import os
+import logging
 
 
-def create_favicon_svg_file(pth, hue):
+logger = logging.getLogger(__name__)
 
-    ## Check
-    if os.path.exists(pth):
-        raise AssertionError(f'File/dir already exists: {repr(pth)}.')
+
+def create_favicon_svg_file(file_path, hue):
+    logger.debug('Writing favicon.svg file.')
 
     ## The SVG is from https://feathericons.com/
     svg = f"""
@@ -14,5 +14,7 @@ def create_favicon_svg_file(pth, hue):
     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
     </svg>
     """
-    with open(pth, 'w') as f:
+    with open(file_path, 'w') as f:
         f.write(svg)
+
+    logger.debug(f'Done, created at {repr(file_path)}.')

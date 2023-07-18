@@ -48,10 +48,10 @@ jobs:
 """
 
 
-def workflow_writer(load, dock, container, git_name, git_email, gh_repo_name):
+def workflow_writer(load_path, load, dock, container, git_name, git_email, gh_repo_name):
     logger.debug('Writing rebuild-docs.yml file.')
 
-    file_path = os.path.join(load, '.github', 'workflows', 'rebuild-docs.yml')
+    file_path = os.path.join(load_path, '.github', 'workflows', 'rebuild-docs.yml')
 
     ## Handle missing intermediate directories
     workflows_dir = os.path.dirname(file_path)
