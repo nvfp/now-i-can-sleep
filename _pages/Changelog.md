@@ -6,6 +6,18 @@ title: Changelog
 
 # Changelog
 
+- 3.0.0 (Jul 15-18):
+    - Refactored the `_compile` command by excluding it from the PyPI distribution to reduce package size. It's because the `_compile` method is only used during the GitHub workflow and not by the users.
+    - New features:
+        - If users don't provide them, NICS will automatically create/use default for: favicon, 404 page, and `index.md` for docs-tree folders.
+        - Added an "Edit this page" button so people can make changes on GitHub.
+        - New options: `custom_license`, `char_map`
+        - Users can now use custom `container` name and `Dock` branch name.
+        - Added `reinit` command that lets users easily reconfigure NICS environment after NICS major update.
+        - Support `.ico` format for favicon.
+    - Breaking changes:
+        - New URL mapping scheme
+        - New plans for how `cmd_init`, `cmd_upgrade`, and `cmd_reinit` will work in the future.
 - 2.8.4 (UNSTABLE): Fixed `copying_template.py` debuggers.
 - 2.8.3: Added debuggers to `copying_template.py`: Investigating an issue where `sass-code-highlighting.scss` didn't get copied.
 - 2.8.2: Bug fixed: The trailing slash in the homepage URL couldn't be trimmed due to an error thrown by GitHub Pages during the build process. In other words, `foo.github.io/REPO/` couldn't be redirected to `foo.github.io/REPO`.
