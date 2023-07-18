@@ -71,3 +71,4 @@ runs:
         GIT_NAME: ${{ inputs.git-name }}
         GIT_EMAIL: ${{ inputs.git-email }}
       run: $GITHUB_ACTION_PATH/nics-compiler/workflows/deploy.sh
+      
