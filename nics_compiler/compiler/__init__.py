@@ -3,9 +3,9 @@ import os
 
 from mykit.kit.keycrate import KeyCrate
 
-from nics.main.constants import SETTINGS_KEYS
-from nics_compiler.compiler.docking import docking
-from nics_compiler.compiler.customize import customize_template_with_user_data
+# from nics.main.constants import SETTINGS_KEYS
+# from nics_compiler.compiler.docking import docking
+# from nics_compiler.compiler.customize import customize_template_with_user_data
 
 
 def run(dock, container):
