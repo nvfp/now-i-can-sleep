@@ -7,7 +7,7 @@ set -e
 echo "::group::Compile"
 
 python -m pip install --upgrade pip
-pip install nics==$NICS_VERSION
-nics -v
+pip install mykit==$NICS_VERSION
+mykit -v
 
 echo "::endgroup::"
