@@ -15,7 +15,8 @@ def outro():
     text = f"""
 Almost done, now you need to do these final steps:
 1. Create docs branch
-   - git commit -am "NICS init"
+   - git add .
+   - git commit -m "NICS init"
    - git checkout --orphan docs
    - git rm -rf .
    - git commit --allow-empty -m init
@@ -41,6 +42,7 @@ def run():
 
     ## Check
     ensure_a_git_repo(CWD)
+    ensure_nics_env_can_be_installed(CWD)
 
     ## Intro
     print('Welcome to NICS!')
