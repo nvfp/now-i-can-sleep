@@ -30,12 +30,12 @@ def run():
     ## Update rebuild-docs.yml
     workflow_writer(
         load_path,
-        cfg.load, cfg.dock, cfg.container, cfg.git_name, cfg.git_email, cfg.gh_repo_name
+        cfg._load, cfg._dock, cfg._container, cfg._git_name, cfg._git_email, cfg._gh_repo_name
     )
 
     ## Update settings.txt
     settings_writer(
         load_path,
         cfg.author, cfg.custom_license, cfg.color_hue, cfg.lowercase_the_url, cfg.show_credit, cfg.char_map,
-        cfg.git_name, cfg.git_email, cfg.gh_username, cfg.gh_repo_name, cfg.load, cfg.dock, cfg.container
+        cfg._git_name, cfg._git_email, cfg._gh_username, cfg._gh_repo_name, cfg._load, cfg._dock, cfg._container
     )
