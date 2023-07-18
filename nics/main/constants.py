@@ -14,7 +14,7 @@ DIST_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics')
 MAIN_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'main')
 NICS_COMPILER_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics-compiler')
 
-TEMPLATE_DOCS_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'template')
+TEMPLATE_DOCS_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'main', 'template')
 TEMPLATE_WEB_DIR_PTH  = os.path.join(ROOT_DIR_PTH, 'nics-compiler', 'template')
 
 SETTINGS_KEYS = [
