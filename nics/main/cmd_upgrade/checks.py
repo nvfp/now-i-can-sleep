@@ -2,6 +2,8 @@ import logging
 import os
 import sys
 
+from nics.main.constants import __version__
+
 
 logger = logging.getLogger(__name__)
 
@@ -28,3 +30,10 @@ def check_container_clues(load_path, container):
     if not os.path.isfile(file_path):
         logger.error(f'File {repr(file_path)} not found.')
         sys.exit(1)
+
+
+def check_upgrade_status(ver):
+
+    if ver == __version__:
+        print('Fantastic! Everything is already up to date.')
+        sys.exit(0)

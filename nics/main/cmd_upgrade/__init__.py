@@ -12,20 +12,23 @@ def run():
     
     load_path = os.getcwd()
 
-    ## Check I
+    ## Check
     ensure_a_git_repo(load_path)
 
-    ## Check II
+    ## Check
     check_rebuild_docs_yml_existence(load_path)
 
     ## Get container
     CONTAINER = where_is_the_container(load_path)
 
-    ## Check III
+    ## Check
     check_container_clues(load_path, CONTAINER)
 
     ## New settings key-value pairs
     cfg = gather_settings(load_path, CONTAINER)
+
+    ## Check
+    check_upgrade_status(cfg._nics_version)
 
     ## Update rebuild-docs.yml
     workflow_writer(
