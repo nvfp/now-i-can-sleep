@@ -39,3 +39,6 @@ def run():
         cfg.author, cfg.custom_license, cfg.color_hue, cfg.lowercase_the_url, cfg.show_credit, cfg.char_map,
         cfg._git_name, cfg._git_email, cfg._gh_username, cfg._gh_repo_name, cfg._load, cfg._dock, cfg._container
     )
+
+    ## For end-users
+    print('Upgrade complete!')
