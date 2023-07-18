@@ -4,12 +4,11 @@ import sys
 from mykit.kit.keycrate import KeyCrate
 from mykit.kit.utils import printer
 
-from ..constants import __version__, SETTINGS_KEYS
-from ..wizard.workflow_writer import _writer as the_workflow_writer
-from ..wizard.settings_writer import full_writer as the_settings_writer
+from nics.main.constants import __version__, SETTINGS_KEYS
 
 
 def run():
+    return
 
     CWD = os.getcwd()
 
