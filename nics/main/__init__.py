@@ -6,7 +6,7 @@ from nics.main.cmd_init import run as run_init
 from nics.main.cmd_upgrade import run as run_upgrade
 
 
-logging.basicConfig(format='[%(asctime)s] <%(levelname)s>: %(message)s', datefmt='%H:%M:%S')
+logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%H:%M:%S')
 logger = logging.getLogger(__name__)
 
 
