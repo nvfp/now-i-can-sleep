@@ -21,7 +21,7 @@ def main():
         formatter_class=argparse.RawTextHelpFormatter  # to use line breaks (\n) in the help message
     )
     parser.add_argument('-v', '--version', action='version', version=f'nics-{__version__}', help='show software version')
-    parser.add_argument('-L', '--log-level', dest='log_level', choices=['debug', 'info', 'warning', 'error'], default='info')
+    parser.add_argument('-L', dest='log_level', choices=['debug', 'info', 'warning', 'error'], default='info', help='Set the log level (default: %(default)s)')
     parser.add_argument('cmd', choices=['init', 'upgrade'], help=argparse.SUPPRESS)  # `help=argparse.SUPPRESS` to hide the default help message
 
     args = parser.parse_args()
