@@ -1,7 +1,7 @@
 import os
 
 from nics.main.utils.ensure_a_git_repo import ensure_a_git_repo
-from nics.main.cmd_upgrade.checks import check_rebuild_docs_yml_existence, check_container_clues
+from nics.main.cmd_upgrade.checks import check_rebuild_docs_yml_existence, check_container_clues, check_upgrade_status
 from nics.main.cmd_upgrade.where_is_the_container import where_is_the_container
 from nics.main.cmd_upgrade.gather_settings import gather_settings
 from nics.main.cmd_init.loading.workflow_writer import workflow_writer
