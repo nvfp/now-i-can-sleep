@@ -32,7 +32,7 @@ exclude = [
     "archive*",
     "assets*",
     "docs*",
-    "nics-compiler*",
+    "nics_compiler*",
     "tests*",
 ]
 
