@@ -28,7 +28,7 @@ def run():
     cfg = KeyCrate(SETTINGS_FILE_PTH, True, True, SETTINGS_KEYS, SETTINGS_KEYS)
 
     if __version__ == cfg._nics_version:
-        printer(f'INFO: Everything is up to date.')
+        printer(f'INFO: Everything is up to date. Maybe try running `pip install -U nics` before doing `nics upgrade`?')
         sys.exit(0)
 
     if __version__.split('.')[0] != cfg._nics_version.split('.')[0]:
@@ -46,5 +46,5 @@ def run():
     )
     with open(SETTINGS_FILE_PTH, 'w') as f: f.write(text)
     printer(f'INFO: Settings file {repr(SETTINGS_FILE_PTH)} is updated.')
-    
-    printer(f'INFO: Upgrade finished.')
+
+    print('Upgrade process completed.')
