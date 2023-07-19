@@ -20,8 +20,8 @@ echo "ls2---"
 ls
 echo "---"
 echo "ls3---"
-ls __nics_working_dir__
+ls __nics_work_dir__
 echo "---"
-python $GITHUB_ACTION_PATH/nics_compiler/compiler $(pwd)/$GH_REPO_NAME $(pwd)/__nics_working_dir__
+python $GITHUB_ACTION_PATH/nics_compiler/compiler $(pwd)/$GH_REPO_NAME $(pwd)/__nics_work_dir__
 
 echo "::endgroup::"
