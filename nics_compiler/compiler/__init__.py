@@ -35,4 +35,4 @@ def main():
     parser.add_argument('dock_path')
     parser.add_argument('container_path')
     args = parser.parse_args()
-    run(args.load, args.dock_path, args.container_path)
+    run(args.dock_path, args.container_path)
