@@ -2,26 +2,6 @@
 
 Minimal settings, markdown-based automated documentation workflow for GitHub repositories.
 
-```txt
-Manual workflow:
-
-           ┌──────────>  Make changes  ────────────┐
-           |                                       v
-
-    Deploy docs-page                       Update docs-files
-
-           ^                                       │
-           └─────────  Rebuild docs-page  <────────┘
-
-
-
-With NICS:
-
-           ┌──────────>  Make changes  ────────────┐
-           |                                       |
-           └─────────  Update docs-files  <────────┘
-```
-
 ![NICS' banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/assets/logo200.png)
 
 [![Rebuild docs](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml/badge.svg)](https://github.com/nvfp/now-i-can-sleep/actions/workflows/rebuild-docs.yml)
