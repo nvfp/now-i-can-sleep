@@ -21,7 +21,7 @@ Minimal settings, markdown-based automated documentation workflow for GitHub rep
 
 - [Documentation](https://nvfp.github.io/now-i-can-sleep)
 - [Changelog](https://nvfp.github.io/now-i-can-sleep/changelog)
-- [💙Many Thanks](https://nvfp.github.io/now-i-can-sleep/many-thanks)
+- [Supports💙](https://nvfp.github.io/many-thanks)
 - [FAQ](https://nvfp.github.io/now-i-can-sleep/faqs)
 
 
