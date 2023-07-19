@@ -33,4 +33,4 @@ def main():
     print(f'container_path: {repr(args.container_path)}.')
     print(f'os.lisdir(args.dock_path): {os.lisdir(args.dock_path)}.')
     print(f'os.lisdir(args.container_path): {os.lisdir(args.container_path)}.')
-    # run(args.load, args.dock, args.container)
+    # run(args.load, args.dock, args.container) 
