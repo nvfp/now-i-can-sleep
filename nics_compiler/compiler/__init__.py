@@ -1,36 +1,38 @@
 import argparse
+import logging
 import os
 
 from mykit.kit.keycrate import KeyCrate
 
-# from nics.main.constants import SETTINGS_KEYS
-# from nics_compiler.compiler.docking import docking
+from nics.main.constants import __version__, SETTINGS_KEYS
+from nics.main.utils.ensure_a_git_repo import ensure_a_git_repo
+from nics_compiler.compiler.docking import docking
 # from nics_compiler.compiler.customize import customize_template_with_user_data
 
 
-def run(dock, container):
-    """
-    `dock_path`: the abs path to the folder that holds the branch (Dock branch) for the doc website
-    `container`: the abs path to the folder that holds the documentation files (in Load branch)
-    """
+logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s] %(levelname)s: %(message)s', datefmt='%H:%M:%S')
+logger = logging.getLogger(__name__)
+
+
+def run(dock_path, container_path):
+
+    ## Check
+    ensure_a_git_repo(dock_path)
 
     ## Parse settings
-    cfg = KeyCrate(os.path.join(container, 'settings.txt'), True, True, SETTINGS_KEYS, SETTINGS_KEYS)
+    cfg = KeyCrate(os.path.join(container_path, 'settings.txt'), True, True, SETTINGS_KEYS, SETTINGS_KEYS)
 
     ## Docking
-    docking(dock)
+    docking(dock_path)
 
     ## Rewrite the template using user-provided data
-    customize_template_with_user_data(container, dock, cfg)
+    # customize_template_with_user_data(dock_path, container_path, cfg)
 
 
 def main():
+    logger.debug(f'Running the NICS ({__version__}) compiler.')
     parser = argparse.ArgumentParser()
     parser.add_argument('dock_path')
     parser.add_argument('container_path')
     args = parser.parse_args()
-    print(f'dock_path: {repr(args.dock_path)}.')
-    print(f'container_path: {repr(args.container_path)}.')
-    print(f'os.lisdir(args.dock_path): {os.lisdir(args.dock_path)}.')
-    print(f'os.lisdir(args.container_path): {os.lisdir(args.container_path)}.')
-    # run(args.load, args.dock, args.container) 
+    run(args.load, args.dock_path, args.container_path)

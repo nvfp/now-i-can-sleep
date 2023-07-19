@@ -1,45 +1,47 @@
+import logging
 import os
 import shutil
-
-from mykit.kit.utils import printer
 
 from nics.main.constants import TEMPLATE_WEB_DIR_PTH
 
 
-def clean_up_the_dock(dock):
-    """Erase everything in `dock`"""
+logger = logging.getLogger(__name__)
 
-    for stuff in os.listdir(dock):
+
+def clean_up_the_dock(dock_path):
+    """Erase everything in `dock_path`"""
+
+    for stuff in os.listdir(dock_path):
 
         # Except .git folder
         if stuff == '.git': continue
 
-        pth = os.path.join(dock, stuff)
+        pth = os.path.join(dock_path, stuff)
 
         if os.path.isdir(pth):
-            printer(f'INFO: Deleting dir {repr(pth)} recursively.')
+            logger.debug(f'Deleting dir {repr(pth)} recursively.')
             shutil.rmtree(pth)
         else:
-            printer(f'INFO: Deleting file {repr(pth)}.')
+            logger.debug(f'Deleting file {repr(pth)}.')
             os.remove(pth)
 
 
-def copy_the_template(dock):
-    """Copy everything from 'nics/main/_template/web/' folder to `dock`"""
+def copy_the_template(dock_path):
+    """Copy everything from 'nics/main/_template/web/' folder to `dock_path`"""
 
     for stuff in os.listdir(TEMPLATE_WEB_DIR_PTH):
 
         src = os.path.join(TEMPLATE_WEB_DIR_PTH, stuff)  # Source
-        dst = os.path.join(dock, stuff)              # Destination
+        dst = os.path.join(dock_path, stuff)             # Destination
 
         if os.path.isfile(src):
-            printer(f'INFO: Copying file {repr(src)} to {repr(dst)}.')
+            logger.debug(f'Copying file {repr(src)} to {repr(dst)}.')
             shutil.copy(src, dst)
         else:  # Directory
-            printer(f'INFO: Copying dir {repr(src)} to {repr(dst)}.')
+            logger.debug(f'Copying dir {repr(src)} to {repr(dst)}.')
             shutil.copytree(src, dst)
 
 
-def docking(dock):
-    clean_up_the_dock(dock)
-    copy_the_template(dock)
+def docking(dock_path):
+    clean_up_the_dock(dock_path)
+    copy_the_template(dock_path)
