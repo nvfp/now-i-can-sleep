@@ -15,3 +15,13 @@ echo "INFO: Done."
 
 
 echo "::endgroup::"
+
+
+echo "::group::Debugging"
+echo "-- GITHUB_WORKSPACE --"
+ls $GITHUB_WORKSPACE
+echo "-- GITHUB_WORKSPACE/.. --"
+ls $GITHUB_WORKSPACE/..
+echo "-- GITHUB_WORKSPACE/../__nics_work_dir__ --"
+ls $GITHUB_WORKSPACE/../__nics_work_dir__
+echo "::endgroup::"
