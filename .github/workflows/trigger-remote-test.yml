@@ -1,6 +1,8 @@
 name: Trigger remote test
 
 on:
+  # Note: it will also run when 'fast-pypi-release' is completed at only
+  #       the first job 'check-commit-msg' (aka not a trigger commit).
   workflow_run:
     workflows: [Fast PyPI release]
     types:
