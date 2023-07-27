@@ -62,7 +62,7 @@ runs:
     - name: Compile
       shell: bash
       env:
-        NICS_VERSION: ${{ inputs.nics-version }}
+        CONTAINER: ${{ inputs.container }}
       run: $GITHUB_ACTION_PATH/nics_compiler/workflows/compile.sh
 
     - name: Deploy
