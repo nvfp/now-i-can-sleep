@@ -5,6 +5,7 @@ on:
     workflows: [Fast PyPI release]
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   run:
@@ -21,4 +22,3 @@ jobs:
               workflow_id: 'NICS-testing.yml',
               ref: 'main'
             })
-            
