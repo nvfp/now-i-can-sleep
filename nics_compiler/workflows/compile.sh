@@ -2,6 +2,21 @@
 set -e  # Exit the script immediately if any command exits with a non-zero status
 
 
+echo "::group::Debugging"
+
+echo "pwd: '$(pwd)'"
+
+echo "-- ls '$(pwd)'"
+ls
+echo "---"
+
+echo "-- ls '$(pwd)/..'"
+ls $(pwd)/..
+echo "---"
+
+echo "::endgroup::"
+
+
 echo "::group::Preparing"
 
 python -m pip install --upgrade pip

@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 def run(dock_path, container_path):
     print(f'DEBUG: dock_path: {repr(dock_path)}.')
     print(f'DEBUG: container_path: {repr(container_path)}.')
+    print(f'DEBUG: abs path of dock_path: {repr(os.path.abspath(dock_path))}.')
+    print(f'DEBUG: abs path of container_path: {repr(os.path.abspath(container_path))}.')
 
     ## Check
     ensure_a_git_repo(dock_path)
