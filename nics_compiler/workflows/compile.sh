@@ -14,6 +14,10 @@ echo "-- ls '$(pwd)/..'"
 ls $(pwd)/..
 echo "---"
 
+echo "-- ls '$(pwd)/../__nics_work_dir__'"
+ls $(pwd)/../__nics_work_dir__
+echo "---"
+
 echo "::endgroup::"
 
 
@@ -28,6 +32,6 @@ echo "::endgroup::"
 echo "::group::Compile"
 
 echo "DEBUG: pwd: '$(pwd)'"
-python $GITHUB_ACTION_PATH/nics_compiler/compiler $(pwd)/../$GH_REPO_NAME $(pwd)/../__nics_work_dir__
+python $GITHUB_ACTION_PATH/nics_compiler/compiler $(pwd) $(pwd)/../__nics_work_dir__
 
 echo "::endgroup::"
