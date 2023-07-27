@@ -19,6 +19,6 @@ jobs:
             await github.rest.actions.createWorkflowDispatch({
               owner: 'nvfp',
               repo: 'demo-testing',
-              workflow_id: 'NICS-testing.yml',
+              workflow_id: 'NICS-remote-testing.yml',
               ref: 'main'
             })
