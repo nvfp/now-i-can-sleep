@@ -12,16 +12,7 @@ echo "::endgroup::"
 
 echo "::group::Compile"
 
-echo "ls1---"
-ls
-echo "---"
-cd ..
-echo "ls2---"
-ls
-echo "---"
-echo "ls3---"
-ls __nics_work_dir__
-echo "---"
+echo "DEBUG: pwd: '$(pwd)'"
 python $GITHUB_ACTION_PATH/nics_compiler/compiler $(pwd)/$GH_REPO_NAME $(pwd)/__nics_work_dir__
 
 echo "::endgroup::"

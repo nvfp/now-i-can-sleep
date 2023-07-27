@@ -1,6 +1,6 @@
-# Please note that after a release is created (for example, `nvfp/now-i-can-sleep@1.0.0`),
-# any changes made to the repository after that release will not be reflected in that version
-# (i.e., if users use version `1.0.0`, the changes will not be there).  ~Nicholas@20230717
+# Note that after a release is created (for example, `nvfp/now-i-can-sleep@1.0.0`),
+# any changes made to the repository after that release will not be reflected in
+# that version (i.e., if users use version `1.0.0`, the changes will not be there).
 
 
 name: "NICS workflow backend"
