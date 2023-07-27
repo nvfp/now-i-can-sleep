@@ -1,0 +1,27 @@
+# name: Trigger remote test
+
+# on:
+#   workflow_run:
+#     workflows: [Fast PyPI release]
+#     types:
+#       - completed
+
+# jobs:
+#   run:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Run
+#         uses: actions/github-script@v6
+#         with:
+#           github-token: ${{ secrets.PAT_TOKEN }}  # Note, PAT token needs to be updated if it has expired
+#           script: |
+#             await github.rest.actions.createWorkflowDispatch({
+#               owner: 'nvfp',
+#               repo: 'demo-testing',
+#               workflow_id: 'NICS-testing.yml',
+#               ref: 'main'
+#             })
+
+            
+
+            
