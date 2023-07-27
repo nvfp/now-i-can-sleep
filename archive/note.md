@@ -7,4 +7,4 @@ Pending features:
 
 
 Note:
-- Code within the `nics-compiler/` folder can use code from `nics/` folder. However, code within `nics/` folder shouldn't access code outside `nics/` folder, as it's a distribution package for users.
+- Code within the `nics_compiler/` folder can use code from `nics/` folder. However, code within `nics/` folder shouldn't access code outside `nics/` folder, as it's a distribution package for users.

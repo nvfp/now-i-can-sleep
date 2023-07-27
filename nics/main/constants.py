@@ -12,10 +12,10 @@ ROOT_DIR_PTH = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 
 DIST_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics')
 MAIN_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'main')
-NICS_COMPILER_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics-compiler')
+NICS_COMPILER_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics_compiler')
 
 TEMPLATE_DOCS_DIR_PTH = os.path.join(ROOT_DIR_PTH, 'nics', 'main', 'template')
-TEMPLATE_WEB_DIR_PTH  = os.path.join(ROOT_DIR_PTH, 'nics-compiler', 'template')
+TEMPLATE_WEB_DIR_PTH  = os.path.join(ROOT_DIR_PTH, 'nics_compiler', 'template')
 
 SETTINGS_KEYS = [
     'author',
