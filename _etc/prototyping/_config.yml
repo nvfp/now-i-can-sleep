@@ -1,4 +1,7 @@
+title: Proto
+desc: My test desc
 author: Nicholas Valentinus
+google_analytics_tracking_id: G-G3HERGXF6P
 nics_ver: 3.0.0
 
 baseurl: /now-i-can-sleep
@@ -6,10 +9,6 @@ url: https://nvfp.github.io
 
 include: 
   - _sass
-  - _scripts
-  - pages
-exclude: 
-  - readme.md
 
 sass:
   style: compact
