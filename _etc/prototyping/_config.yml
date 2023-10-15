@@ -1,0 +1,12 @@
+title: Proto
+
+include: 
+  - _sass
+  - _scripts
+  - pages
+exclude: 
+  - readme.md
+
+sass:
+  style: compact
+  sass_dir: _sass

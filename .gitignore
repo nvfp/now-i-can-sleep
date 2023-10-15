@@ -1,16 +1,1 @@
-
-
-__pycache__/
-
-
-# Distribution / packaging
-dist/
-*.egg-info/
-
-
-# Ignore Jekyll and Sass related files
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
+__pycache__
