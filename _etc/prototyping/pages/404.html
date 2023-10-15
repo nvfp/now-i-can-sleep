@@ -1,0 +1,11 @@
+---
+layout: main
+title: Not the one, sorry..
+permalink: /404.html
+---
+
+{% for post in site.pages reversed %}
+    {% if post.path contains 'pages/' %}
+        <p>{{ post.path }}</p>
+    {% endif %}
+{% endfor %}
