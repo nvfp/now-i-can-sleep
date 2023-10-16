@@ -8,7 +8,33 @@ GitHub repo documentation builder. Builds automatically each time you update the
 ## Usage
 
 ```yml
-name
+name: Rebuild docs (NICS)
+
+on:
+  push:
+    branches:
+      - main  # EDITME: your default branch name
+    paths:
+      - './docs/**'  # EDITME: the relative path to the documentation files
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: nvfp/now-i-can-sleep@v3
+        with:
+          
+          ## EDITME
+          ## vvvvvv
+          
+          ## The relative path (relative to the root) to the folder containing the documentation files.
+          nics_docs_dir_relpth: ./docs
+
+        env:
+          GH_TOKEN: ${{ github.token }}
 ```
 
 
@@ -21,4 +47,4 @@ name
 
 ## License
 
-This project is licensed under the MIT license.
+This project is licensed under the MIT License.
