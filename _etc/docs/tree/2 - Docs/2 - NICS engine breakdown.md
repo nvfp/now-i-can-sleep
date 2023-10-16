@@ -1,1 +1,0 @@
-# How does the NICS engine work?

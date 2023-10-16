@@ -2,7 +2,7 @@
 
 GitHub repo documentation builder. Builds automatically each time you update the doc!
 
-![banner](https://raw.githubusercontent.com/nvfp/now-i-can-sleep/master/_etc/assets/banner.jpg)
+![banner](_etc/assets/banner.jpg)
 
 
 ## Usage
@@ -15,7 +15,7 @@ on:
     branches:
       - main  # EDITME: your default branch name
     paths:
-      - './docs/**'  # EDITME: the relative path to the documentation files
+      - './docs/**'  # EDITME: The relative path (relative to the root) to the folder containing the documentation files.
   workflow_dispatch:
 
 jobs:
@@ -26,13 +26,7 @@ jobs:
     steps:
       - uses: nvfp/now-i-can-sleep@v3
         with:
-          
-          ## EDITME
-          ## vvvvvv
-          
-          ## The relative path (relative to the root) to the folder containing the documentation files.
-          nics_docs_dir_relpth: ./docs
-
+          nics_docs_dir_relpth: ./docs  # EDITME: The relative path (relative to the root) to the folder containing the documentation files.
         env:
           GH_TOKEN: ${{ github.token }}
 ```
