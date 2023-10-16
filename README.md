@@ -8,7 +8,7 @@ GitHub repo documentation builder. Builds automatically each time you update the
 ## Usage
 
 ```yml
-name: Rebuild docs (NICS)
+name: Rebuild docs
 
 on:
   push:
