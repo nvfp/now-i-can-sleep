@@ -1,74 +1,25 @@
-# Note that after a release is created (for example, `nvfp/now-i-can-sleep@1.0.0`),
-# any changes made to the repository after that release will not be reflected in
-# that version (i.e., if users use version `1.0.0`, the changes will not be there).
-
-
-name: "NICS workflow backend"
-description: "A part of the NICS workflow and shouldn't be used directly."
-author: "Nicholas Valentinus"
-branding:
-  icon: settings
-  color: red
+name: now-i-can-sleep
+description: Automatically build GitHub documentation.
 
 inputs:
-  load:
-    description: the branch name where the container lives
+  nics_docs_dir_relpth:
+    description: The relative path (relative to the root) to the folder containing the documentation files.
     required: true
-  dock:
-    description: the documentation website branch name
-    required: true
-  # Note: this `container` value is important for finding the `settings.txt` during
-  # compilation; otherwise, we won't know which one (since we need to open the
-  # settings.txt first to find the `container` value).
-  container:
-    description: the folder name where the documentation is stored
-    required: true
-  git-name:
-    description: Git username (to be used when committing to the Dock branch)
-    required: true
-  git-email:
-    description: Git email
-    required: true
-  gh-repo-name:
-    description: the github.com/USERNAME/gh-repo-name
-    required: true
-  nics-version:
-    required: true
+    default: ./docs
 
 runs:
   using: 'composite'
   steps:
-    - name: Set script permissions
-      shell: bash
-      run: find $GITHUB_ACTION_PATH/nics_compiler/workflows -type f -name "*.sh" -exec chmod +x {} \;
-
-    - name: Checkout Load branch
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
       with:
-        ref: ${{ inputs.load }}
-    
-    - name: Set up NICS working directory
+        python-version: '3.10'    
+    - run: python $GITHUB_ACTION_PATH/nics
       shell: bash
-      env:
-        CONTAINER: ${{ inputs.container }}
-        GH_REPO_NAME: ${{ inputs.gh-repo-name }}
-      run: $GITHUB_ACTION_PATH/nics_compiler/workflows/setup-working-dir.sh
 
-    - name: Checkout Dock branch
-      uses: actions/checkout@v3
-      with:
-        ref: ${{ inputs.dock }}
 
-    - name: Compile
-      shell: bash
-      env:
-        CONTAINER: ${{ inputs.container }}
-      run: $GITHUB_ACTION_PATH/nics_compiler/workflows/compile.sh
 
-    - name: Deploy
-      shell: bash
-      env:
-        GIT_NAME: ${{ inputs.git-name }}
-        GIT_EMAIL: ${{ inputs.git-email }}
-      run: $GITHUB_ACTION_PATH/nics_compiler/workflows/deploy.sh
-      
+author: Nicholas Valentinus
+branding:
+  icon: settings
+  color: red

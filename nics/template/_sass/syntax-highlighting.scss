@@ -1,0 +1,261 @@
+// Copied (also modified) from https://github.com/nvfp/nvfp.github.io/blob/main/_sass/custom-code-highlight.scss  @ Oct 15, 2023
+
+
+.highlight pre,
+pre {
+    border: 1px solid #555;
+    padding: 6px 10px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    background-color: #222;
+    line-height: 1.25;
+}
+
+.highlight {
+    .hll {
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        padding: 6px 10px;
+        border-radius: 3px;
+    }
+
+    .c {
+        color: #999988;
+        font-style: italic;
+    }
+
+    .err {
+        color: #a61717;
+        background-color: #e3d2d2;
+    }
+
+    .k,
+    .o {
+        font-weight: bold;
+    }
+
+    .cm {
+        color: #999988;
+        font-style: italic;
+    }
+
+    .cp {
+        color: #aaa;
+        font-weight: bold;
+    }
+
+    .c1 {
+        color: #888;
+        font-style: italic;
+    }
+
+    .cs {
+        color: #aaa;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .gd {
+        color: #000000;
+        background-color: #ffdddd;
+
+        .x {
+            color: #000000;
+            background-color: #ffaaaa;
+        }
+    }
+
+    .ge {
+        font-style: italic;
+    }
+
+    .gr {
+        color: #aa0000;
+    }
+
+    .gh {
+        color: #aaa;
+    }
+
+    .gi {
+        color: #000000;
+        background-color: #ddffdd;
+
+        .x {
+            color: #000000;
+            background-color: #aaffaa;
+        }
+    }
+
+    .go {
+        color: #888888;
+    }
+
+    .gp {
+        color: #555555;
+    }
+
+    .gs {
+        font-weight: bold;
+    }
+
+    .gu {
+        color: #800080;
+        font-weight: bold;
+    }
+
+    .gt {
+        color: #aa0000;
+    }
+
+    .kc,
+    .kd,
+    .kn,
+    .kp,
+    .kr {
+        font-weight: bold;
+    }
+
+    .kt {
+        color: #8498d4;
+        font-weight: bold;
+    }
+
+    .m {
+        color: #009999;
+    }
+
+    .s {
+        color: #df7590;
+    }
+
+    .n {
+        color: #aaa;
+    }
+
+    .na {
+        color: #48adad;
+    }
+
+    .nb {
+        color: #29b3e1;
+    }
+
+    .nc {
+        color: #8498d4;
+        font-weight: bold;
+    }
+
+    .no {
+        color: teal;
+    }
+
+    .ni {
+        color: purple;
+    }
+
+    .ne,
+    .nf {
+        color: #e85959;
+        font-weight: bold;
+    }
+
+    .nn {
+        color: #555555;
+    }
+
+    .nt {
+        color: #9595f1;
+    }
+
+    .nv {
+        color: teal;
+    }
+
+    .ow {
+        font-weight: bold;
+    }
+
+    .w {
+        color: #bbbbbb;
+    }
+
+    .mf,
+    .mh,
+    .mi,
+    .mo {
+        color: #009999;
+    }
+
+    .sb,
+    .sc,
+    .sd,
+    .s2,
+    .se,
+    .sh,
+    .si,
+    .sx {
+        color: #e87592;
+    }
+
+    .sr {
+        color: #009926;
+    }
+
+    .s1 {
+        color: #e87592;
+    }
+
+    .ss {
+        color: #e85959;
+    }
+
+    .bp {
+        color: #aaa;
+    }
+
+    .vc,
+    .vg,
+    .vi {
+        color: teal;
+    }
+
+    .il {
+        color: #009999;
+    }
+
+    .gc {
+        color: #aaa;
+        background-color: #EAF2F5;
+    }
+}
+
+
+code.language-plaintext {
+    background-color: #ddd;
+    border-radius: 3px;
+    padding: 3px 4px;
+}
+blockquote {
+    position: relative;
+    margin: 0;
+    padding: 0px 28px;
+    color: #999;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background-color: currentColor;
+    }
+}
+code {
+    font-size: 14px;
+}
+hr {
+    border: none;
+    border-top: 1px solid #555;
+}
