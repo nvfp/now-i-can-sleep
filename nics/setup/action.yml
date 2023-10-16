@@ -1,0 +1,21 @@
+inputs:
+  
+  folder:
+    description: The relative path (relative to the root) to the folder containing the documentation files.
+    required: true
+    default: ./docs
+  
+  branch:
+    description: The relative path (relative to the root) to the folder containing the documentation files.
+    required: true
+    default: ./docs
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'    
+    - run: python $GITHUB_ACTION_PATH/nics
+      shell: bash
