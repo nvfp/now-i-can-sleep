@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - './_etc/docs/**'
+      - '_etc/docs/**'
   workflow_dispatch:
 
 jobs:
