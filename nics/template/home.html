@@ -1,0 +1,16 @@
+---
+layout: main
+title: Home
+permalink: /
+---
+
+<div class="page404">
+    <h1>Discover what you need:</h1>
+    <div class="links">
+        {% for post in site.pages %}
+            {% if post.path contains 'pages/' %}
+                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

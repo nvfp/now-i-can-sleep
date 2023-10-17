@@ -48,15 +48,14 @@ def customize(stored):
     shutil.move(os.path.join(stored, 'favicon.ico'), CWD)
 
     ## Writing _config.yml
-    REPO = os.environ['GITHUB_REPOSITORY'].split('/')[1]
     with open(os.path.join(CWD, '_config.yml'), 'w') as f: f.write(
-        f"title: {REPO}\n"
-        f"desc: {REPO} documentation\n"
+        f"title: {os.environ['GITHUB_REPOSITORY']}\n"
+        f"desc: {os.environ['GITHUB_REPOSITORY']} documentation\n"
         f"author: {os.environ['NICS_INPUT_AUTHOR']}\n"
         f"google_analytics_tracking_id: {os.environ['NICS_INPUT_GATID']}\n"
         f"nics_ver: {os.environ['GHACTION_REF']}\n"
         
-        f"baseurl: /{REPO}\n"
+        f"baseurl: /{os.environ['GITHUB_REPOSITORY'].split('/')[1]}\n"
         f"url: https://{os.environ['GITHUB_ACTOR']}.github.io\n"
         
         'include: [_sass]\nsass: {style: compact, sass_dir: _sass}'
