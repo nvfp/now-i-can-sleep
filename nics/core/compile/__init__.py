@@ -1,4 +1,3 @@
-import json
 import os
 import re
 import shutil
@@ -23,10 +22,7 @@ def store(nics_dir):
 def prepare():
     
     ## Copy the template
-    # shutil.move(TEMPLATE_DIR, CWD)  # dev-docs: using shutil.move: just move the dir literally, not extracting the contents
-    # print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
     shutil.copytree(TEMPLATE_DIR, CWD)
-    print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
 
     ## Remove the files that will be replaced soon
     os.remove(os.path.join(CWD, '_config.yml'))
@@ -36,7 +32,6 @@ def prepare():
     PAGES = os.path.join(CWD, 'pages')
     shutil.rmtree(PAGES)
     os.mkdir(PAGES)
-    print(f"DEBUG: os.listdir(PAGES): {os.listdir(PAGES)}")
 
     ## Remove unnecessary files
     os.remove(os.path.join(CWD, '.gitignore'))
@@ -60,9 +55,6 @@ def customize(stored):
         
         'include: [_sass]\nsass: {style: compact, sass_dir: _sass}'
     )
-    print('vvvvvvvvvvvvvvvv _config.yml vvvvvvvvvvvvvvvv')
-    with open(os.path.join(CWD, '_config.yml'), 'r') as f: print(f.read())
-    print('^^^^^^^^^^^^^^^^ _config.yml ^^^^^^^^^^^^^^^^')
 
     ## Rendering the pages
     PAGES = os.path.join(stored, 'pages')
@@ -100,23 +92,14 @@ def customize(stored):
 
 def compile(nics_dir):
 
-    print(f"DEBUG: os.listdir(nics_dir): {os.listdir(nics_dir)}")
-
     ## Store the nics_dir files inside a temporary folder
     stored = store(nics_dir)
-    print(f"DEBUG: os.listdir(stored): {os.listdir(stored)}")
 
     ## Cleanup
-    print(f"DEBUG: before: os.listdir(CWD): {os.listdir(CWD)}")
     shutil.rmtree(CWD)
-    # os.mkdir(CWD)  # dev-docs: don't have to make a directory here; the CWD will be populated with template/ content later.
-    # print(f"DEBUG: after: os.listdir(CWD): {os.listdir(CWD)}")
 
     ## Prepare
     prepare()
-    print(f"DEBUG: after prepare: os.listdir(CWD): {os.listdir(CWD)}")
 
     ## Customize
     customize(stored)
-    print(f"DEBUG: after customize: os.listdir(CWD): {os.listdir(CWD)}")
-    print(f"DEBUG: after customize: os.listdir(pages): {os.listdir(os.path.join(CWD, 'pages'))}")

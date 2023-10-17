@@ -5,7 +5,7 @@
 
 
 this 3.0.0 was aborted
-~~- 3.0.0 (Jul 15-18):~~
+- ~~3.0.0 (Jul 15-18):~~
     - Refactored the `_compile` command by excluding it from the PyPI distribution to reduce package size. It's because the `_compile` method is only used during the GitHub workflow and not by the users.
     - New features:
         - If users don't provide them, NICS will automatically create/use default for: favicon, 404 page, and `index.md` for docs-tree folders.
