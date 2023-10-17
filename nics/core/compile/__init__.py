@@ -101,6 +101,7 @@ def compile(nics_dir):
     ## Cleanup
     print(f"DEBUG: before: os.listdir(CWD): {os.listdir(CWD)}")
     shutil.rmtree(CWD)
+    os.mkdir(CWD)
     print(f"DEBUG: after: os.listdir(CWD): {os.listdir(CWD)}")
 
     ## Prepare
