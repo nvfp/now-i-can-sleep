@@ -4,4 +4,9 @@ permalink: /thank-you
 title: Thank you
 ---
 
-thx
+thx `foo`
+
+```python
+def foo(x):
+    print(x)
+```
