@@ -92,10 +92,10 @@ def customize(stored):
                 + md_content
             )
 
-def compile():
+def compile(nics_dir):
 
     ## Store the nics_dir files inside a temporary folder
-    stored = store()
+    stored = store(nics_dir)
     print(f"DEBUG: os.listdir(stored): {os.listdir(stored)}")
 
     ## Cleanup
