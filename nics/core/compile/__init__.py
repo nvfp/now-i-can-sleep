@@ -25,6 +25,8 @@ def prepare():
     ## Copy the template
     shutil.move(TEMPLATE_DIR, CWD)
     print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
+    shutil.copytree(TEMPLATE_DIR, CWD)
+    print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
 
     ## Remove the files that will be replaced soon
     os.remove(os.path.join(CWD, '_config.yml'))
