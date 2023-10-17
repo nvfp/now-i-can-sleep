@@ -16,7 +16,6 @@ jobs:
       id-token: write   # GitHub Pages: to verify the deployment originates from an appropriate source
     environment:
       name: Documentation  # EDITME
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: nvfp/now-i-can-sleep@main
         with:
