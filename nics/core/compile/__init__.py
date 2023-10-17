@@ -13,7 +13,11 @@ TEMPLATE_DIR = os.path.join(os.environ['GITHUB_ACTION_PATH'], 'nics', 'template'
 def store(nics_dir):
     DIR = tempfile.mkdtemp()
     shutil.move(nics_dir, DIR)
-    return DIR
+
+    ## The above operations will move nics_dir into DIR. Let's say the folder contains the
+    ## documentation file named FOO. We want DIR/FOO, not just DIR. So we do the following below.
+    FOLDER = os.listdir(DIR)[0]
+    return os.path.join(DIR, FOLDER)
 
 
 def prepare():

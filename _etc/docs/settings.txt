@@ -1,3 +1,0 @@
-#-- NICS settings | Read documentation at https://nvfp.github.io/now-i-can-sleep
-
-author: 'Nicholas Valentinus'
