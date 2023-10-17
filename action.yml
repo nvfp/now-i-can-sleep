@@ -16,6 +16,7 @@ runs:
         python-version: '3.10'
 
     - run: ls -al  # Debug
+      shell: bash
 
     - run: python $GITHUB_ACTION_PATH/nics
       env:
@@ -24,17 +25,22 @@ runs:
       shell: bash
 
     - run: ls -al  # Debug
+      shell: bash
 
     ## Build the static files
     - uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.0'
     - run: gem install bundler && bundle install  # Install dependencies
+      shell: bash
     - run: bundle exec jekyll build  # Build Jekyll site
+      shell: bash
 
     ## Debug
     - run: ls -al
+      shell: bash
     - run: ls _site -al
+      shell: bash
 
 
     ## Note that the process of uploading artifacts below is actually not needed,
