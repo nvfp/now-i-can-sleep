@@ -23,6 +23,8 @@ def store(nics_dir):
 def prepare():
     
     ## Copy the template
+    # shutil.move(TEMPLATE_DIR, CWD)  # dev-docs: using shutil.move: just move the dir literally, not extracting the contents
+    # print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
     shutil.copytree(TEMPLATE_DIR, CWD)
     print(f"DEBUG: os.listdir(CWD) after copying template:{os.listdir(CWD)}")
 
@@ -108,7 +110,7 @@ def compile(nics_dir):
     ## Cleanup
     print(f"DEBUG: before: os.listdir(CWD): {os.listdir(CWD)}")
     shutil.rmtree(CWD)
-    os.mkdir(CWD)
+    # os.mkdir(CWD)  # dev-docs: don't have to make a directory here; the CWD will be populated with template/ content later.
     print(f"DEBUG: after: os.listdir(CWD): {os.listdir(CWD)}")
 
     ## Prepare
