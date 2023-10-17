@@ -3,16 +3,19 @@ name: Rebuild docs
 on:
   push:
     # branches:
-    #   - main
+    #   - main  # EDITME
     # paths:
-    #   - '_etc/docs/**'
+    #   - '_etc/docs/**'  # EDITME
   workflow_dispatch:
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    # permissions:
-    #   contents: write
+    permissions:
+      id-token: write   # GitHub Pages: to verify the deployment originates from an appropriate source
+    environment:
+      name: Documentation  # EDITME
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: nvfp/now-i-can-sleep@main
         with:
