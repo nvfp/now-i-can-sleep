@@ -18,7 +18,10 @@ runs:
     # - run: ls -al  # Debug
     
     ## Testing
-    - run: echo ${{github.action_ref}}
+    - run: echo "$foo - $bar"
+      env:
+        foo: ${{ github.action_ref }}
+        bar: "wow"
       shell: bash
 
     - run: python $GITHUB_ACTION_PATH/nics
