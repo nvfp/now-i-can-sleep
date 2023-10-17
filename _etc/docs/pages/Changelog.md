@@ -1,6 +1,6 @@
 # Changelog
 
-- 3.0.0 (Oct 15, 2023):
+- 3.0.0 (Oct 17, 2023):
     - the simple and fresh version of NICS
 
 this 3.0.0 was aborted
