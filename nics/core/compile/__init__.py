@@ -94,6 +94,8 @@ def customize(stored):
 
 def compile(nics_dir):
 
+    print(f"DEBUG: os.listdir(nics_dir): {os.listdir(nics_dir)}")
+
     ## Store the nics_dir files inside a temporary folder
     stored = store(nics_dir)
     print(f"DEBUG: os.listdir(stored): {os.listdir(stored)}")
