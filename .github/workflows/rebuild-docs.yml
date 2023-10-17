@@ -16,10 +16,9 @@ jobs:
       id-token: write   # GitHub Pages: to verify the deployment originates from an appropriate source
     environment:
       name: Documentation  # EDITME
-      url: ${{ steps.runner.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - id: runner
-        uses: nvfp/now-i-can-sleep@main
+      - uses: nvfp/now-i-can-sleep@main
         with:
           nics_docs_dir_relpth: ./_etc/docs
           author: Nicholas Valentinus
