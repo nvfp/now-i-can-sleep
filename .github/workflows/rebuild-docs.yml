@@ -12,6 +12,7 @@ jobs:
   run:
     runs-on: ubuntu-latest
     permissions:
+      pages: write      # GitHub Pages: to deploy to Pages
       id-token: write   # GitHub Pages: to verify the deployment originates from an appropriate source
     environment:
       name: Documentation  # EDITME

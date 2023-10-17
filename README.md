@@ -1,5 +1,7 @@
 # *now-i-can-sleep*
 
+[![Run tests](https://github.com/nvfp/now-i-can-sleep/actions/workflows/run-tests.yml/badge.svg)](https://github.com/nvfp/now-i-can-sleep/actions/workflows/run-tests.yml)
+
 GitHub repo documentation builder. Builds automatically each time you update the doc!
 
 ![banner](_etc/assets/banner.jpg)
