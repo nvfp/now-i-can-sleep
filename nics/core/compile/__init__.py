@@ -7,7 +7,7 @@ import tempfile
 
 CWD = os.environ['GITHUB_WORKSPACE']
 
-TEMPLATE_DIR = os.path.join(os.environ['GITHUB_ACTION_PATH', 'nics', 'template'])
+TEMPLATE_DIR = os.path.join(os.environ['GITHUB_ACTION_PATH'], 'nics', 'template')
 
 
 def store(nics_dir):
