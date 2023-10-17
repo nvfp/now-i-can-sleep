@@ -16,6 +16,9 @@ runs:
         python-version: '3.10'
 
     # - run: ls -al  # Debug
+    
+    ## Testing
+    - run: echo ${{github.action_ref}}
 
     - run: python $GITHUB_ACTION_PATH/nics
       env:
