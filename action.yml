@@ -19,6 +19,7 @@ runs:
     
     ## Testing
     - run: echo ${{github.action_ref}}
+      shell: bash
 
     - run: python $GITHUB_ACTION_PATH/nics
       env:
