@@ -111,7 +111,7 @@ def compile(nics_dir):
     print(f"DEBUG: before: os.listdir(CWD): {os.listdir(CWD)}")
     shutil.rmtree(CWD)
     # os.mkdir(CWD)  # dev-docs: don't have to make a directory here; the CWD will be populated with template/ content later.
-    print(f"DEBUG: after: os.listdir(CWD): {os.listdir(CWD)}")
+    # print(f"DEBUG: after: os.listdir(CWD): {os.listdir(CWD)}")
 
     ## Prepare
     prepare()
