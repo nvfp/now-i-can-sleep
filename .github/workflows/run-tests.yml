@@ -1,0 +1,17 @@
+name: Run tests
+
+on:
+  # push:
+    # branches:
+    #   - main
+    # paths:
+    #   - '_etc/docs/**'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    # permissions:
+    #   contents: write
+    steps:
+      - run: echo "hi"

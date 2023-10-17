@@ -1,6 +1,7 @@
 import os
 
-from .core import engine
+# from .core.validations import validations
+# from .core.compile import compile
 
 
 NICS_DIR = os.path.join(os.environ['GITHUB_WORKSPACE'], os.path.abspath(os.path.normpath(os.environ['NICS_DIR'])))
@@ -8,8 +9,10 @@ NICS_DIR = os.path.join(os.environ['GITHUB_WORKSPACE'], os.path.abspath(os.path.
 
 def main():
 
-    print(NICS_DIR)
-    print('---')
-    print(os.listdir(NICS_DIR))
+    print(f"os.environ['GITHUB_ACTION_REF']: {os.environ['GITHUB_ACTION_REF']}")
 
-    engine()
+    ## Validating...
+    # validations(NICS_DIR)
+
+    # ## Compile
+    # compile(NICS_DIR)

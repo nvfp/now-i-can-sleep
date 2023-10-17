@@ -7,9 +7,5 @@ nics_ver: 3.0.0
 baseurl: /now-i-can-sleep
 url: https://nvfp.github.io
 
-include: 
-  - _sass
-
-sass:
-  style: compact
-  sass_dir: _sass
+include: [_sass]
+sass: {style: compact, sass_dir: _sass}

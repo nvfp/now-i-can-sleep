@@ -13,11 +13,38 @@ runs:
     - uses: actions/checkout@v4
     - uses: actions/setup-python@v4
       with:
-        python-version: '3.10'    
+        python-version: '3.10'
+
+    # - run: ls -al  # Debug
+
     - run: python $GITHUB_ACTION_PATH/nics
       env:
         NICS_DIR: ${{ inputs.nics_docs_dir_relpth }}
       shell: bash
+
+    # - run: ls -al  # Debug
+
+    # ## Build the static files
+    # - uses: ruby/setup-ruby@v1
+    #   with:
+    #     ruby-version: '3.0'
+    # - run: gem install bundler && bundle install  # Install dependencies
+    # - run: bundle exec jekyll build  # Build Jekyll site
+
+    # ## Debug
+    # - run: ls -al
+    # - run: ls _site -al
+
+
+    ## Note that the process of uploading artifacts below is actually not needed,
+    ## but I don't know how to use `actions/deploy-pages@v2` without the artifact process.
+    ## So, soon, the method below should get improved.
+
+    # ## Upload the _site as artifact
+    # - uses: actions/upload-pages-artifact@v2
+
+    # ## Deploy to GitHub Pages
+    # - uses: actions/deploy-pages@v2
 
 
 
