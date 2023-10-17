@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import shutil
 import tempfile
 
@@ -30,6 +31,9 @@ def prepare():
     os.mkdir(PAGES)
     print(f"DEBUG: os.listdir(PAGES): {os.listdir(PAGES)}")
 
+    ## Remove unnecessary files
+    os.remove(os.path.join(CWD, '.gitignore'))
+
 
 def customize(stored):
     
@@ -37,18 +41,56 @@ def customize(stored):
     shutil.move(os.path.join(stored, 'favicon.ico'), CWD)
 
     ## Writing _config.yml
-    with open(os.path.join(stored, 'settings.json'), 'r') as fp:
-        SETTINGS = json.load(fp)
+    REPO = os.environ['GITHUB_REPOSITORY'].split('/')[1]
     with open(os.path.join(CWD, '_config.yml'), 'w') as f: f.write(
-        f"title: {Proto}"
-        f"desc: {My test desc}"
-        f"author: {}"
-        f"google_analytics_tracking_id: {}"
-        f"nics_ver: {3.0.0}"
-        f"baseurl: {/now-i-can-sleep}"
-        f"url: {https://nvfp.github.io}"
+        f"title: {REPO}\n"
+        f"desc: {REPO} documentation\n"
+        f"author: {os.environ['NICS_INPUT_AUTHOR']}\n"
+        f"google_analytics_tracking_id: {os.environ['NICS_INPUT_GATID']}\n"
+        f"nics_ver: {os.environ['GHACTION_REF']}\n"
+        
+        f"baseurl: /{REPO}\n"
+        f"url: https://{os.environ['GITHUB_ACTOR']}.github.io\n"
+        
         'include: [_sass]\nsass: {style: compact, sass_dir: _sass}'
     )
+    print('vvvvvvvvvvvvvvvv _config.yml vvvvvvvvvvvvvvvv')
+    with open(os.path.join(CWD, '_config.yml'), 'r') as f: print(f.read())
+    print('^^^^^^^^^^^^^^^^ _config.yml ^^^^^^^^^^^^^^^^')
+
+    ## Rendering the pages
+    PAGES = os.path.join(stored, 'pages')
+    for md in os.listdir(PAGES):
+        md_pth = os.path.join(PAGES, md)
+
+        ## Read
+        with open(md_pth, 'r') as f:
+            md_content = f.read()
+
+        ## Write
+        with open(os.path.join(CWD, 'pages', md), 'w') as f:
+            
+            TITLE = md[:-3]
+            PERMALINK = ''
+            for char in TITLE:
+                if re.match(r'[a-zA-Z0-9]', char):
+                    PERMALINK += char.lower()
+                else:
+                    PERMALINK += '-'
+
+            ## checks
+            if re.search(r'-{2,}', PERMALINK):
+                print(f"WARNING: Two or more consecutive hyphens found in this URL {repr(PERMALINK)}; this may not be the one you intended.")
+            
+            ## Write
+            f.write(
+                "---\n"
+                "layout: main\n"
+                f"title: {TITLE}\n"
+                f"permalink: /{PERMALINK}\n"
+                "---\n\n"
+                + md_content
+            )
 
 def compile():
 
