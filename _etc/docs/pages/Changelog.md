@@ -3,7 +3,6 @@
 - 3.0.0 (Oct 15, 2023):
     - the simple and fresh version of NICS
 
-
 this 3.0.0 was aborted
 - ~~3.0.0 (Jul 15-18):~~
     - Refactored the `_compile` command by excluding it from the PyPI distribution to reduce package size. It's because the `_compile` method is only used during the GitHub workflow and not by the users.
