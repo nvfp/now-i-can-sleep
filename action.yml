@@ -22,18 +22,12 @@ runs:
       with:
         python-version: '3.10'
 
-    - run: ls -al  # Debug
-      shell: bash
-
     - run: python $GITHUB_ACTION_PATH/nics
       env:
         NICS_DIR: ${{ inputs.nics_docs_dir_relpth }}
         NICS_INPUT_AUTHOR: ${{ inputs.author }}
         NICS_INPUT_GATID: ${{ inputs.google_analytics_tracking_id }}
         GHACTION_REF: ${{ github.action_ref }}
-      shell: bash
-
-    - run: ls -al  # Debug
       shell: bash
 
     ## Build the static files
@@ -45,16 +39,10 @@ runs:
     - run: bundle exec jekyll build  # Build Jekyll site
       shell: bash
 
-    ## Debug
-    - run: ls -al
-      shell: bash
-    - run: ls _site -al
-      shell: bash
-
 
     ## Note that the process of uploading artifacts below is actually not needed,
-    ## but I don't know how to use `actions/deploy-pages@v2` without the artifact process.
-    ## So, soon, the method below should get improved.
+    ## but i dont know how to use `actions/deploy-pages@v2` without the artifact process.
+    ## soon the method below should get improved.
 
     ## Upload the _site as artifact
     - uses: actions/upload-pages-artifact@v2

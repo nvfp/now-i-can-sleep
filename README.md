@@ -10,29 +10,47 @@ GitHub repo documentation builder. Builds automatically each time you update the
 
 ## Usage
 
+Copy this `./.github/workflows/rebuild-docs.yml` file and change the values to your own.
+
 ```yml
 name: Rebuild docs
 
 on:
   push:
     branches:
-      - main  # EDITME: your default branch name
+      - main  # EDITME
     paths:
-      - './docs/**'  # EDITME: The relative path (relative to the root) to the folder containing the documentation files.
+      - 'docs/**'  # EDITME
   workflow_dispatch:
 
 jobs:
   run:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - uses: nvfp/now-i-can-sleep@v3
         with:
-          nics_docs_dir_relpth: ./docs  # EDITME: The relative path (relative to the root) to the folder containing the documentation files.
-        env:
-          GH_TOKEN: ${{ github.token }}
+
+          ## EDIT THESE
+          nics_docs_dir_relpth: ./docs
+          author: Foo Bar
+          google_analytics_tracking_id: abcdefg
+
+    runs-on: ubuntu-latest
+    permissions: { pages: write, id-token: write }
+    environment: { name: Documentation }
 ```
+
+You can put the folder containing the documentation files anywhere, but this example is in the `./docs` folder. The `docs` folder would look like this:
+
+```txt
+docs/
+└── pages/
+    └── changelog.md
+    └── page_1.md
+    └── page_99.md
+└── favicon.ico
+```
+
+The two items, `pages/` and `favicon.ico`, are needed. You can put anything else inside `docs/` (NICS will ignore them), but don't put anything besides markdown files inside `docs/pages/`.
 
 
 ## Links
