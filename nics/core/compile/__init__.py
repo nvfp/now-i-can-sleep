@@ -33,7 +33,7 @@ def prepare(ROOT_USER, ROOT_ACTION):
     os.remove(os.path.join(ROOT_USER, '.gitignore'))
 
 
-def customize(ROOT_USER, stored):
+def customize(ROOT_USER, stored, IPT_AUTHOR, IPT_ANALYTICS, IPT_ACTION_REF):
     
     ## Copying favicon
     shutil.move(os.path.join(stored, 'favicon.ico'), ROOT_USER)
@@ -87,7 +87,7 @@ def customize(ROOT_USER, stored):
                 + md_content
             )
 
-def compile(ROOT_USER, ROOT_ACTION, NICS_DIR):
+def compile(IPT_AUTHOR, IPT_ANALYTICS, IPT_ACTION_REF, ROOT_USER, ROOT_ACTION, NICS_DIR):
 
     ## Store the NICS_DIR files inside a temporary folder
     stored = store(NICS_DIR)
@@ -96,7 +96,7 @@ def compile(ROOT_USER, ROOT_ACTION, NICS_DIR):
     shutil.rmtree(ROOT_USER)
 
     ## Prepare
-    prepare()
+    prepare(ROOT_USER, ROOT_ACTION)
 
     ## Customize
-    customize(stored)
+    customize(ROOT_USER, stored, IPT_AUTHOR, IPT_ANALYTICS, IPT_ACTION_REF)

@@ -27,7 +27,7 @@ def main():
     validations(NICS_DIR)
 
     ## Compile
-    compile(NICS_DIR)
+    compile(IPT_AUTHOR, IPT_ANALYTICS, IPT_ACTION_REF, ROOT_USER, ROOT_ACTION, NICS_DIR)
 
 
 if __name__ == '__main__':

@@ -49,7 +49,7 @@
             <div class="links">
                 {% for post in site.pages %}
                     {% if post.path contains 'pages/' %}
-                        <p>~~> <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></p>
+                        <p>~~> &nbsp;&nbsp;<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></p>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -65,17 +65,11 @@
             
             const divLinks = divInner.querySelector(".links");
 
-            // Init (these are a must, to prevent null value)
-            svgChevronRight.style.display = 
-
             // Make the divOpener clickable
             divOpener.addEventListener('click', () => {
                 // Toggle the chevron
-                // svgChevronRight.style.display = (svgChevronRight.style.display === "block" || svgChevronRight.style.display === null) ? "none" : "block";
-                // svgChevronDown.style.display = (svgChevronDown.style.display === "block" || svgChevronDown.style.display === null) ? "none" : "block";
-                // vvvvvvvv above has no effect
-                svgChevronRight.style.display = svgChevronRight.style.display === "block" ? "none" : "block";
-                svgChevronDown.style.display = svgChevronDown.style.display === "block" ? "none" : "block";
+                svgChevronRight.classList.toggle("hide");
+                svgChevronDown.classList.toggle("hide");
                 // Toggle the links
                 divLinks.classList.toggle("show");
             });
@@ -83,7 +77,9 @@
     </script>
 
     <main>
-        {{ content }}
+        <div class="inner">
+            {{ content }}
+        </div>
     </main>
 
     <footer>
