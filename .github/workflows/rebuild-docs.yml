@@ -4,14 +4,14 @@ on:
   push:
     branches:
       - main
-    # paths:
-    #   - '_etc/docs/**'
+    paths:
+      - '_etc/docs/**'
   workflow_dispatch:
 
 jobs:
   run:
     steps:
-      - uses: nvfp/now-i-can-sleep@main
+      - uses: nvfp/now-i-can-sleep@v4
         with:
 
           src: ./_etc/docs
