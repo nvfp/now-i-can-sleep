@@ -4,24 +4,20 @@ import shutil
 import tempfile
 
 
-CWD = os.environ['GITHUB_WORKSPACE']
-
-TEMPLATE_DIR = os.path.join(os.environ['GITHUB_ACTION_PATH'], 'nics', 'template')
-
-
-def store(nics_dir):
+def store(NICS_DIR):
     DIR = tempfile.mkdtemp()
-    shutil.move(nics_dir, DIR)
+    shutil.move(NICS_DIR, DIR)
 
-    ## The above operations will move nics_dir into DIR. Let's say the folder contains the
+    ## The above operations will move NICS_DIR into DIR. Let's say the folder contains the
     ## documentation file named FOO. We want DIR/FOO, not just DIR. So we do the following below.
     FOLDER = os.listdir(DIR)[0]
     return os.path.join(DIR, FOLDER)
 
 
-def prepare():
+def prepare(CWD_USER, CWD_ACTION):
     
     ## Copy the template
+    TEMPLATE_DIR = os.path.join(CWD_ACTION, 'nics', 'template')  # dev-docs: it's okay redundant a bit, for readability.
     shutil.copytree(TEMPLATE_DIR, CWD)
 
     ## Remove the files that will be replaced soon
@@ -53,7 +49,8 @@ def customize(stored):
         f"baseurl: /{os.environ['GITHUB_REPOSITORY'].split('/')[1]}\n"
         f"url: https://{os.environ['GITHUB_ACTOR']}.github.io\n"
         
-        'include: [_sass]\nsass: {style: compact, sass_dir: _sass}'
+        "include: [_sass]\n"
+        "sass: {style: compressed, sass_dir: _sass, sourcemap: never}"
     )
 
     ## Rendering the pages
@@ -90,13 +87,13 @@ def customize(stored):
                 + md_content
             )
 
-def compile(nics_dir):
+def compile(CWD_USER, CWD_ACTION, NICS_DIR):
 
-    ## Store the nics_dir files inside a temporary folder
-    stored = store(nics_dir)
+    ## Store the NICS_DIR files inside a temporary folder
+    stored = store(NICS_DIR)
 
     ## Cleanup
-    shutil.rmtree(CWD)
+    shutil.rmtree(CWD_USER)
 
     ## Prepare
     prepare()

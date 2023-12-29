@@ -1,17 +1,20 @@
 import os
 
 
-def validations(nics_dir):
+def validations(NICS_DIR):
 
-    if not os.path.isdir(nics_dir): raise AssertionError('not a dir')
+    if not os.path.isdir(NICS_DIR):
+        raise AssertionError(f"Not a dir: {repr(NICS_DIR)}.")
+    
+    FAVICON = os.path.join(NICS_DIR, 'favicon.ico')
+    PAGES = os.path.join(NICS_DIR, 'pages')
 
-    if 'favicon.ico' not in os.listdir(nics_dir):
+    if not os.path.isfile(FAVICON):
         raise AssertionError("favicon.ico not found")
 
-    if 'pages' not in os.listdir(nics_dir):
+    if not os.path.isdir(PAGES):
         raise AssertionError("pages/ not found")
 
-    PAGES = os.path.join(nics_dir, 'pages')
     if len(os.listdir(PAGES)) == 0:
         raise AssertionError("pages/ folder shouldn't be empty")
 

@@ -7,6 +7,8 @@ GitHub repo documentation builder. Builds automatically each time you update the
 
 ![banner](_etc/assets/banner.jpg)
 
+[Documentation](https://nvfp.github.io/now-i-can-sleep)
+
 
 ## Usage
 
@@ -30,36 +32,47 @@ jobs:
         with:
 
           ## EDIT THESE
-          nics_docs_dir_relpth: ./docs
+          src: ./docs
           author: Foo Bar
-          google_analytics_tracking_id: abcdefg
+          analytics: abcdefg
 
     runs-on: ubuntu-latest
     permissions: { pages: write, id-token: write }
     environment: { name: Documentation }
 ```
 
-You can put the folder containing the documentation files anywhere, but this example is in the `./docs` folder. The `docs` folder would look like this:
+Read the parameters' description [here](https://github.com/nvfp/now-i-can-sleep/blob/main/action.yml)
+
+You can put the folder-containing-the-documentation-files (`src`) anywhere. But, this example is in the `./docs` folder. The `docs` folder would look like this:
 
 ```txt
 docs/
 └── pages/
-    └── changelog.md
     └── page_1.md
-    └── page_99.md
+    └── page_2.md
+    └── Usage.md
+    └── foo.md
+    └── BAR.md
+    └── baz.MD
+    └── ...
 └── favicon.ico
 ```
 
-The two items, `pages/` and `favicon.ico`, are needed. You can put anything else inside `docs/` (NICS will ignore them), but don't put anything besides markdown files inside `docs/pages/`.
+- There are two items that are needed: `pages/` and `favicon.ico`.
+- Besides `pages/` and `favicon.ico`, you can put anything you like inside `docs/` (NICS will ignore them).
+- Inside `pages/`, only markdown files are allowed.
 
-
-## Links
-
-- [Thank you💙](https://nvfp.github.io/thank-you)
-- [Documentation](https://nvfp.github.io/now-i-can-sleep)
-- [Changelog](https://nvfp.github.io/now-i-can-sleep/changelog)
+The last step is to configure the GitHub Pages deployment settings for your GitHub repository. You can do this by visiting [https://github.com/OWNER/REPO/settings/pages](https://github.com/OWNER/REPO/settings/pages) and selecting 'GitHub Actions' under the 'Build and Deployment' setting.
 
 
 ## License
 
 This project is licensed under the MIT License.
+
+
+<!-- 
+
+## Dev-docs:
+- the test suite should require no dependencies to make development easier.
+
+-->
