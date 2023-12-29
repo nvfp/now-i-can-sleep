@@ -1,8 +1,6 @@
-# import os
-# import sys
-# sys.path.append(os.environ['GITHUB_ACTION_PATH'])
-
 import os
+import sys
+sys.path.append(os.environ['GITHUB_ACTION_PATH'])  # make dirs under this path importable
 
 from nics.core.validations import validations
 from nics.core.compile import compile
