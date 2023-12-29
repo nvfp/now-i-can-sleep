@@ -9,7 +9,7 @@ permalink: /
     <div class="links">
         {% for post in site.pages %}
             {% if post.path contains 'pages/' %}
-                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                <p>==> &nbsp;&nbsp;<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></p>
             {% endif %}
         {% endfor %}
     </div>

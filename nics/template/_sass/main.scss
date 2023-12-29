@@ -114,7 +114,7 @@ header {
 main {
     width: $width-max;
     min-height: 91svh;
-    margin: 0 auto;
+    margin: 13px auto;
     line-height: 1.3;
     @media (max-width: $width-mobile) {
         width: 91%;
@@ -171,6 +171,9 @@ footer {  // no need $width-max, since footer is always x-centered.
         flex-direction: column;
         gap: 7px;
         padding-left: 21px;
+        p {
+            margin: 0
+        }
     }
 }
 

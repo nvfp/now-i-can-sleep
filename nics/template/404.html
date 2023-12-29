@@ -1,15 +1,15 @@
 ---
 layout: main
-title: Not the one, sorry..
+title: Page not found
 permalink: /404.html
 ---
 
 <div class="homepage-and-page404">
-    <h2>Feel free to choose the page you meant to find here.</h2>
+    <h2>Maybe you meant one of these?</h2>
     <div class="links">
         {% for post in site.pages %}
             {% if post.path contains 'pages/' %}
-                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                <p>==> &nbsp;&nbsp;<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></p>
             {% endif %}
         {% endfor %}
     </div>

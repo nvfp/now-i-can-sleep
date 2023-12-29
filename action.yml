@@ -40,10 +40,38 @@ runs:
       shell: bash
 
     ## Debug
-    - run: find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-      shell: bash
-    - run: find ./_site | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
-      shell: bash
+    - run: |
+        ## 🔍🔍
+        import os
+        def dir_tree(dir, level=0):  # level start from 0; level=0 is the root
+          print(('' if level==0 else '    '*(level-1)+'└── ') + os.path.basename(dir) + '/')
+          for stuff in os.listdir(dir):
+            stuff_pth = os.path.join(dir, stuff)
+            if os.path.isfile(stuff_pth):
+              print('    '*level + f'└── {stuff}')
+            elif os.path.isdir(stuff_pth):
+              dir_tree(stuff_pth, level+1)
+            else: raise AssertionError('Please fix me.')
+        print('='*33)
+        dir_tree(os.getcwd())  # Start
+        print('='*33)
+      shell: python
+    - run: |
+        ## 🔍🔍🔍
+        import os
+        def dir_tree(dir, level=0):  # level start from 0; level=0 is the root
+          print(('' if level==0 else '    '*(level-1)+'└── ') + os.path.basename(dir) + '/')
+          for stuff in os.listdir(dir):
+            stuff_pth = os.path.join(dir, stuff)
+            if os.path.isfile(stuff_pth):
+              print('    '*level + f'└── {stuff}')
+            elif os.path.isdir(stuff_pth):
+              dir_tree(stuff_pth, level+1)
+            else: raise AssertionError('Please fix me.')
+        print('='*33)
+        dir_tree(os.path.join(os.getcwd(), '_site'))  # Start
+        print('='*33)
+      shell: python
 
 
     ## Note that the process of uploading artifacts below is actually not needed,
