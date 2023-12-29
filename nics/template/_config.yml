@@ -1,10 +1,10 @@
-title: Proto
+title: Proto Abc 123 Xyz foo bar baz
 desc: My test desc
 author: Nicholas Valentinus
-google_analytics_tracking_id: G-G3HERGXF6P
-nics_ver: 3.0.0
+analytics: G-G3HERGXF6P  # Google Analytics tracking ID
+nics_ver: 1.2.3
 
-baseurl: /now-i-can-sleep
+baseurl: /nics
 url: https://nvfp.github.io
 
 include: [_sass]
