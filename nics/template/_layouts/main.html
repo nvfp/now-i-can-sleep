@@ -65,11 +65,17 @@
             
             const divLinks = divInner.querySelector(".links");
 
+            // Init (these are a must, to prevent null value)
+            svgChevronRight.style.display = 
+
             // Make the divOpener clickable
             divOpener.addEventListener('click', () => {
                 // Toggle the chevron
-                svgChevronRight.style.display = (svgChevronRight.style.display === "block" || svgChevronRight.style.display === null) ? "none" : "block";
-                svgChevronDown.style.display = (svgChevronDown.style.display === "block" || svgChevronDown.style.display === null) ? "none" : "block";
+                // svgChevronRight.style.display = (svgChevronRight.style.display === "block" || svgChevronRight.style.display === null) ? "none" : "block";
+                // svgChevronDown.style.display = (svgChevronDown.style.display === "block" || svgChevronDown.style.display === null) ? "none" : "block";
+                // vvvvvvvv above has no effect
+                svgChevronRight.style.display = svgChevronRight.style.display === "block" ? "none" : "block";
+                svgChevronDown.style.display = svgChevronDown.style.display === "block" ? "none" : "block";
                 // Toggle the links
                 divLinks.classList.toggle("show");
             });
