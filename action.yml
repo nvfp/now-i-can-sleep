@@ -2,15 +2,15 @@ name: now-i-can-sleep
 description: Automatically build GitHub documentation.
 
 inputs:
-  nics_docs_dir_relpth:
+  src:
     description: The relative path (relative to the root) to the folder containing the documentation files.
-    required: true
+    required: false
     default: ./docs
   author:
     description: Author
     required: true
-  google_analytics_tracking_id:
-    description: Google Analytics Tracking ID
+  analytics:
+    description: Google Analytics tracking ID
     required: false
     default: null
 
@@ -24,10 +24,10 @@ runs:
 
     - run: python $GITHUB_ACTION_PATH/nics
       env:
-        NICS_DIR: ${{ inputs.nics_docs_dir_relpth }}
-        NICS_INPUT_AUTHOR: ${{ inputs.author }}
-        NICS_INPUT_GATID: ${{ inputs.google_analytics_tracking_id }}
-        GHACTION_REF: ${{ github.action_ref }}
+        IPT_SRC: ${{ inputs.src }}
+        IPT_AUTHOR: ${{ inputs.author }}
+        IPT_ANALYTICS: ${{ inputs.analytics }}
+        IPT_ACTION_REF: ${{ github.action_ref }}
       shell: bash
 
     ## Build the static files
@@ -37,6 +37,12 @@ runs:
     - run: gem install bundler && bundle install  # Install dependencies
       shell: bash
     - run: bundle exec jekyll build  # Build Jekyll site
+      shell: bash
+
+    ## Debug
+    - run: find . | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
+      shell: bash
+    - run: find ./_site | sed -e "s/[^-][^\/]*\// |/g" -e "s/|\([^ ]\)/|-\1/"
       shell: bash
 
 

@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics_tracking_id }}"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.analytics }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{{ site.google_analytics_tracking_id }}');
+        gtag('config', '{{ site.analytics }}');
     </script>
 
 
@@ -20,6 +19,8 @@
     <title>{{ page.title }} | {{ site.title }}</title>
 
     <link rel="icon" type="image/x-icon" href="{{ site.baseurl }}/favicon.ico">
+
+    <meta name="color-scheme" content="dark">
 
     <meta property="og:title" content="{{ page.title }}">
     <meta property="og:url" content="{{ page.permalink | absolute_url }}">
@@ -35,60 +36,55 @@
     <link rel="canonical" href="{{ page.permalink | absolute_url }}">
     
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/_sass/main.css">
-
 </head>
 
 <body>
-
     <header>
-        <div class="opener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            <h1>{{ site.title }}: {{ page.title }}</h1>
-        </div>
-        <div class="links">
-            <div class="box">
+        <div class="inner">
+            <div class="opener">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="chevron-down hide"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                <p>{{ site.title }}: {{ page.title }}</p>
+            </div>
+            <div class="links">
                 {% for post in site.pages %}
                     {% if post.path contains 'pages/' %}
-                        <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                        <p>~~> &nbsp;&nbsp;<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></p>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
     </header>
+    <script>
+        (() => {
+            const divInner = document.querySelector("header .inner");
+            
+            const divOpener = divInner.querySelector(".opener");
+            const svgChevronRight = divOpener.querySelector(".chevron-right");
+            const svgChevronDown = divOpener.querySelector(".chevron-down");
+            
+            const divLinks = divInner.querySelector(".links");
+
+            // Make the divOpener clickable
+            divOpener.addEventListener('click', () => {
+                // Toggle the chevron
+                svgChevronRight.classList.toggle("hide");
+                svgChevronDown.classList.toggle("hide");
+                // Toggle the links
+                divLinks.classList.toggle("show");
+            });
+        })();
+    </script>
 
     <main>
-        {{ content }}
+        <div class="inner">
+            {{ content }}
+        </div>
     </main>
 
     <footer>
         <p>&copy; {{ 'now' | date: '%Y' }} {{ site.author }}</p>
         <p>Built and <a href="https://github.com/nvfp/now-i-can-sleep">now-i-can-sleep</a> ({{ site.nics_ver }})</p>
     </footer>
-
-    <script>
-        const OPENER = document.querySelector('header .opener');
-        const CHEVRON_RIGHT = document.querySelector('header .opener .chevron-right');
-        const CHEVRON_DOWN = document.querySelector('header .opener .chevron-down');
-        const LINKS = document.querySelector('header .links');
-
-        // init
-        CHEVRON_RIGHT.style.display = 'none';
-        CHEVRON_DOWN.style.display = 'none';
-        CHEVRON_RIGHT.style.display = 'block';
-
-        // Make the OPENER clickable
-        OPENER.addEventListener('click', () =>
-        {
-            // Toggle the chevron
-            CHEVRON_RIGHT.style.display = CHEVRON_RIGHT.style.display === 'block' ? 'none' : 'block';
-            CHEVRON_DOWN.style.display = CHEVRON_DOWN.style.display === 'block' ? 'none' : 'block';
-
-            // Toggle the links
-            LINKS.classList.toggle('shown');
-        });
-    </script>
-
 </body>
-
 </html>
