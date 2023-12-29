@@ -15,12 +15,12 @@ def main():
     IPT_ANALYTICS = os.environ['IPT_ANALYTICS']
     IPT_ACTION_REF = os.environ['IPT_ACTION_REF']
 
-    ## Note: CWD_USER is the one for the user, while CWD_ACTION is for the NICS.
-    CWD_USER = os.environ['GITHUB_WORKSPACE']
-    CWD_ACTION = os.environ['GITHUB_ACTION_PATH']
+    ## Note: ROOT_USER is the one for the user, while ROOT_ACTION is for the NICS.
+    ROOT_USER = os.environ['GITHUB_WORKSPACE']
+    ROOT_ACTION = os.environ['GITHUB_ACTION_PATH']
 
     ## The directory that containing the NICS stuff.
-    NICS_DIR = os.path.abspath(os.path.join(CWD_USER, os.path.normpath(IPT_SRC)))
+    NICS_DIR = os.path.abspath(os.path.join(ROOT_USER, os.path.normpath(IPT_SRC)))
     print(f"DEBUG: NICS_DIR: {repr(NICS_DIR)}.")
 
     ## Validating...

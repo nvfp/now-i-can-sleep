@@ -14,37 +14,37 @@ def store(NICS_DIR):
     return os.path.join(DIR, FOLDER)
 
 
-def prepare(CWD_USER, CWD_ACTION):
+def prepare(ROOT_USER, ROOT_ACTION):
     
     ## Copy the template
-    TEMPLATE_DIR = os.path.join(CWD_ACTION, 'nics', 'template')  # dev-docs: it's okay redundant a bit, for readability.
-    shutil.copytree(TEMPLATE_DIR, CWD)
+    TEMPLATE_DIR = os.path.join(ROOT_ACTION, 'nics', 'template')  # dev-docs: it's okay redundant a bit, for readability.
+    shutil.copytree(TEMPLATE_DIR, ROOT_USER)
 
     ## Remove the files that will be replaced soon
-    os.remove(os.path.join(CWD, '_config.yml'))
-    os.remove(os.path.join(CWD, 'favicon.ico'))
+    os.remove(os.path.join(ROOT_USER, '_config.yml'))
+    os.remove(os.path.join(ROOT_USER, 'favicon.ico'))
 
     ## Clear the pages/ folder
-    PAGES = os.path.join(CWD, 'pages')
+    PAGES = os.path.join(ROOT_USER, 'pages')
     shutil.rmtree(PAGES)
     os.mkdir(PAGES)
 
     ## Remove unnecessary files
-    os.remove(os.path.join(CWD, '.gitignore'))
+    os.remove(os.path.join(ROOT_USER, '.gitignore'))
 
 
-def customize(stored):
+def customize(ROOT_USER, stored):
     
     ## Copying favicon
-    shutil.move(os.path.join(stored, 'favicon.ico'), CWD)
+    shutil.move(os.path.join(stored, 'favicon.ico'), ROOT_USER)
 
     ## Writing _config.yml
-    with open(os.path.join(CWD, '_config.yml'), 'w') as f: f.write(
+    with open(os.path.join(ROOT_USER, '_config.yml'), 'w') as f: f.write(
         f"title: {os.environ['GITHUB_REPOSITORY']}\n"
         f"desc: {os.environ['GITHUB_REPOSITORY']} documentation\n"
-        f"author: {os.environ['NICS_INPUT_AUTHOR']}\n"
-        f"google_analytics_tracking_id: {os.environ['NICS_INPUT_GATID']}\n"
-        f"nics_ver: {os.environ['GHACTION_REF']}\n"
+        f"author: {IPT_AUTHOR}\n"
+        f"analytics: {IPT_ANALYTICS}\n"  # Google Analytics tracking ID
+        f"nics_ver: {IPT_ACTION_REF}\n"
         
         f"baseurl: /{os.environ['GITHUB_REPOSITORY'].split('/')[1]}\n"
         f"url: https://{os.environ['GITHUB_ACTOR']}.github.io\n"
@@ -63,7 +63,7 @@ def customize(stored):
             md_content = f.read()
 
         ## Write
-        with open(os.path.join(CWD, 'pages', md), 'w') as f:
+        with open(os.path.join(ROOT_USER, 'pages', md), 'w') as f:
             
             TITLE = md[:-3]
             PERMALINK = ''
@@ -87,13 +87,13 @@ def customize(stored):
                 + md_content
             )
 
-def compile(CWD_USER, CWD_ACTION, NICS_DIR):
+def compile(ROOT_USER, ROOT_ACTION, NICS_DIR):
 
     ## Store the NICS_DIR files inside a temporary folder
     stored = store(NICS_DIR)
 
     ## Cleanup
-    shutil.rmtree(CWD_USER)
+    shutil.rmtree(ROOT_USER)
 
     ## Prepare
     prepare()
