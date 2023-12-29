@@ -28,7 +28,7 @@ on:
 jobs:
   run:
     steps:
-      - uses: nvfp/now-i-can-sleep@v3
+      - uses: nvfp/now-i-can-sleep@v4
         with:
 
           ## EDIT THESE
@@ -41,7 +41,7 @@ jobs:
     environment: { name: Documentation }
 ```
 
-Read the parameters' description [here](https://github.com/nvfp/now-i-can-sleep/blob/main/action.yml)
+Read the parameters' description [here](https://github.com/nvfp/now-i-can-sleep/blob/main/action.yml).
 
 You can put the folder-containing-the-documentation-files (`src`) anywhere. But, this example is in the `./docs` folder. The `docs` folder would look like this:
 
