@@ -134,6 +134,29 @@ main {
         ul, ol, dl {
             line-height: 1.55;
         }
+
+
+        // Custom CSS for homepage and 404-page
+        .custom-home-and-404 {
+            // background-color: purple;//proto
+
+            .title {
+                font-size: 32px;
+                @media (max-width: $width-mobile) {
+                    font-size: 21px;
+                }
+            }
+            .links {
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+                margin-left: 31px;
+                gap: 7px;
+                p {
+                    margin: 0;
+                }
+            }
+        }
     }
 }
 
@@ -150,41 +173,6 @@ footer {  // no need $width-max, since footer is always x-centered.
     font-size: 13px;
     p {
         margin: 0;
-    }
-}
-
-
-.homepage-and-page404 {
-    width: 79%;
-    display: flex;
-    flex-direction: column;
-    margin: 31px auto;
-    @media (max-width: $width-mobile) {
-        width: 92%;
-    }
-
-    h1 {
-        font-size: 32px;
-        @media (max-width: $width-mobile) {
-            font-size: 21px;
-        }
-    }
-
-    h2 {
-        font-size: 24px;
-        @media (max-width: $width-mobile) {
-            font-size: 17px;
-        }
-    }
-
-    .links {
-        display: flex;
-        flex-direction: column;
-        gap: 7px;
-        padding-left: 21px;
-        p {
-            margin: 0
-        }
     }
 }
 
