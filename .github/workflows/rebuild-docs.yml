@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-    paths:
-      - '_etc/docs/**'
+    # paths:              # commented for dev purposes: to see the changes easier
+    #   - '_etc/docs/**'  # commented for dev purposes: to see the changes easier
   workflow_dispatch:
 
 jobs:
