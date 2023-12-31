@@ -27,6 +27,8 @@ title: Page I
         - Added `str_ops` parent module
     - Note, there are so many additions and adjustments for this update. And some of them I may forget to put here.
 
+---
+
 - 9.3.0 (Aug 19, 2023):
     - Added `.kit.fileops.json_list_db_manager`, `.kit.fileops.simple`; along with their tests.
     - Added `sort` to `.kit.time.TimeFmt`, create tests for `.kit.time.TimeFmt`.

@@ -54,6 +54,7 @@ docs/
     └── foo.md
     └── BAR.md
     └── baz.MD
+    └── This is Title.md
     └── ...
 └── favicon.ico
 ```
@@ -61,6 +62,7 @@ docs/
 - There are two items that are needed: `pages/` and `favicon.ico`.
 - Besides `pages/` and `favicon.ico`, you can put anything you like inside `docs/` (NICS will ignore them).
 - Inside `pages/`, only markdown files are allowed.
+- The page's title will be derived from the file name, and the URL will mirror the file name, converted to lowercase and with spaces replaced by hyphens. For example, `Foo is Bar.md`'would have a title of `Foo is Bar` and a URL of `foo-is-bar`.
 
 The last step is to configure the GitHub Pages deployment settings for your GitHub repository. You can do this by visiting [https://github.com/OWNER/REPO/settings/pages](https://github.com/OWNER/REPO/settings/pages) and selecting 'GitHub Actions' under the 'Build and Deployment' setting.
 

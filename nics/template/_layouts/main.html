@@ -56,6 +56,9 @@
         </div>
     </header>
     <script>
+        // Header script (TODO: these scripts (also the main script below) actually should be run after DOM is fully loaded, but for now, it's okay)
+
+
         (() => {
             const divInner = document.querySelector("header .inner");
             
@@ -86,5 +89,23 @@
         <p>&copy; {{ 'now' | date: '%Y' }} {{ site.author }}</p>
         <p>Built and <a href="https://github.com/nvfp/now-i-can-sleep">now-i-can-sleep</a> ({{ site.nics_ver }})</p>
     </footer>
+
+    <script>
+        // Main script
+
+        // 404 Redirection (slash-redirection)
+        (() => {
+            const PTH = window.location.href;
+            const ROOT_PTH = '{{ site.url }}{{ site.baseurl }}/';
+            if ((PTH !== ROOT_PTH) && PTH.endsWith('/')) {  // Just if the path ends with "/". UPDATE: but NOT homepage (or it will stuck in infinite loop).
+                let pthMod = PTH.slice(0, -1);
+                while (pthMod.endsWith('/')) {  // just in case there are multiple "/"
+                    pthMod = pthMod.slice(0, -1);
+                }
+                window.location.href = pthMod;
+                // TODO: handle the case of "homepage + multiple trailing slashes" (example: web.com/homepage/// -> web.com/homepage [does not exist])
+            }
+        })();
+    </script>
 </body>
 </html>
